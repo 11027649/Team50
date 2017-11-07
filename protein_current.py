@@ -1,5 +1,7 @@
 import time
 import os
+from colorama import init
+init()
 
 # set up variables
 protein = []
@@ -168,7 +170,7 @@ def clear_screen():
     time.sleep(1)
 
     # clear the terminal window
-    os.system("clear")
+    os.system("cls")
 
 ## DIT IS DE MAIN ##
 init_protein()
