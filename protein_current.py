@@ -144,6 +144,7 @@ def print_protein():
         # print rows
         for j in range(x * 2 - 1):
 
+                # Hoi dit is een comment
                 # print H blue
                 if grid[j][i][0] == 'H':
                     print('\033[34;1m' + grid[j][i][0], end='')
