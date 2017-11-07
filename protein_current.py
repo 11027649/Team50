@@ -146,12 +146,14 @@ def print_protein():
 
                 # print H blue
                 if grid[j][i][0] == 'H':
-                    print(grid[j][i][1], end='')
+                    print('\033[38;5;33;1m' + grid[j][i][0], end='')
+                    print('\033[0m', end='')
 
 
                 # print P red
                 elif grid[j][i][0] == 'P':
-                    print(grid[j][i][1], end='')
+                    print('\033[31;1m' + grid[j][i][0], end='')
+                    print('\033[0m', end='')
                     if grid[j][i][1] != 1 and j + 1 < x * 2 - 1 and grid[j + 1][i] != "---":
                         print(' ', end='')
 
