@@ -104,6 +104,7 @@ def print_protein():
             direction -= 1
         if protein[i].pos_next == 'R':
             direction += 1
+        
         # makes sure the direction is the right format (never above 3)
         direction %= 4;
 
@@ -144,12 +145,10 @@ def print_protein():
         # print rows
         for j in range(x * 2 - 1):
 
-                # Hoi dit is een comment
                 # print H blue
                 if grid[j][i][0] == 'H':
                     print('\033[34;1m' + grid[j][i][0], end='')
                     print('\033[0m', end='')
-
 
                 # print P red
                 elif grid[j][i][0] == 'P':
@@ -159,13 +158,13 @@ def print_protein():
                     if grid[j][i][1] != 1 and j + 1 < x * 2 - 1 and grid[j + 1][i] != "---":
                         print(' ', end='')
 
-
                 # if something else is present
                 else:
                     print(grid[j][i], end='')
 
         print()
     print()
+
 
 def clear_screen():
     """ Clears the screen to show how the protein folds in a nice way. """
@@ -176,20 +175,22 @@ def clear_screen():
     # clear the terminal window
     os.system("cls")
 
-## DIT IS DE MAIN ##
-init_protein()
+
+def main():
+    init_protein()
 
 
-fold_protein(1, 'L')
-fold_protein(2, 'L')
-fold_protein(3, 'R')
-fold_protein(4, 'R')
-fold_protein(6, 'R')
-fold_protein(9, 'R')
-fold_protein(12, 'R')
-fold_protein(16, 'R')
+    fold_protein(1, 'L')
+    fold_protein(2, 'L')
+    fold_protein(3, 'R')
+    fold_protein(4, 'R')
+    fold_protein(6, 'R')
+    fold_protein(9, 'R')
+    fold_protein(12, 'R')
+    fold_protein(16, 'R')
+
+    print_protein()
 
 
-print_protein()
-
-# phpphpphpphpphpphpp
+if __name__ == "__main__":
+    main()
