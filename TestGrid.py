@@ -1,4 +1,5 @@
 # save position of each amino acid to remember which ones are linked
+# dit is een comment
 class Amino():
     def __init__(self, letter, pos_next):
         self.letter = letter
