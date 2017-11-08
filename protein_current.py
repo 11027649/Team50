@@ -151,7 +151,6 @@ def visualize_fold():
         # the coordinates are 
         grid[coor_x][coor_y] = aa_info[i][2]
 
-<<<<<<< HEAD
     # add layout, making the grid 2 times as big, to add bonds
         # makes sure the last protein does not print its extra layout
         if i != protein_length - 1:
@@ -162,7 +161,7 @@ def visualize_fold():
             elif coordinates[i][3] == 2:
                 grid[coor_x][coor_y + 1] = '| '
             elif coordinates[i][3] == 3:
-=======
+
         # print extra layout for all AA except the last one
         if i != protein_length - 1:
 
@@ -180,7 +179,6 @@ def visualize_fold():
             
             # stripes left to it
             elif aa_info[i][3] == 3:
->>>>>>> 64c7a1d33288f8f6c29bd3fb577414824a7d7395
                 grid[coor_x - 1][coor_y] = '---'
 
             print('klaar')
@@ -196,26 +194,24 @@ def visualize_fold():
                 if grid[j][i][0] == 'H':
                     print('\033[34;1m' + grid[j][i][0] + '\033[0m', end='')
 
-<<<<<<< HEAD
+
                     if grid[j][i][1] != 1 and j + 1 < x * 2 - 1 and grid[j + 1][i] != "---":
                         print(' ', end='')
-=======
+
                     #if grid[j][i][1] != 1 and j + 1 < x * 2 - 1 and grid[j + 1][i] != "---":
                      #   print(' ', end='')
->>>>>>> 64c7a1d33288f8f6c29bd3fb577414824a7d7395
 
 
                 # print P red
                 elif grid[j][i][0] == 'P':
                     print('\033[31;1m' + grid[j][i][0] + '\033[0m', end='')
 
-<<<<<<< HEAD
+
                     if grid[j][i][1] != 1 and j + 1 < x * 2 - 1 and grid[j + 1][i] != "---":
                         print(' ', end='')
-=======
+
                     #if grid[j][i][1] != 1 and j + 1 < x * 2 - 1 and grid[j + 1][i] != "---":
                      #   print(' ', end='')
->>>>>>> 64c7a1d33288f8f6c29bd3fb577414824a7d7395
 
 
                 # if something else is present
@@ -252,22 +248,6 @@ def main():
     # fold_protein(2, 'L')
     # initialize_grid(min_x, min_y)
     # visualize_fold(min_x, min_y, x, y, aa_info)
-
-<<<<<<< HEAD
-# fold_protein(2, 'L')
-# fold_protein(3, 'R')
-# fold_protein(4, 'R')
-# fold_protein(6, 'R')
-# print_protein()
-# clear_screen()
-
-
-=======
-    # fold_protein(3, 'R')
-    # initialize_grid(min_x, min_y)
-    # visualize_fold(min_x, min_y, x, y, aa_info)
->>>>>>> 64c7a1d33288f8f6c29bd3fb577414824a7d7395
-
 
 
 if __name__ == "__main__":
