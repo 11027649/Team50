@@ -126,36 +126,37 @@ def print_protein():
 
         grid[coor_x][coor_y] = [coordinates[i][2], coordinates[i][3]]
 
-    # add layout, making the grid 2* as big, to add bonds
+    # add layout, making the grid 2 times as big, to add bonds
         # makes sure the last protein does not print its extra layout
         if i != protein_length - 1:
             if coordinates[i][3] == 0:
-                grid[coor_x][coor_y - 1] = '|'
+                grid[coor_x][coor_y - 1] = '| '
             elif coordinates[i][3] == 1:
                 grid[coor_x + 1][coor_y] = '---'
             elif coordinates[i][3] == 2:
-                grid[coor_x][coor_y + 1] = '|'
+                grid[coor_x][coor_y + 1] = '| '
             elif coordinates[i][3] == 3:
                 grid[coor_x - 1][coor_y] = '---'
 
     # print the grid
     for i in range(y * 2 - 1):
+        print("    ", end='')
 
         # print rows
         for j in range(x * 2 - 1):
 
-                # Hoi dit is een comment
                 # print H blue
                 if grid[j][i][0] == 'H':
-                    print('\033[34;1m' + grid[j][i][0], end='')
-                    print('\033[0m', end='')
+                    print('\033[34;1m' + grid[j][i][0] + '\033[0m', end='')
+
+                    if grid[j][i][1] != 1 and j + 1 < x * 2 - 1 and grid[j + 1][i] != "---":
+                        print(' ', end='')
 
 
                 # print P red
                 elif grid[j][i][0] == 'P':
-                    print('\033[31;1m' + grid[j][i][0], end='')
-                    print('\033[0m', end='')
-                    
+                    print('\033[31;1m' + grid[j][i][0] + '\033[0m', end='')
+
                     if grid[j][i][1] != 1 and j + 1 < x * 2 - 1 and grid[j + 1][i] != "---":
                         print(' ', end='')
 
@@ -180,14 +181,14 @@ def clear_screen():
 init_protein()
 
 
-fold_protein(1, 'L')
-fold_protein(2, 'L')
-fold_protein(3, 'R')
-fold_protein(4, 'R')
-fold_protein(6, 'R')
-fold_protein(9, 'R')
-fold_protein(12, 'R')
-fold_protein(16, 'R')
+# fold_protein(2, 'L')
+# fold_protein(3, 'R')
+# fold_protein(4, 'R')
+# fold_protein(6, 'R')
+# print_protein()
+# clear_screen()
+
+
 
 
 print_protein()
