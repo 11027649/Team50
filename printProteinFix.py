@@ -1,10 +1,21 @@
 import time
 import os
+from colorama import init
+init()
 
 # set up variables
 protein = []
 protein_length = 0
 ALLOWED_LENGTH = 20
+
+# make array for coordinates
+coordinates = []
+
+# initialize coordinates
+min_x = 0
+min_y = 0
+max_x = 0
+max_y = 0
 
 # save position of each amino acid to remember which ones are linked
 class Amino():
@@ -50,21 +61,13 @@ def fold_protein(amino_number, direction):
 
     # we need to check here if not 2 amino acids are on the same point in the grid
 
+
     # if not, write direction into amino acid
     protein[amino_number].pos_next = direction
 
 
-def print_protein():
-    """ Prints the protein in a nice way. """
-
-    # make array for coordinates
-    coordinates = []
-
-    # initialize coordinates
-    min_x = 0
-    min_y = 0
-    max_x = 0
-    max_y = 0
+def initialize_grid(min_x, min_y, max_x, max_y):
+    """ Initializes the grid at which the protein lays. Also appends the coordinates of each AA to an array. """
 
     # starts at 0 to makes sure the starting position is 0
     x_pos = 0
@@ -102,15 +105,15 @@ def print_protein():
             direction -= 1
         if protein[i].pos_next == 'R':
             direction += 1
+        
         # makes sure the direction is the right format (never above 3)
         direction %= 4;
 
         # append the amino acids and its coordinates on the grid
         coordinates.append([x_pos, y_pos, protein[i].letter, direction])
 
-    # gets a whitespace between the inserted protein and the print
-    print()
 
+def visualise_fold():
     x = min_x + max_x + 1
     y = abs(min_y) + max_y + 1
 
@@ -144,15 +147,16 @@ def print_protein():
 
                 # print H blue
                 if grid[j][i][0] == 'H':
-                    print(grid[j][i][1], end='')
-
+                    print('\033[34;1m' + grid[j][i][0], end='')
+                    print('\033[0m', end='')
 
                 # print P red
                 elif grid[j][i][0] == 'P':
-                    print(grid[j][i][1], end='')
+                    print('\033[31;1m' + grid[j][i][0], end='')
+                    print('\033[0m', end='')
+                    
                     if grid[j][i][1] != 1 and j + 1 < x * 2 - 1 and grid[j + 1][i] != "---":
                         print(' ', end='')
-
 
                 # if something else is present
                 else:
@@ -161,6 +165,7 @@ def print_protein():
         print()
     print()
 
+
 def clear_screen():
     """ Clears the screen to show how the protein folds in a nice way. """
 
@@ -168,22 +173,24 @@ def clear_screen():
     time.sleep(1)
 
     # clear the terminal window
-    os.system("clear")
-
-## DIT IS DE MAIN ##
-init_protein()
+    os.system("cls")
 
 
-fold_protein(1, 'L')
-fold_protein(2, 'L')
-fold_protein(3, 'R')
-fold_protein(4, 'R')
-fold_protein(6, 'R')
-fold_protein(9, 'R')
-fold_protein(12, 'R')
-fold_protein(16, 'R')
+def main():
+    init_protein()
+    initialize_grid(min_x, min_y, max_x, max_y)
+    visualise_fold()
+
+    # don't fold first amino acid
+    bond = 2
+
+    for bond in range(protein_length):
+        if protein[bond].pos_next == 'C':
+            fold_protein(bond, 'R')
+            initialize_grid(min_x, min_y, max_x, max_y)
+            visualise_fold()
+            clear_screen()
 
 
-print_protein()
-
-# phpphpphpphpphpphpp
+if __name__ == "__main__":
+    main()
