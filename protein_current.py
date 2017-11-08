@@ -24,7 +24,8 @@ class Amino():
 
 
 def init_protein():
-    """ Gets an input from the user and makes it usable to fold. """
+    """ Gets an input from the user and makes it usable to fold. 
+        Initializes all the aminos: Letter, Next position, and coordinates. """
 
     # ask user for protein string as input, max length
     protein_string = input("Insert protein string: ")
@@ -66,7 +67,8 @@ def fold_protein(amino_number, direction):
     # if not, write direction into amino acid
     protein[amino_number].pos_next = direction
 
-def initialize_grid():
+
+def make_grid():
 
     # initialize coordinates
     max_x = 0
@@ -79,7 +81,7 @@ def initialize_grid():
     # 1(right) 2(down) 3(left) 0(up), standard direction is to the right
     direction = 1
 
-    print('Hallo ik ben in initialize_grid aangekomen')
+    print('Hallo ik ben in make_grid aangekomen')
     print(protein_length)
 
     # for each amino acid in the protein
@@ -151,16 +153,6 @@ def visualize_fold():
         grid[coor_x][coor_y] = aa_info[i][2]
 
     # add layout, making the grid 2 times as big, to add bonds
-        # makes sure the last protein does not print its extra layout
-        if i != protein_length - 1:
-            if coordinates[i][3] == 0:
-                grid[coor_x][coor_y - 1] = '| '
-            elif coordinates[i][3] == 1:
-                grid[coor_x + 1][coor_y] = '---'
-            elif coordinates[i][3] == 2:
-                grid[coor_x][coor_y + 1] = '| '
-            elif coordinates[i][3] == 3:
-
         # print extra layout for all AA except the last one
         if i != protein_length - 1:
 
@@ -198,7 +190,7 @@ def visualize_fold():
                         print(' ', end='')
 
                     #if grid[j][i][1] != 1 and j + 1 < x * 2 - 1 and grid[j + 1][i] != "---":
-                     #   print(' ', end='')
+                     #  print(' ', end='')
 
 
                 # print P red
@@ -221,7 +213,6 @@ def visualize_fold():
     print()
 
 
-
 def clear_screen():
     """ Clears the screen to show how the protein folds in a nice way. """
 
@@ -234,10 +225,8 @@ def clear_screen():
 
 def main():
     init_protein()
-    initialize_grid()
+    make_grid()
 
-    print(y)
-    print(x)
     visualize_fold()
 
     fold_protein(3, 'L')
