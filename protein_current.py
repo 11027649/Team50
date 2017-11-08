@@ -132,7 +132,7 @@ def initialize_grid():
     y = abs(min_y) + max_y + 1
     
 
-
+# hoi dit is een comment
 def visualize_fold():
     # make a grid twice the size of the former grid
     grid = [['  ' for p in range(y * 2 - 1)] for q in range(x * 2 - 1)]
