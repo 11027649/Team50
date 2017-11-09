@@ -1,19 +1,18 @@
-def print_protein():
+def print_protein(x, y, protein_length):
     # make a grid twice the size of the former grid
     grid = [['  ' for p in range(y * 2 - 1)] for q in range(x * 2 - 1)]
 
     print('this is min x en min y', end='')
-    print(min_x, min_y)
 
     print(str(protein_length) + 'in visualize_fold')
-    
+
     for i in range(protein_length):
 
-        coor_x = (aa_info[i][0] + min_x) * 2
-        coor_y = (aa_info[i][1] + abs(min_y)) * 2
+        coor_x = (aa_info[i][0] ) * 2
+        coor_y = (aa_info[i][1] ) * 2
         print(coor_x)
         print(coor_y)
-        # the coordinates are 
+        # the coordinates are
         grid[coor_x][coor_y] = aa_info[i][2]
 
     # add layout, making the grid 2 times as big, to add bonds
@@ -27,11 +26,11 @@ def print_protein():
             # stripes right to it
             elif aa_info[i][3] == 1:
                 grid[coor_x + 1][coor_y] = '---'
-            
+
             # pipeline above it
             elif aa_info[i][3] == 2:
                 grid[coor_x][coor_y + 1] = '| '
-            
+
             # stripes left to it
             elif aa_info[i][3] == 3:
                 grid[coor_x - 1][coor_y] = '---'

@@ -1,7 +1,7 @@
 import time
 import os
-import animation
-import amino
+from animation import print_protein
+from amino import Amino
 
 from colorama import init
 init()
@@ -19,12 +19,12 @@ y = 0
 aa_info = []
 
 def init_protein():
-    """ Gets an input from the user and makes it usable to fold. 
+    """ Gets an input from the user and makes it usable to fold.
         Initializes all the aminos: Letter, Next position, and coordinates. """
 
     # ask user for protein string as input, max length
     protein_string = input("Insert protein string: ")
-    
+
     global protein_length
 
     protein_length = len(protein_string)
@@ -68,7 +68,8 @@ def make_grid():
     # initialize coordinates
     max_x = 0
     max_y = 0
-
+    min_y = 0
+    min_x = 0
     # starts at 0 to makes sure the starting position is 0
     x_pos = 0
     y_pos = 0
@@ -97,10 +98,6 @@ def make_grid():
             max_y = y_pos
         if x_pos > max_x:
             max_x = x_pos
-
-        global min_y
-        global min_x
-
         if y_pos < min_y:
             min_y = -abs(y_pos)
         if x_pos < min_x:
@@ -111,13 +108,13 @@ def make_grid():
             direction -= 1
         if protein[i].pos_next == 'R':
             direction += 1
-        
+
         # makes sure the direction is the right format (never above 3)
         direction %= 4;
 
         # append the amino acids and its coordinates on the grid
         print(protein[i].letter)
-        
+
         protein[i].aa_x = x_pos
         protein[i].aa_y = y_pos
 
@@ -127,18 +124,21 @@ def make_grid():
     x = min_x + max_x + 1
     global y
     y = abs(min_y) + max_y + 1
-    
+
+    # makes sure the right coordinates are given
+    for i in range(len(aa_info)):
+        aa_info[i] = [x_pos + min_x, y_pos + min_y, protein[i].letter, direction]
 
 
 def main():
     init_protein()
     make_grid()
 
-    visualize_fold()
+    print_protein(x,y, protein_length)
 
     fold_protein(3, 'L')
-    initialize_grid()
-    visualize_fold()
+    initialize_grid(x, y, protein_length, aa_info)
+    print_protein()
 
     # fold_protein(2, 'L')
     # initialize_grid(min_x, min_y)
