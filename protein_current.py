@@ -57,24 +57,52 @@ def fold_protein(amino_number, direction):
         print("This ain't no valid foldin' input dude.")
         exit(1)
 
-    # we need to check here if not 2 amino acids are on the same point in the grid (pseudocode)
-    # x_start = protein[amino_number].aa_x
-    # y_start = protein[amino_number].aa_y
-    # check_direction = protein[amino_number].direction
-    # for i in range(protein_length - amino_number):
-    #     if check_direction == 0:
-    #         y_pos += 1
-    #     elif check_direction == 1:
-    #         x_pos += 1
-    #     elif check_direction == 2:
-    #         y_pos -= 1
-    #     elif check_direction == 3:
-    #         x_pos -= 1
-
     # if not, write direction into amino acid
     protein[amino_number].pos_next = direction
-    # afther an amino acid is formed it has to make the grid to get the coordinates
-    make_grid()
+    if direction == 'L':
+        check_direction = protein[amino_number].direction - 1
+    if direction == 'R':
+        check_direction = protein[amino_number].direction + 1
+    check_direction %= 4
+    protein[amino_number].direction = check_direction
+
+    # we need to check here if not 2 amino acids are on the same point in the grid (pseudocode)
+    x_pos = protein[amino_number].aa_x
+    y_pos = protein[amino_number].aa_y
+
+
+    # iterates over protein and checks if the coordinates already exist
+    for i in range(1, protein_length - amino_number):
+        protein[i + amino_number]
+
+
+        # gives new coordinates
+        if check_direction == 0:
+             y_pos += 1
+        elif check_direction == 1:
+            x_pos += 1
+        elif check_direction == 2:
+            y_pos -= 1
+        elif check_direction == 3:
+            x_pos -= 1
+        # gets the right direction
+        if protein[i + amino_number].pos_next == 'L':
+            check_direction -= 1
+        if protein[i + amino_number].pos_next == 'R':
+            check_direction += 1
+        check_direction %= 4
+        # checks if the coordinates already exist
+
+        for j in range(i + amino_number - 1):
+            if protein[j].aa_x == x_pos:
+                if protein[j].aa_y == y_pos:
+                    print("yeah this fold is not possible")
+                    exit(1)
+            protein[i + amino_number].aa_x = x_pos
+            protein[i + amino_number].aa_y = y_pos
+            protein[i+ amino_number].direction = check_direction
+
+
 
 def make_grid():
 
@@ -132,21 +160,32 @@ def make_grid():
     for i in range(len(protein)):
         protein[i].aa_x = protein[i].aa_x + min_x
         protein[i].aa_y = protein[i].aa_y + min_y
+def print_coordintes():
+    for i in range(len(protein)):
+        print(protein[i].aa_x, end ='<x>')
+        print(protein[i].aa_y, end ='<y>')
+        print(protein[i].direction, end ='<direction>')
+        print()
 
 
 def main():
     init_protein()
-    make_grid()
+
+    fold_protein(1, 'L')
+    print('fold 1')
+    print_coordintes()
+
+    print()
     fold_protein(2, 'L')
-    fold_protein(4, 'L')
+    print('fold 2')
+    print_coordintes()
+    print()
+    fold_protein(3, 'L')
+    print('fold 3')
+    print_coordintes()
+    print()
     make_grid()
 
-    # print_protein(x,y, protein_length)
-    # initialize_grid(x, y, protein_length, aa_info)
-    # print_protein()
-    # fold_protein(2, 'L')
-    # initialize_grid(min_x, min_y)
-    # visualize_fold(min_x, min_y, x, y, aa_info)
 
 
 if __name__ == "__main__":
