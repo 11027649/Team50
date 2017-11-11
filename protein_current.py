@@ -69,7 +69,10 @@ def fold_protein(amino_number, direction):
     # we need to check here if not 2 amino acids are on the same point in the grid (pseudocode)
     x_pos = protein[amino_number].aa_x
     y_pos = protein[amino_number].aa_y
-
+    # needed for a correction factor (100 to make sure the x and y coordinates
+    # will be lower than this factor)
+    min_x = 100
+    min_y = 100
 
     # iterates over protein and checks if the coordinates already exist
     for i in range(1, protein_length - amino_number):
@@ -101,8 +104,16 @@ def fold_protein(amino_number, direction):
             protein[i + amino_number].aa_x = x_pos
             protein[i + amino_number].aa_y = y_pos
             protein[i+ amino_number].direction = check_direction
-
-
+    # gets a correction factor for the string (also if it is higher than 0)
+    for i in range(len(protein)):
+        if protein[i].aa_x < min_x:
+            min_x = protein[i].aa_x
+        if protein[i].aa_y < min_y:
+            min_y = protein[i].aa_y
+    for i in range(len(protein)):
+        protein[i].aa_x += -(min_x)
+        protein[i].aa_y += -(min_y)
+    print(min_x, end = 'min_x')
 
 def make_grid():
 
@@ -180,7 +191,7 @@ def main():
     print('fold 2')
     print_coordintes()
     print()
-    fold_protein(3, 'L')
+    fold_protein(3, 'R')
     print('fold 3')
     print_coordintes()
     print()
