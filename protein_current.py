@@ -42,6 +42,7 @@ def init_protein():
 
     # set all directions of the amino acids to Continue, and if it's the last one, to End
     # give the protein coordinates: y = 0 and x = 0 + i
+    # gives each amino an ID to see easily if the amino's are bonded or not
     for i in range(protein_length):
         if i == protein_length - 1:
             protein.append(Amino(protein_string[i].upper(), 'E', i, 0, 1))
@@ -175,6 +176,7 @@ def make_grid():
     for i in range(len(protein)):
         protein[i].aa_x = protein[i].aa_x + min_x
         protein[i].aa_y = protein[i].aa_y + min_y
+
 def print_coordintes():
     for i in range(len(protein)):
         print(protein[i].aa_x, end ='<x>')
