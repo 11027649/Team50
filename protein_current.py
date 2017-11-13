@@ -1,8 +1,9 @@
 import time
 import os
 from animation import print_protein
+
 from amino import Amino
-import score
+from score import score
 
 from colorama import init
 init()
@@ -48,11 +49,14 @@ def init_protein():
             protein.append(Amino(protein_string[i].upper(), 'E', i, 0, 1))
         else:
             protein.append(Amino(protein_string[i].upper(), 'C', i, 0, 1))
+    protein_to_grid()
 
 
-
-def fold_protein(amino_number, direction):
+def fold_protein(amino_number, direction, grid):
     """ Folds the protein. """
+    # saves the old grid
+    old_grid = grid
+
 
     # check if valid folding input
     if direction != 'L' and direction != 'R':
@@ -98,6 +102,7 @@ def fold_protein(amino_number, direction):
             if protein[j].aa_x == x_pos:
                 if protein[j].aa_y == y_pos:
                     print("yeah this fold is not possible")
+                    grid = old_grid
                     exit(1)
             protein[i + amino_number].aa_x = x_pos
             protein[i + amino_number].aa_y = y_pos
@@ -110,20 +115,20 @@ def protein_to_grid():
     # saves the x and y value of the grid
     max_x = 0
     max_y = 0
-    
+
     # gets the needed height and width of the grid
     for i in range(protein_length):
         if protein[i].aa_x > max_x:
             max_x = protein[i].aa_x
         if protein[i].aa_y > max_y:
             max_y = protein[i].aa_y
-    
+
     # gets the coordinates of the grid
     cur_x = 0
     cur_y = 0
     global grid
     grid = [[' ' for p in range(max_y+1)] for q in range(max_x+1)]
-    
+
     for i in range(protein_length):
         cur_x = protein[i].aa_x
         cur_y = protein[i].aa_y
@@ -132,7 +137,7 @@ def protein_to_grid():
 
 
 def temporary_print(max_x, max_y):
-    
+
     for i in range(max_y + 1):
         for j in range(max_x + 1):
             if not grid[j][i] == ' ':
@@ -160,17 +165,14 @@ def main():
     init_protein()
 
 
+    fold_protein(1, 'L', grid)
     print('fold 1')
-    grid = fold_protein(1, 'L')
-    stability = score(grid)
-    print("The stability of this protein is: " + stability)
-    clear_screen()
-    
 
-    fold_protein(2, 'L')
-    print('fold 2')
 
-    fold_protein(3, 'R')
+    fold_protein(2, 'L', grid)
+    print('fold 2', grid)
+
+    fold_protein(3, 'R', grid)
     print('fold 3')
 
 
