@@ -40,19 +40,15 @@ def init_protein():
             print("Please only insert P's and H's...")
             exit(1)
 
-    grid = [[0 for x in range(protein_length)] for y in range(1)]
-
     # set all directions of the amino acids to Continue, and if it's the last one, to End
     # give the protein coordinates: y = 0 and x = 0 + i
     # gives each amino an ID to see easily if the amino's are bonded or not
-    # makes a grid
     for i in range(protein_length):
         if i == protein_length - 1:
             protein.append(Amino(protein_string[i].upper(), 'E', i, 0, 1))
         else:
             protein.append(Amino(protein_string[i].upper(), 'C', i, 0, 1))
 
-    return grid
 
 
 def fold_protein(amino_number, direction):
@@ -165,7 +161,7 @@ def main():
 
 
     print('fold 1')
-    fold_protein(1, 'L')
+    grid = fold_protein(1, 'L')
     stability = score(grid)
     print("The stability of this protein is: " + stability)
     clear_screen()
