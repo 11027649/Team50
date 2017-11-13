@@ -17,7 +17,6 @@ x = 0
 y = 0
 
 
-
 def init_protein():
     """ Gets an input from the user and makes it usable to fold.
         Initializes all the aminos: Letter, Next position, and coordinates. """
@@ -102,8 +101,38 @@ def fold_protein(amino_number, direction):
             protein[i + amino_number].aa_y = y_pos
             protein[i+ amino_number].direction = check_direction
     correct_protein()
+    protein_to_grid()
+    # makes from the array protein an according grid with proteins in it
+def protein_to_grid():
+    # saves the x and y value of the grid
+    max_x = 0
+    max_y = 0
+    # gets the needed height and width of the grid
+    for i in range(protein_length):
+        if protein[i].aa_x > max_x:
+            max_x = protein[i].aa_x
+        if protein[i].aa_y > max_y:
+            max_y = protein[i].aa_y
+    # gets the coordinates of the grid
+    cur_x = 0
+    cur_y = 0
+    global grid
+    grid = [[' ' for p in range(max_y+1)] for q in range(max_x+1)]
+    for i in range(protein_length):
+        cur_x = protein[i].aa_x
+        cur_y = protein[i].aa_y
+        grid[cur_x][cur_y] = protein[i]
+    temporary_print(max_x, max_y)
 
 
+def temporary_print(max_x, max_y):
+    for i in range(max_y + 1):
+        for j in range(max_x + 1):
+            if not grid[j][i] == ' ':
+                print (grid[j][i].letter, end ='')
+            else:
+                print (grid[j][i], end ='')
+        print()
 def correct_protein():
     # needed for a correction factor (100 to make sure the x and y coordinates
     # will be lower than this factor)
@@ -118,7 +147,7 @@ def correct_protein():
     for i in range(len(protein)):
         protein[i].aa_x += -(min_x)
         protein[i].aa_y += -(min_y)
-    print(min_x, end = 'min_x')
+
 
 def make_grid():
 
@@ -201,7 +230,7 @@ def main():
     print('fold 3')
     print_coordintes()
     print()
-    make_grid()
+
 
 
 
