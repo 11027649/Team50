@@ -11,7 +11,7 @@ def score(grid):
 		for j in range(rows):
 
 			# check if H, and if yes, check stability
-			if grid[i][j] == 'H'
+			if grid[i][j] == 'H':
 
 				if not j == 0:
 					# check if above is an H

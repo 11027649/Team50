@@ -2,6 +2,7 @@ import time
 import os
 from animation import print_protein
 from amino import Amino
+import score
 
 from colorama import init
 init()
@@ -39,14 +40,19 @@ def init_protein():
             print("Please only insert P's and H's...")
             exit(1)
 
+    grid = [[0 for x in range(protein_length)] for y in range(1)]
+
     # set all directions of the amino acids to Continue, and if it's the last one, to End
     # give the protein coordinates: y = 0 and x = 0 + i
     # gives each amino an ID to see easily if the amino's are bonded or not
+    # makes a grid
     for i in range(protein_length):
         if i == protein_length - 1:
             protein.append(Amino(protein_string[i].upper(), 'E', i, 0, 1))
         else:
             protein.append(Amino(protein_string[i].upper(), 'C', i, 0, 1))
+
+    return grid
 
 
 def fold_protein(amino_number, direction):
@@ -103,21 +109,25 @@ def fold_protein(amino_number, direction):
     correct_protein()
     protein_to_grid()
     # makes from the array protein an according grid with proteins in it
+
 def protein_to_grid():
     # saves the x and y value of the grid
     max_x = 0
     max_y = 0
+    
     # gets the needed height and width of the grid
     for i in range(protein_length):
         if protein[i].aa_x > max_x:
             max_x = protein[i].aa_x
         if protein[i].aa_y > max_y:
             max_y = protein[i].aa_y
+    
     # gets the coordinates of the grid
     cur_x = 0
     cur_y = 0
     global grid
     grid = [[' ' for p in range(max_y+1)] for q in range(max_x+1)]
+    
     for i in range(protein_length):
         cur_x = protein[i].aa_x
         cur_y = protein[i].aa_y
@@ -126,6 +136,7 @@ def protein_to_grid():
 
 
 def temporary_print(max_x, max_y):
+    
     for i in range(max_y + 1):
         for j in range(max_x + 1):
             if not grid[j][i] == ' ':
@@ -133,6 +144,7 @@ def temporary_print(max_x, max_y):
             else:
                 print (grid[j][i], end ='')
         print()
+
 def correct_protein():
     # needed for a correction factor (100 to make sure the x and y coordinates
     # will be lower than this factor)
@@ -148,90 +160,22 @@ def correct_protein():
         protein[i].aa_x += -(min_x)
         protein[i].aa_y += -(min_y)
 
-
-def make_grid():
-
-    # initialize coordinates
-    max_x = 0
-    max_y = 0
-    min_y = 0
-    min_x = 0
-    # starts at 0 to makes sure the starting position is 0
-    x_pos = 0
-    y_pos = 0
-
-    # 1(right) 2(down) 3(left) 0(up), standard direction is to the right
-    new_direction = 1
-
-    # for each amino acid in the protein
-    for i in range(protein_length):
-
-        # gets the coordinates of this amino acid
-        if new_direction == 0:
-            y_pos += 1
-        elif new_direction == 1:
-            x_pos += 1
-        elif new_direction == 2:
-            y_pos -= 1
-        elif new_direction == 3:
-            x_pos -= 1
-
-        # save the highest and lowest coordinates for making the grid
-        if y_pos > max_y:
-            max_y = y_pos
-        if x_pos > max_x:
-            max_x = x_pos
-        if y_pos < min_y:
-            min_y = -abs(y_pos)
-        if x_pos < min_x:
-            min_x = -x_pos
-
-        # gets the right direction
-        if protein[i].pos_next == 'L':
-            new_direction -= 1
-        if protein[i].pos_next == 'R':
-            new_direction += 1
-
-        # makes sure the direction is the right format (never above 3)
-        new_direction %= 4;
-
-        # gives protein an x and y value, however these are temporary
-        # the x and y value will be set to the correct value later
-        # for the x value the lowest x value has to be added (same for y)
-        protein[i].aa_x = x_pos
-        protein[i].aa_y = y_pos
-        protein[i].direction = new_direction
-    # makes sure the right coordinates are given(here the lowest x value is added)
-    for i in range(len(protein)):
-        protein[i].aa_x = protein[i].aa_x + min_x
-        protein[i].aa_y = protein[i].aa_y + min_y
-
-def print_coordintes():
-    for i in range(len(protein)):
-        print(protein[i].aa_x, end ='<x>')
-        print(protein[i].aa_y, end ='<y>')
-        print(protein[i].direction, end ='<direction>')
-        print()
-
-
 def main():
     init_protein()
 
-    fold_protein(1, 'L')
-    print('fold 1')
-    print_coordintes()
 
-    print()
+    print('fold 1')
+    fold_protein(1, 'L')
+    stability = score(grid)
+    print("The stability of this protein is: " + stability)
+    clear_screen()
+    
+
     fold_protein(2, 'L')
     print('fold 2')
-    print_coordintes()
-    print()
+
     fold_protein(3, 'R')
     print('fold 3')
-    print_coordintes()
-    print()
-
-
 
 
 if __name__ == "__main__":
