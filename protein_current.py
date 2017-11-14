@@ -22,7 +22,6 @@ def init_protein():
 
     # ask user for protein string as input, max length
     protein_string = input("Insert protein string: ")
-
     global protein_length
 
     protein_length = len(protein_string)
@@ -49,8 +48,9 @@ def init_protein():
     protein_to_grid()
 
 
-def fold_protein(amino_number, direction, grid):
+def fold_protein(amino_number, direction, grid, protein):
     """ Folds the protein. """
+
     # saves the old grid
     old_grid = grid
     old_protein = protein
@@ -59,7 +59,7 @@ def fold_protein(amino_number, direction, grid):
     if direction != 'L' and direction != 'R':
         print("This ain't no valid foldin' input dude.")
         exit(1)
-
+    
     # if not, write direction into amino acid
     protein[amino_number].pos_next = direction
     if direction == 'L':
@@ -93,8 +93,8 @@ def fold_protein(amino_number, direction, grid):
         if protein[i + amino_number].pos_next == 'R':
             check_direction += 1
         check_direction %= 4
-        # checks if the coordinates already exist
 
+        # checks if the coordinates already exist
         for j in range(i + amino_number - 1):
             if protein[j].aa_x == x_pos:
                 if protein[j].aa_y == y_pos:
@@ -102,6 +102,7 @@ def fold_protein(amino_number, direction, grid):
                     grid = old_grid
                     protein = old_protein
                     return
+
             protein[i + amino_number].aa_x = x_pos
             protein[i + amino_number].aa_y = y_pos
             protein[i+ amino_number].direction = check_direction
@@ -172,23 +173,26 @@ def print_coordinates():
 def main():
     init_protein()
 
-    print('fold 1')
-    fold_protein(1, 'L', grid)
-    temporary_print()
-    stability = score(grid, protein)
-    print(stability)
+    # print('fold 1')
+    # fold_protein(1, 'L', grid, protein)
+    # temporary_print()
+    # stability =score(grid, protein)
+    # print(stability)
 
-    print('fold 2')
-    fold_protein(2, 'L', grid)
-    temporary_print()
-    stability = score(grid, protein)
-    print(stability)
 
-    print('fold 3')
-    fold_protein(3, 'L', grid)
-    temporary_print()
-    stability = score(grid, protein)
-    print(stability)
+
+    for bond in range(1, protein_length - 1):
+        if protein[bond].pos_next == 'C':
+            fold_protein(bond, 'R', grid, protein)
+            temporary_print()
+            print_coordinates()
+            stability = score(grid, protein)
+            print("The stability of this protein is: " + str(stability))
+
+
+
+
+
 
 if __name__ == "__main__":
     main()
