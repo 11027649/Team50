@@ -96,7 +96,7 @@ def fold_protein(amino_number, direction, grid, protein):
         for j in range(i + amino_number - 1):
             if protein[j].aa_x == x_pos:
                 if protein[j].aa_y == y_pos:
-                    print("yeah this fold is not possible")
+                    print("ERROR IMPOSSIBLE FOLD (will use old grid)")
                     grid = old_grid
                     protein = old_protein
                     return
@@ -192,6 +192,8 @@ def main():
 
     for bond in range(1, protein_length - 1):
         if protein[bond].pos_next == 'C':
+            print(bond, end ='**')
+            print()
             fold_protein(bond, 'R', grid, protein)
             temporary_print()
             print_coordinates()
