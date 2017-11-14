@@ -1,8 +1,11 @@
 # Team50
 
 Minor Programmeren UvA: Programmeertheorie
+
 Heuristieken project november/december 2017
+
 Case: Protein Powder
+
 
 Programmers: Christian Bijvoets, David van Grinsven and Natasja Wezel
 
