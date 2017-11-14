@@ -1,36 +1,35 @@
-def score(grid):
+def score(grid, protein):
 	""" Takes a grid with the folded protein in it. Returns a stability score. """
 
-	rows = len(grid)
-	columns = len(grid[0])
+	score = 0
+	columns = len(grid)
+	rows = len(grid[1])
 
 	# iterate over columns
-	for i in range(columns):
+	for y in range(rows):
 
 		# iterate over rows
-		for j in range(rows):
+		for x in range(columns):
 
-			# check if H, and if yes, check stability
-			if grid[i][j] == 'H':
+	        # makes sure it is a letter
+			if not grid[x][y] == ' ':
 
-				if not j == 0:
-					# check if above is an H
-					if (grid[i][j + 1] == 'H'): #(and if not bonded)
-						score = score - 0.5
+				if grid[x][y].letter == 'H':
+					if not x == 0 and not grid[x - 1][y] == ' ':
+						if grid[x - 1][y].letter == 'H':
+							score -= 0.5
+					if not x == columns - 1 and not grid[x + 1][y] == ' ':
+						if grid[x + 1][y].letter == 'H':
+							score -= 0.5
+					if not y == rows - 1 and not grid[x][y + 1] == ' ':
+						if grid[x][y + 1].letter == 'H' :
+							score -= 0.5
+					if not y == 0 and not grid[x][y - 1] == ' ':
+						if grid[x][y - 1].letter == 'H':
+							score -= 0.5
 
-				if not j == rows:
-					# check if beneath is an H
-					if (grid[i][j - 1] == 'H'): #(and if not bonded)
-						score = score - 0.5
-
-				if not i == columns:
-					# check if right is an H
-					if grid[i + 1][j] == 'H':
-						score = score - 0.5
-
-				if not i == 0:
-					# check if left is an H
-					if grid[i - 1][j] == 'H':
-						score = score - 0.5
-
+	for i in range(len(protein) - 1):
+		if protein[i].letter == 'H':
+			if protein[i + 1].letter == 'H':
+				score += 1
 	return score

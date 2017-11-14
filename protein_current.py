@@ -13,10 +13,7 @@ init()
 protein = []
 protein_length = 0
 ALLOWED_LENGTH = 20
-min_x = 0
-min_y = 0
-x = 0
-y = 0
+
 
 
 def init_protein():
@@ -56,7 +53,7 @@ def fold_protein(amino_number, direction, grid):
     """ Folds the protein. """
     # saves the old grid
     old_grid = grid
-
+    old_protein = protein
 
     # check if valid folding input
     if direction != 'L' and direction != 'R':
@@ -103,7 +100,8 @@ def fold_protein(amino_number, direction, grid):
                 if protein[j].aa_y == y_pos:
                     print("yeah this fold is not possible")
                     grid = old_grid
-                    exit(1)
+                    protein = old_protein
+                    return
             protein[i + amino_number].aa_x = x_pos
             protein[i + amino_number].aa_y = y_pos
             protein[i+ amino_number].direction = check_direction
@@ -127,24 +125,25 @@ def protein_to_grid():
     cur_x = 0
     cur_y = 0
     global grid
-    grid = [[' ' for p in range(max_y+1)] for q in range(max_x+1)]
+    grid = [[' ' for p in range(max_y + 1)] for q in range(max_x + 1)]
 
     for i in range(protein_length):
         cur_x = protein[i].aa_x
         cur_y = protein[i].aa_y
         grid[cur_x][cur_y] = protein[i]
-    temporary_print(max_x, max_y)
 
-
-def temporary_print(max_x, max_y):
-
-    for i in range(max_y + 1):
-        for j in range(max_x + 1):
+def temporary_print():
+    max_x = len(grid)
+    max_y = len(grid[1])
+    for i in range(max_y):
+        for j in range(max_x):
             if not grid[j][i] == ' ':
                 print (grid[j][i].letter, end ='')
             else:
                 print (grid[j][i], end ='')
         print()
+
+
 
 def correct_protein():
     # needed for a correction factor (100 to make sure the x and y coordinates
@@ -161,20 +160,35 @@ def correct_protein():
         protein[i].aa_x += -(min_x)
         protein[i].aa_y += -(min_y)
 
+
+def print_coordinates():
+    for i in range(len(protein)):
+        print (protein[i].aa_x, end ='<x>')
+        print (protein[i].aa_y, end ='<y>')
+        print (protein[i].direction, end ='<direction>')
+        print()
+
+
 def main():
     init_protein()
 
-
-    fold_protein(1, 'L', grid)
     print('fold 1')
+    fold_protein(1, 'L', grid)
+    temporary_print()
+    stability = score(grid, protein)
+    print(stability)
 
-
+    print('fold 2')
     fold_protein(2, 'L', grid)
-    print('fold 2', grid)
+    temporary_print()
+    stability = score(grid, protein)
+    print(stability)
 
-    fold_protein(3, 'R', grid)
     print('fold 3')
-
+    fold_protein(3, 'L', grid)
+    temporary_print()
+    stability = score(grid, protein)
+    print(stability)
 
 if __name__ == "__main__":
     main()
