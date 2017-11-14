@@ -59,7 +59,7 @@ def fold_protein(amino_number, direction, grid, protein):
     if direction != 'L' and direction != 'R':
         print("This ain't no valid foldin' input dude.")
         exit(1)
-    
+
     # if not, write direction into amino acid
     protein[amino_number].pos_next = direction
     if direction == 'L':
@@ -75,18 +75,16 @@ def fold_protein(amino_number, direction, grid, protein):
 
     # iterates over protein and checks if the coordinates already exist
     for i in range(1, protein_length - amino_number):
-        protein[i + amino_number]
-
-
         # gives new coordinates
         if check_direction == 0:
-             y_pos += 1
+            y_pos += 1
         elif check_direction == 1:
             x_pos += 1
         elif check_direction == 2:
             y_pos -= 1
         elif check_direction == 3:
             x_pos -= 1
+
         # gets the right direction
         if protein[i + amino_number].pos_next == 'L':
             check_direction -= 1
@@ -178,6 +176,17 @@ def main():
     # temporary_print()
     # stability =score(grid, protein)
     # print(stability)
+
+
+    # fold_protein(1, 'R', grid, protein)
+    # fold_protein(2, 'R', grid, protein)
+    # fold_protein(4, 'R', grid, protein)
+    # fold_protein(5, 'R', grid, protein)
+    # fold_protein(7, 'R', grid, protein)
+
+
+    # temporary_print()
+    # print_coordinates()
 
 
 
