@@ -1,5 +1,5 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# contains score
+# contains the function score()
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 def score(grid, protein):
