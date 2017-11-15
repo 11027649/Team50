@@ -10,9 +10,9 @@ def print_coordinates(protein):
         print()
 
 def print_protein(grid):
-    """ Prints the protein in the grid, without extra styling (like -- for 
+    """ Prints the protein in the grid, without extra styling (like -- for
         bonds) """
-    
+
     # set up variables
     max_x = len(grid)
     max_y = len(grid[1])
