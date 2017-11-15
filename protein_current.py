@@ -8,7 +8,6 @@ from score import score
 from colorama import init
 init()
 
-
 # set up variables
 protein = []
 protein_length = 0
