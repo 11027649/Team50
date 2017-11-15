@@ -1,15 +1,9 @@
 import copy
 
-from animation import print_protein
+from animation import visualize_protein
 from amino import Amino
 from score import score
-<<<<<<< HEAD
-
-from colorama import init
-init()
-=======
 from helper_prints import print_protein, print_coordinates
->>>>>>> c32992fc6c1c8db551128f78ec3367d849cb653b
 
 # set up variables
 protein = []
@@ -148,7 +142,7 @@ def protein_to_grid():
 
 def correct_protein():
     """ Takes the global protein and corrects the coordinates. Does this by taking
-        100 as a correction factor for the x and y coordinates. The correction 
+        100 as a correction factor for the x and y coordinates. The correction
         factor is that high to make sure the min_x and min_y values are lower then
         this factor. """
 
@@ -185,24 +179,25 @@ def main():
     # stability =score(grid, protein)
     # print(stability)
 
-    # fold_protein(1, 'R', grid, protein)
-    # fold_protein(2, 'R', grid, protein)
-    # fold_protein(4, 'R', grid, protein)
+    fold_protein(1, 'R', grid, protein)
+    fold_protein(2, 'R', grid, protein)
+    fold_protein(4, 'R', grid, protein)
+    visualize_protein(grid, protein)
     # fold_protein(5, 'R', grid, protein)
     # fold_protein(7, 'R', grid, protein)
 
     # print_protein()
     # print_coordinates()
 
-    for bond in range(1, protein_length - 1):
-        if protein[bond].pos_next == 'C':
-            print(bond, end ='**')
-            print()
-            fold_protein(bond, 'R', grid, protein)
-            print_protein(grid)
-            print_coordinates(protein)
-            stability = score(grid, protein)
-            print("The stability of this protein is: " + str(stability))
+    # for bond in range(1, protein_length - 1):
+    #     if protein[bond].pos_next == 'C':
+    #         print(bond, end ='**')
+    #         print()
+    #         fold_protein(bond, 'R', grid, protein)
+    #         print_protein(grid)
+    #         print_coordinates(protein)
+    #         stability = score(grid, protein)
+    #         print("The stability of this protein is: " + str(stability))
 
 
 if __name__ == "__main__":
