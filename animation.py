@@ -1,4 +1,10 @@
-def print_protein(x, y, protein_length):
+import time
+import os
+
+def print_protein(grid):
+    """ Prints the protein with nicely added layout to make it easy to see
+        where the bonds of the protein are. """
+    
     # make a grid twice the size of the former grid
     grid = [['  ' for p in range(y * 2 - 1)] for q in range(x * 2 - 1)]
 
