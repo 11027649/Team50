@@ -1,3 +1,8 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# contains the function print_coordinates
+# contains the function print_protein
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
 def print_coordinates(protein):
     """ Prints the coordinates of all aminos of the protein.
         Used for debugging purposes. """

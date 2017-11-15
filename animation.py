@@ -1,3 +1,8 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# contains the function visualize_protein
+# contains the function clear_screen
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
 import time
 import os
 
