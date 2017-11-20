@@ -1,3 +1,7 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# Contains: score(). A function that prints the score to the screen.
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
 from update_grid import update_grid
 from global_vars import amino
 
@@ -5,15 +9,15 @@ import global_vars
 global_vars.init()
 
 def score():
+    """ A function that returns a stability score for a specific folding of a protein. """
 
     score = 0
-
     grid = global_vars.grid
     coordinates = global_vars.coordinates
-
     width = len(grid)
     height = len(grid[0])
 
+    # for all aminos in the protein
     for i in range(len(global_vars.protein_string)):
         x = coordinates[i][0]
         y = coordinates[i][1]
