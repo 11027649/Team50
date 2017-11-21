@@ -2,6 +2,7 @@ from global_vars import amino
 from score import score
 from fold import fold
 from print_protein import print_protein
+import time
 
 import global_vars
 global_vars.init()
@@ -48,10 +49,13 @@ def algo_brute_force():
     if input("This brute force algorithm will take " + str(steps) + " steps. \nThat equals approx. "+ str(int(steps / (2684 * 60))) +"m "+ str(round(60*((steps / (2684 * 60)) % 1), 2)) +"s.\n U sure? (y/n) ").upper() == "Y":
         print()
 
+        start = time.time()
         # fold_all_right()
         recursive_function(depth)
 
-        print("Best solution found with a stability of " + str(winning_score))
+        end = time.time()
+
+        print("Best solution found with a stability of " + str(winning_score) + " in: " + str(round((end - start),2)) + " seconds!")
         print()
 
         global_vars.coordinates = winning_coordinates

@@ -16,6 +16,7 @@ input_string()
 
 message("Protein received")
 
+
 print_protein()
 
 message("Protein initiated, starting algorithm.")
