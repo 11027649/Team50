@@ -46,7 +46,9 @@ def algo_brute_force():
 
     steps = pow(3, len(global_vars.protein_string) - 2)
 
-    if input("This brute force algorithm will take " + str(steps) + " steps. \nThat equals approx. "+ str(int(steps / (2684 * 60))) +"m "+ str(round(60*((steps / (2684 * 60)) % 1), 2)) +"s.\n U sure? (y/n) ").upper() == "Y":
+    sps = 3000
+
+    if input("This brute force algorithm will take " + str(steps) + " steps. \nThat equals approx. "+ str(int(steps / (sps * 60))) +"m "+ str(round(60*((steps / (sps * 60)) % 1), 2)) +"s.\n U sure? (y/n) ").upper() == "Y":
         print()
 
         start = time.time()
@@ -55,7 +57,7 @@ def algo_brute_force():
 
         end = time.time()
 
-        print("Best solution found with a stability of " + str(winning_score) + " in: " + str(round((end - start),2)) + " seconds!")
+        print("Best solution found with a stability of " + str(winning_score) + " in: " + str(int((end - start) / 60)) + "m " + str(round(((end - start) % 60), 2)) + "s.")
         print()
 
         global_vars.coordinates = winning_coordinates
