@@ -1,6 +1,10 @@
-# this is a function file that allows the user to print a special message
-
-main_indicator = "\n>>>> "
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# Contains: print_mess. A function that prints out a special, easy to recognize,
+# message to theirselves.
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 def print_mess(to_print):
+	""" Prints a message to show the user where in the program he/she is. """
+
+	main_indicator = "\n>>>> "
     print(main_indicator + to_print, end="\n\n")

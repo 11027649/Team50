@@ -1,4 +1,6 @@
-# init_grid
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# Contains: init_grid.
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # initializes grid and drops protein in it
 from global_vars import amino
