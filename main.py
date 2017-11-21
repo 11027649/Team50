@@ -16,6 +16,11 @@ def main():
     # initialize
     grid_and_protein = []
     grid_and_protein = init_protein()
+    grid = grid_and_protein[0]
+    protein = grid_and_protein[1]
+
+
+
 
     for bond in range(1, len(protein) - 1):
         if protein[bond].pos_next == 'C':
@@ -26,6 +31,8 @@ def main():
             protein = grid_and_protein[1]
             print_protein(grid)
             stability = score(grid, protein)
+            print_coordinates(protein)
+            visualize_protein(grid, protein)
             print("The stability of this protein is: " + str(stability))
 
 
