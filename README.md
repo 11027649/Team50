@@ -15,7 +15,13 @@ Some things are known about the mechanism of folding: hydrophobic/polar amino ac
 
 The goal is of this project is to fold the given proteins so that they are maximally stable. To reach this goal we will make a program that folds a protein in it's most stable configuration. The program takes a protein string as user input. The program folds proteins that are made of only P's and H's. H's are the hydrophobic Amino Acids here and if they are next to eachother, this counts as -1 for stability.
 
-To use the program you only need to run one file: protein_current.py. This file has dependencies on 4 other files: score, animation, amino, and helper_prints. 
+# "Normal Way"
+
+To use the program you only need to run one file: main.py. This file has dependencies on 4 other files: initialize, folder, score, animation, amino, and helper_prints. 
+
+INITIALIZE
+
+FOLDER
 
 SCORE
 In the score file a function is implemented that takes a grid as input and returns the stability as an integer. It does this by iterating over the grid and distracting 0.5 from the stability everytime an H is above, under, left or right from another H. Than it adds 1 for each 'real' bond. 
@@ -28,4 +34,39 @@ The amino file only contains the class Amino. In Amino there are saved some vari
 
 HELPER_PRINTS
 The helper prints file contains two print functions: print_coordinates to print all of the coordinates of all Amino Acids (mainly used for debugging) and print_protein to print the protein (really plain, without bonds etc.).
+
+# "Alternative Way"
+With rotation matrices.
+
+To use the program you only need to run one file: main.py. This file has dependencies on 10 other files: message, input_string, init_grid, update_grid, print_protein, fold, score, global_vars, algo_brute_force.
+
+GLOBAL_VARS
+Holds all the global variables that are needed in every file: protein_string, grid, coordinates, winning score, current score and the class amino with in it: an ID, the letter (H/P/C), and x,y coordinates
+
+MESSAGE
+Enables you to print a nice message to the screen. This is used for debugging, but we want to use it later on for a nice UI.
+
+INPUT_STRING
+After you run the main file, the input_string function is the first one to be called. It wil ask you for a string input. The assignements we need to are saved in a .txt file. This way you can put in A1,B1,B2,C1, etc. You can also put in a string containing H,P and C. This function calls the init_grid function.
+
+INIT_GRID
+The init_grid function is called once in the whole program. It initializes the grid and the coordinates of the protein string.
+
+PRINT_PROTEIN
+Prints the protein.
+
+FOLD
+This is where the magic happens :-). The fold function takes the ID of the amino that's being folded, and the direction to which it's folded. The aminos from the ID are cleared in the grid. The new coordinates are calculated using a rotation matrix. There's checked if there are no collisions. If there are none, the fold is done. If there are, the fold is made undone and the aminos are putted back in the grid.
+
+SCORE
+The score function works the same as the in the alternative way, except that it uses the grid and protein from the global_vars file and doesn't return things but puts them in the global_vars.
+
+ALGO_BRUTE_FORCE
+This Brute Force algorithm searches trough the whole space state and gives the first protein back that had the best score.
+
+
+
+
+
+
 
