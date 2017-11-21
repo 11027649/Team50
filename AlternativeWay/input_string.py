@@ -1,4 +1,5 @@
-# this file contains a function for the user's choise of protein
+# this file contains a function for the user's choice of protein
+
 from init_grid import init_grid
 
 import global_vars

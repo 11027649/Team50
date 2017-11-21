@@ -3,8 +3,8 @@
 # message to theirselves.
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-def print_mess(to_print):
+def message(to_print):
 	""" Prints a message to show the user where in the program he/she is. """
 
 	main_indicator = "\n>>>> "
-    print(main_indicator + to_print, end="\n\n")
+	print(main_indicator + to_print, end="\n\n")

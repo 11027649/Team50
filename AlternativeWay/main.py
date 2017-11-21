@@ -1,4 +1,4 @@
-from print_mess import print_mess
+from message import message
 from input_string import input_string
 from print_protein import print_protein
 from fold import fold
@@ -10,20 +10,17 @@ import global_vars
 global_vars.init()
 
 
-print_mess("This is a protein-fold-optimizer by Team50")
+message("This is a protein-fold-optimizer by Team50")
 
 input_string()
 
-print_mess("Protein received")
+message("Protein received")
 
 print_protein()
 
-print_mess("Protein initiated, starting algorithm.")
+message("Protein initiated, starting algorithm.")
 
-print_mess("Folding summary:")
+message("Folding summary:")
 
 algo_brute_force()
 
-# print_mess("Printing protein")
-#
-# print_protein()

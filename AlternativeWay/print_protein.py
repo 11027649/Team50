@@ -10,21 +10,17 @@ global_vars.init()
 def print_protein():
     """ Prints the grid in which the protein lays. """
 
+    # get grid, print heigth and width to the screen
+    grid = global_vars.grid
+
     rows = len(grid[0])
     columns = len(grid)
 
-    # get grid, print heigth and width to the screen
-    grid = global_vars.grid
-<<<<<<< HEAD
-    # print("Height grid: " + str(len(grid[0])))
-    # print("Width grid: " + str(len(grid)), end="\n\n")
-=======
     print("Height grid: " + str(rows))
     print("Width grid: " + str(columns), end="\n\n")
 
     # iterate over rows
     for j in range(rows):
->>>>>>> c151632ddca14cc3ec9fe96b3c53374ca36db0d1
 
         # iterate over columns
         for i in range(columns):
@@ -32,11 +28,8 @@ def print_protein():
             # print spaces on empty grid spots
             if (grid[i][j] == 0):
                 print(" ", end=" ")
-<<<<<<< HEAD
-=======
 
             # print letters on grid spots where amino acids are
->>>>>>> c151632ddca14cc3ec9fe96b3c53374ca36db0d1
             else:
                 print(grid[i][j].letter, end=" ")
 
