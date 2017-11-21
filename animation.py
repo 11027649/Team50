@@ -46,7 +46,7 @@ def visualize_protein(grid, protein):
             # stripes left to it
             elif protein[i].direction == 3:
                 printgrid[coor_x - 1][coor_y] = '---'
-                
+
     # print the grid
     for i in range(y_new):
         # print rows
@@ -56,16 +56,10 @@ def visualize_protein(grid, protein):
                 if printgrid[j][i].letter == 'H':
                     print(printgrid[j][i].letter, end = '')
 
-
-                    if printgrid[j][i].direction != 1 and j + 1 < x_new - 1 and printgrid[j + 1][i] != "---":
-                        print(' ', end='')
                 # print P red
                 elif printgrid[j][i].letter == 'P':
                     print(printgrid[j][i].letter, end ='')
 
-
-                    if printgrid[j][i].direction != 1 and j + 1 < x_new - 1 and printgrid[j + 1][i] != "---":
-                        print(' ', end='')
                 # if something else is present
             else:
                 print(printgrid[j][i], end='')
