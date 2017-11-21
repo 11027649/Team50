@@ -29,9 +29,7 @@ def main():
             grid_and_protein = fold_protein(bond, 'R', grid, protein)
             grid = grid_and_protein[0]
             protein = grid_and_protein[1]
-            print_protein(grid)
             stability = score(grid, protein)
-            print_coordinates(protein)
             visualize_protein(grid, protein)
             print("The stability of this protein is: " + str(stability))
 

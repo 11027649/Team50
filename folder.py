@@ -5,17 +5,27 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 import copy
-
 def fold_protein(amino_number, direction, grid, protein):
-    """ Folds the protein at a given amino_number in a given direction.
-        Returns a new grid and new protein if the fold is possible.
-        Returns the old grid and old protein if the fold is impossible. """
-
     # saves the old grid
     old_grid = grid
 
     # make a deepcopy of the protein to make sure the AA values are saved
     old_protein = copy.deepcopy(protein)
+
+    # will make a new grid with proteins in it
+    # this grid is temporary
+    # to all coordinates the max length will be added
+    # this way the new coordinates can never be out of range
+    max_length = len(protein)
+    x_new = max_length*2
+    y_new = max_length*2
+
+    tempgrid = [['  ' for p in range(y_new)] for q in range(x_new)]
+    # adds all aminos in the grid before the fold
+    for i in range(amino_number):
+        coor_x = protein[i].aa_x + max_length
+        coor_y = protein[i].aa_y + max_length
+        tempgrid[coor_x][coor_y] = protein[i]
 
     # check if valid folding input
     if direction != 'L' and direction != 'R':
@@ -32,10 +42,8 @@ def fold_protein(amino_number, direction, grid, protein):
     protein[amino_number].direction = check_direction
 
     # we need to check here if not 2 amino acids are on the same point in the grid (pseudocode)
-    x_pos = protein[amino_number].aa_x
-    y_pos = protein[amino_number].aa_y
-
-    # iterates over protein and checks if the coordinates already exist
+    x_pos = protein[amino_number].aa_x + max_length
+    y_pos = protein[amino_number].aa_y + max_length
     for i in range(1, len(protein) - amino_number):
         # gives new coordinates
         if check_direction == 0:
@@ -55,23 +63,23 @@ def fold_protein(amino_number, direction, grid, protein):
         check_direction %= 4
 
         # checks if the coordinates already exist
-        for j in range(i + amino_number - 1):
-            if protein[j].aa_x == x_pos:
-                if protein[j].aa_y == y_pos:
-                    print("IMPOSSIBLE FOLD: will use old grid")
+        if tempgrid[x_pos][y_pos] == '  ':
+            protein[ i+ amino_number].aa_x = x_pos - max_length
+            protein[ i+ amino_number].aa_y = y_pos - max_length
+            protein[i + amino_number].direction = check_direction
+            tempgrid[x_pos][y_pos] = protein[i + amino_number]
+        else:
+            print("IMPOSSIBLE FOLD: will use old grid")
 
-                    # reset protein to the old protein and return from the function
-                    grid_and_protein = [old_grid, old_protein]
-                    return grid_and_protein
-
-            protein[i + amino_number].aa_x = x_pos
-            protein[i + amino_number].aa_y = y_pos
-            protein[i+ amino_number].direction = check_direction
+            # reset protein to the old protein and return from the function
+            grid_and_protein = [old_grid, old_protein]
+            return grid_and_protein
     protein = correct_protein(protein)
     grid = protein_to_grid(protein)
 
     grid_and_protein = [grid, protein]
     return grid_and_protein
+
 
 
 def correct_protein(protein):
