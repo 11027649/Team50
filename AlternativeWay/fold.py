@@ -18,18 +18,20 @@ def fold(num_id, direction):
 
     # print(num_id)
     # print(len(global_vars.protein_string), end="\n\n")
-
-    if num_id >= len(global_vars.protein_string) or num_id < 1:
-        print("je probeert te vouwen op een niet bestaande index bitch")
+    length = len(global_vars.protein_string)
+    if num_id >= length or num_id < 1:
+        print("You try to fold on " + str(num_id) + ", only up to id " + str(length - 1) + " available.")
         # Returncode 1: trying to fold on a place that aint valid.
         return 1
 
     rot_origin = [coordinates[num_id][0], coordinates[num_id][1]]
 
-    print("Pivot origin: " + str(rot_origin[0]) + "," + str(rot_origin[1]))
+    # print("Pivot origin: " + str(rot_origin[0]) + "," + str(rot_origin[1]))
 
     rotation_matrix_left = [[0, 1], [-1, 0]]
     rotation_matrix_right = [[0, -1], [1, 0]]
+
+    returncode = False
 
     if(direction == "R"):
         rotation_matrix = rotation_matrix_right
@@ -52,9 +54,10 @@ def fold(num_id, direction):
         elif (to_coords[1] < 0 or to_coords[1] >= grid_height):
             coordinates[i] = [to_coords[0], to_coords[1]]
         elif (str(type(grid[to_coords[0]][to_coords[1]])) == "<class 'global_vars.amino'>"):
-            print("Collision detected while folding amino " + str(num_id) + "\n -> Stopped this fold, cause amino " + str(i) + " was colliding")
+            # print("Collision detected while folding amino " + str(num_id) + "\n -> Stopped this fold, cause amino " + str(i) + " was colliding")
             coordinates = backup_coordinates
-            break;
+            returncode = True
+            break
         else:
             coordinates[i] = [to_coords[0], to_coords[1]]
 
@@ -62,7 +65,10 @@ def fold(num_id, direction):
 
     update_grid()
 
+    # print("rc: ", str(returncode))
 
+    if returncode == True:
+        return 1
 
     # if all_pos_free:
     #     # onthoud niewe grid en nieuwe coords in coordinates
