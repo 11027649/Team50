@@ -23,8 +23,7 @@ def visualize_protein(grid, protein):
         # puts letters in the right coordinates
         coor_x = (protein[i].aa_x ) * 2
         coor_y = (protein[i].aa_y ) * 2
-        print(coor_x)
-        print(coor_y)
+
         # the coordinates are
         printgrid[coor_x][coor_y] = protein[i]
 
@@ -34,7 +33,7 @@ def visualize_protein(grid, protein):
 
             # pipeline under the letter
             if protein[i].direction == 0:
-                printgrid[coor_x][coor_y - 1] = '| '
+                printgrid[coor_x][coor_y + 1] = '| '
 
             # stripes right to it
             elif protein[i].direction == 1:
@@ -42,39 +41,35 @@ def visualize_protein(grid, protein):
 
             # pipeline above it
             elif protein[i].direction == 2:
-                printgrid[coor_x][coor_y + 1] = '| '
+                printgrid[coor_x][coor_y - 1] = '| '
 
             # stripes left to it
             elif protein[i].direction == 3:
                 printgrid[coor_x - 1][coor_y] = '---'
-
+                
     # print the grid
     for i in range(y_new):
-        print("    ", end='')
-
         # print rows
         for j in range(x_new):
             if not printgrid[j][i] == '  ' and not printgrid[j][i] ==  '---' and not printgrid[j][i] == '| '  :
-                print(printgrid[j][i])
                 # print H blue
                 if printgrid[j][i].letter == 'H':
-                    print('\033[34;1m' + printgrid[j][i].letter + '\033[0m', end='')
+                    print(printgrid[j][i].letter, end = '')
 
 
                     if printgrid[j][i].direction != 1 and j + 1 < x_new - 1 and printgrid[j + 1][i] != "---":
                         print(' ', end='')
                 # print P red
                 elif printgrid[j][i].letter == 'P':
-                    print('\033[31;1m' + printgrid[j][i].letter + '\033[0m', end='')
+                    print(printgrid[j][i].letter, end ='')
 
 
                     if printgrid[j][i].direction != 1 and j + 1 < x_new - 1 and printgrid[j + 1][i] != "---":
                         print(' ', end='')
                 # if something else is present
-                else:
-                    print(printgrid[j][i], end='')
+            else:
+                print(printgrid[j][i], end='')
 
-            print()
         print()
 
 
