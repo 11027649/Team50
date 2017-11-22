@@ -5,7 +5,7 @@
 def score(grid, protein):
 	""" Takes a grid with the folded protein in it. Returns a stability score,
 		that is calculated by distracting 0.5 everytime H amino acids are next
-		to each other on the grid. Also takes the protein, and adds the 'normal' 
+		to each other on the grid. Also takes the protein, and adds the 'normal'
 		bounds to the score. """
 
 	# set up variables
@@ -28,10 +28,10 @@ def score(grid, protein):
 					# if not in the first column and the grid spot on the left
 					# is not empty
 					if not x == 0 and not grid[x - 1][y] == ' ':
-						
+
 						# check if left is H
 						if grid[x - 1][y].letter == 'H':
-							
+
 							# adjust score
 							score -= 0.5
 
@@ -54,5 +54,5 @@ def score(grid, protein):
 		if protein[i].letter == 'H':
 			if protein[i + 1].letter == 'H':
 				score += 1
-	
+
 	return score
