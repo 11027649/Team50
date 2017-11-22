@@ -3,12 +3,13 @@ from score import score
 from fold import fold
 from print_protein import print_protein
 import time
+import copy
 
 import global_vars
 global_vars.init()
 
 winning_score = 0
-winning_coordinates = global_vars.coordinates[:]
+winning_coordinates = copy.deepcopy(global_vars.coordinates)
 
 def algo_brute_force():
 
@@ -16,14 +17,13 @@ def algo_brute_force():
 
     def recursive_function(depth):
 
-
-
         current_score = score()
         global winning_score
         if current_score < winning_score:
             winning_score = current_score
-            winning_coordinates = global_vars.coordinates[:]
+            winning_coordinates = copy.deepcopy(global_vars.coordinates)
 
+            print(winning_coordinates)
             print("\n\nBest so far, stability of " + str(winning_score) + ":\n")
             print_protein()
 
@@ -60,7 +60,8 @@ def algo_brute_force():
         print("Best solution found with a stability of " + str(winning_score) + " in: " + str(int((end - start) / 60)) + "m " + str(round(((end - start) % 60), 2)) + "s.")
         print()
 
-        global_vars.coordinates = winning_coordinates
+        print(winning_coordinates)
+        global_vars.coordinates = copy.deepcopy(winning_coordinates)
 
     else:
         print("\nStopping program\n")
