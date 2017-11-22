@@ -1,6 +1,6 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # Contains: algo_brute_force, recursive_function, fold_all_right.
-# 
+#
 # Fold all right makes a spiral of the protein. This was to try if the fold and
 # score function worked right.
 #
@@ -18,15 +18,13 @@ import global_vars
 global_vars.init()
 
 
-<<<<<<< HEAD
-=======
+
 def algo_brute_force():
-    """ This algorithm tries every possibility of foldation of the protein. 
+    """ This algorithm tries every possibility of foldation of the protein.
         Therefore it uses the global coordinates. It stores the amount of "best"
         solutions in a global variable called amount.
-        In a unlogical, unefficient way for now.. 
+        In a unlogical, unefficient way for now..
         It's not working yet to save the winning coordinates."""
->>>>>>> 65b353e3e7e281793084df1348973e4044906ecd
 
 def algo_brute_force():
 
