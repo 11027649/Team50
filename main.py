@@ -4,7 +4,7 @@
 
 from folder import fold_protein
 from initialize import init_protein
-from animation import visualize_protein
+from animation import visualize_protein, clear_screen
 from amino import Amino
 from score import score
 from helper_prints import print_protein, print_coordinates
@@ -32,6 +32,11 @@ def main():
             stability = score(grid, protein)
             visualize_protein(grid, protein)
             print("The stability of this protein is: " + str(stability))
+
+            if not bond == (len(protein) - 1):
+                clear_screen()
+
+            
 
 
 
