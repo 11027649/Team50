@@ -1,3 +1,4 @@
 # IGNORE PYCACHES
 __pycache__/
+*.py[cod]
 *.pyc
