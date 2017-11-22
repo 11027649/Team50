@@ -25,4 +25,4 @@ message("Folding summary:")
 
 algo_brute_force()
 
-print_protein()
+message("We found " + str(global_vars.amount) + " best solutions.")

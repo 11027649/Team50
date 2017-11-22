@@ -1,6 +1,6 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # Contains: fold. A function that folds a protein. Does this by finding an
-# origin and rotating the rest of the protein with a rotation matrix (left or 
+# origin and rotating the rest of the protein with a rotation matrix (left or
 # right), depending on the direction in which the protein is being fold.
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
@@ -13,7 +13,7 @@ global_vars.init()
 
 def fold(num_id, direction):
     """ Finds an origin to fold around and multiplies the coordinates of the aminos
-        that will get a different place with a rotation matrix to get the new 
+        that will get a different place with a rotation matrix to get the new
         coordinates. If the fold is not possible, returns and old grid and at which
         amino acid this fold was colliding. """
 
@@ -30,7 +30,7 @@ def fold(num_id, direction):
 
     if num_id >= len(global_vars.protein_string) or num_id < 1:
         print("This fold index doesn't exist.")
-        
+
         # returncode 1: an invalid place to fold
         return 1
 
@@ -54,7 +54,7 @@ def fold(num_id, direction):
     # iterates over the aminos, beginning at the one after the amino acid where
     # we'll fold
     for i in range(num_id + 1, len(global_vars.protein_string)):
-        
+
         # cleans all aminos from where we'll fold
         grid[coordinates[i][0]][coordinates[i][1]] = 0
 
@@ -68,7 +68,7 @@ def fold(num_id, direction):
         # foldings that aren't possible
         if (to_coords[0] < 0 or to_coords[0] >= grid_width):
             coordinates[i] = [to_coords[0], to_coords[1]]
-        
+
         elif (to_coords[1] < 0 or to_coords[1] >= grid_height):
             coordinates[i] = [to_coords[0], to_coords[1]]
 
@@ -77,13 +77,13 @@ def fold(num_id, direction):
             coordinates = backup_coordinates
             returncode = True
             break
-        
-        elif (str(type(grid[to_coords[0]][to_coords[1]])) == 
+
+        elif (str(type(grid[to_coords[0]][to_coords[1]])) ==
                     "<class 'global_vars.amino'>"):
-            
+
             # print where the collision was detected
-            # print("Collision detected while folding amino " + str(num_id) 
-            #           + "\n -> Stopped this fold, cause amino " + str(i) + " was colliding")
+            # print("Collision detected while folding amino " + str(num_id)
+                      # + "\n -> Stopped this fold, cause amino " + str(i) + " was colliding")
 
             # reset coordinates and break out of the function
             coordinates = backup_coordinates
