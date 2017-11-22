@@ -51,46 +51,36 @@ def print_protein():
 
     print()
 
-def fancy_print():
+def fancy_print_protein():
+
+    print("hoi")
     # get grid, print heigth and width to the screen
-    grid = global_vars.grid
-
-    # gets the length of the old grid
-    x_old = len(grid)
-    y_old = len(grid[0])
-
-    # gets the length of the new grid
-    x_new = (x_old * 2) + 4
-    y_new = (y_old * 2) + 4
-
-    # init the printgrid
-    printgrid = [['  ' for i in range(y_new)] for j in range(x_new)]
-
-    # putt all proteins in the string
-    for i in range(len(global_vars.protein_string)):
-        coor_x = (global_vars.coordinates[i][0] * 2) + 2
-        coor_y = (global_vars.coordinates[i][1] * 2) + 2
-        printgrid[coor_x][coor_y] = global_vars.grid[(coor_x - 2) / 2][(coor_y - 2) / 2]
-    # add layout to the grid
-    for i in range(len(global_vars.protein_string)):
-        coor_x = global_vars.coordinates[i][0] * 2
-        coor_y = global_vars.coordinates[i][1] * 2
-        if not printgrid[coor_x][coor_y] == '  ' and printgrid[coor_x][coor_y + 2].num_id == i + 1:
-            printgrid[coor_x][coor_y + 1] = '| '
-        elif not printgrid[coor_x][coor_y] == '  ' and printgrid[coor_x][coor_y - 2].num_id == i + 1:
-            printgrid[coor_x][coor_y - 1] = '| '
-        elif not printgrid[coor_x][coor_y] == '  ' and printgrid[coor_x + 2][coor_y].num_id == i + 1:
-            printgrid[coor_x + 1][coor_y] = '- '
-        elif not printgrid[coor_x][coor_y] == '  ' and printgrid[coor_x - 2][coor_y].num_id == i + 1:
-            printgrid[coor_x - 1][coor_y] = '- '
-
-    for j in range(y_new):
-        for i in range(x_new):
-            if not str(type(printgrid[i][j])) == "<class 'str'>":
-                if printgrid[i][j].letter == 'H':
-                    print(printgrid[i][j].letter, end='')
-                elif printgrid[i][j].letter =='P':
-                    print(printgrid[i][j].letter, end='')
-            else:
-                print(printgrid[i][j], end = '')
-        print()
+    #
+    # grid = global_vars.grid
+    #
+    # print_protein()
+    #
+    # fancy_grid_width = len(grid[0]) * 2 - 1
+    # fancy_grid_height = len(grid) * 2 - 1
+    #
+    # print(fancy_grid_height)
+    # print(fancy_grid_width)
+    #
+    # fancy_grid = [[" " for j in range(fancy_grid_height)] for i in range(fancy_grid_width)]
+    #
+    # for i in range(len(global_vars.protein_string)):
+    #     fancy_grid[coordinates[i][0] * 2][coordinates[i][1] * 2] = grid[coordinates[i][0]][coordinates[i][1]]
+    #
+    # for j in range(fancy_grid_width):
+    #
+    #     for i in range(fancy_grid_height):
+    #
+    #         if (grid[i][j] == 0):
+    #             print(" ", end=" ")
+    #
+    #         else:
+    #             print(grid[i][j].num_id, end=" ")
+    #
+    #     print()
+    #
+    # print()

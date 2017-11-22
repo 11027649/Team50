@@ -7,6 +7,10 @@ def init():
     grid = []
     global coordinates
     coordinates = []
+    global winning_score
+    winning_score = 0
+    global winning_grid
+    winning_grid = []
     global amount
     amount = 0
 

@@ -8,25 +8,21 @@ import copy
 import global_vars
 global_vars.init()
 
-winning_score = 0
-winning_coordinates = copy.deepcopy(global_vars.coordinates)
+
 
 def algo_brute_force():
-
-    current_score = 0
 
     def recursive_function(depth):
 
         current_score = score()
-        global winning_score
-        if current_score <= winning_score:
-            if current_score < winning_score:
-                global_vars.amount = 0
-            winning_score = current_score
-            winning_coordinates = copy.deepcopy(global_vars.coordinates)
+
+        if current_score < global_vars.winning_score:
+
+            global_vars.winning_score = current_score
+            global_vars.winning_grid = copy.deepcopy(global_vars.grid)
             global_vars.amount += 1
             # print(winning_coordinates)
-            print("\n\nBest so far, stability of " + str(winning_score) + ":\n")
+            print("\n\nBest so far, stability of " + str(global_vars.winning_score) + ":\n")
             print_protein()
 
 
@@ -59,11 +55,11 @@ def algo_brute_force():
 
         end = time.time()
 
-        print("Best solution found with a stability of " + str(winning_score) + " in: " + str(int((end - start) / 60)) + "m " + str(round(((end - start) % 60), 2)) + "s.")
+        print("Best solution found with a stability of " + str(global_vars.winning_score) + " in: " + str(int((end - start) / 60)) + "m " + str(round(((end - start) % 60), 2)) + "s.")
         print()
 
         # print(winning_coordinates)
-        global_vars.coordinates = copy.deepcopy(winning_coordinates)
+        global_vars.grid = global_vars.winning_grid
 
     else:
         print("\nStopping program\n")

@@ -1,7 +1,8 @@
 from message import message
 from input_string import input_string
-from print_protein import fancy_print
+from print_protein import fancy_print_protein
 from print_protein import print_protein
+from update_grid import update_grid
 from fold import fold
 from score import score
 
@@ -16,7 +17,6 @@ input_string()
 
 message("Protein received")
 
-
 print_protein()
 
 message("Protein initiated, starting algorithm.")
@@ -26,3 +26,5 @@ message("Folding summary:")
 algo_brute_force()
 
 message("We found " + str(global_vars.amount) + " best solutions.")
+
+print_protein()
