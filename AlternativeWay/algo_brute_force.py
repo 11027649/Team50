@@ -19,11 +19,13 @@ def algo_brute_force():
 
         current_score = score()
         global winning_score
-        if current_score < winning_score:
+        if current_score <= winning_score:
+            if current_score < winning_score:
+                global_vars.amount = 0
             winning_score = current_score
             winning_coordinates = copy.deepcopy(global_vars.coordinates)
-
-            print(winning_coordinates)
+            global_vars.amount += 1
+            # print(winning_coordinates)
             print("\n\nBest so far, stability of " + str(winning_score) + ":\n")
             print_protein()
 
@@ -60,7 +62,7 @@ def algo_brute_force():
         print("Best solution found with a stability of " + str(winning_score) + " in: " + str(int((end - start) / 60)) + "m " + str(round(((end - start) % 60), 2)) + "s.")
         print()
 
-        print(winning_coordinates)
+        # print(winning_coordinates)
         global_vars.coordinates = copy.deepcopy(winning_coordinates)
 
     else:

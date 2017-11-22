@@ -7,6 +7,8 @@ def init():
     grid = []
     global coordinates
     coordinates = []
+    global amount
+    amount = 0
 
 class amino():
     def __init__(self, num_id, letter, x, y):
