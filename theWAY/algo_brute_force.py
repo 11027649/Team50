@@ -1,3 +1,12 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# Contains: algo_brute_force, recursive_function, fold_all_right.
+# 
+# Fold all right makes a spiral of the protein. This was to try if the fold and
+# score function worked right.
+#
+# The algo_brute_force tries every foldation of the protein.
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
 from global_vars import amino
 from score import score
 from fold import fold
@@ -12,6 +21,11 @@ winning_score = 0
 winning_coordinates = copy.deepcopy(global_vars.coordinates)
 
 def algo_brute_force():
+    """ This algorithm tries every possibility of foldation of the protein. 
+        Therefore it uses the global coordinates. It stores the amount of "best"
+        solutions in a global variable called amount.
+        In a unlogical, unefficient way for now.. 
+        It's not working yet to save the winning coordinates."""
 
     current_score = 0
 
@@ -43,11 +57,8 @@ def algo_brute_force():
 
 
     length = len(global_vars.protein_string)
-
     depth = length - 2
-
     steps = pow(3, len(global_vars.protein_string) - 2)
-
     sps = 3000
 
     if input("This brute force algorithm will take " + str(steps) + " steps. \nThat equals approx. "+ str(int(steps / (sps * 60))) +"m "+ str(round(60*((steps / (sps * 60)) % 1), 2)) +"s.\n U sure? (y/n) ").upper() == "Y":
@@ -68,7 +79,6 @@ def algo_brute_force():
     else:
         print("\nStopping program\n")
         exit(1)
-
 
 
 def fold_all_right():
