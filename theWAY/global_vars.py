@@ -7,6 +7,8 @@ def init():
     grid = []
     global coordinates
     coordinates = []
+    global winning_coordinates
+    winning_coordinates = []
     global winning_score
     winning_score = 0
     global winning_grid
