@@ -18,7 +18,7 @@ def hillclimber():
     global_vars.winning_grid = copy.deepcopy(global_vars.grid)
     global_vars.winning_coordinates = copy.deepcopy(global_vars.coordinates)
     # do 1000 random folds and keep track of the highest value
-    for i in range(500):
+    for i in range(10000):
 
         for j in range(5):
             random_value = getrandvalue()
