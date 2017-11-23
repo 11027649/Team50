@@ -5,6 +5,7 @@ from print_protein import print_protein
 from update_grid import update_grid
 from fold import fold
 from score import score
+from hillclimber import hillclimber
 
 from algo_brute_force import algo_brute_force
 
@@ -23,8 +24,7 @@ message("Protein initiated, starting algorithm.")
 
 message("Folding summary:")
 
-algo_brute_force()
-
+hillclimber()
 message("We found " + str(global_vars.amount) + " best solutions.")
 
 print_protein()
