@@ -33,14 +33,15 @@ message("Folding summary:")
 with open('optimum.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
 
-    for i in range(4, 15):
+    for i in range(4, 18):
         # algo_brute_force()
 
         print(i)
-        forloop = 5
+        forloop = 25
         for j in range(forloop):
-            hillclimber(i)
-            writer.writerow([i] + [global_vars.winning_score])
+        	print(j)
+        	hillclimber(i)
+        	writer.writerow([i] + [global_vars.winning_score])
 
 
 

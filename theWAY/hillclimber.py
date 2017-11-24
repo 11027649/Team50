@@ -21,7 +21,7 @@ def hillclimber(amount_of_random_folds):
     global_vars.winning_grid = copy.deepcopy(global_vars.grid)
     global_vars.winning_coordinates = copy.deepcopy(global_vars.coordinates)
 
-    iterations = 1000
+    iterations = 5000
 
     # with open('data.csv', 'w', newline='') as csvfile:
     #     datawriter = csv.writer(csvfile)
