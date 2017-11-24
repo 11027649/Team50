@@ -45,7 +45,10 @@ def print_protein():
             if (grid[i][j] == 0):
                 print(" ", end=" ")
             else:
-                print(grid[i][j].num_id, end=" ")
+                if(grid[i][j].num_id > 9):
+                    print(grid[i][j].num_id, end="")
+                else:
+                    print(grid[i][j].num_id, end=" ")
 
         print()
 
