@@ -1,3 +1,5 @@
+Kunnen jullie voor de punten aanvraag de github map van 10:44 (de tijd dat we het (tweede) mailtje stuurden) gebruiken...
+
 Usage: In folder "theWAY" run main.py, uncomment the type of algorithm you want to use. To plot the data of the last hillclimber result, use plotdata.py.
 
 # Team50
