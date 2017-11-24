@@ -30,22 +30,9 @@ message("Folding summary:")
 
 """>>>>>> UNCOMMENT THE ALGORITHM YOU WANT TO USE BELOW <<<<<<"""
 
-with open('optimum.csv', 'w', newline='') as csvfile:
-    writer = csv.writer(csvfile)
-
-    for i in range(4, 15):
-        # algo_brute_force()
-
-        print(i)
-        forloop = 5
-        for j in range(forloop):
-            hillclimber(i)
-            writer.writerow([i] + [global_vars.winning_score])
-
-
-
-
+fold(3, "L")
 # Print the best solution.
 print_protein()
+fancy_print_protein()
 
 plotdata()
