@@ -28,7 +28,7 @@ message("Folding summary:")
 
 """>>>>>> UNCOMMENT THE ALGORITHM YOU WANT TO USE BELOW <<<<<<"""
 
-# algo_brute_force()
+algo_brute_force()
 # hillclimber()
 
 # Print the best solution.
