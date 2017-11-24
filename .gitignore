@@ -1,6 +1,6 @@
-# IGNORE PYCACHES
-.Python
-
+# IGNORE pycaches
 __pycache__/
-*.py[cod]
 *.pyc
+
+# IGNORE generated csv files
+*.csv
