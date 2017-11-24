@@ -1,3 +1,5 @@
+Usage: In folder "theWAY" run main.py, uncomment the type of algorithm you want to use. To plot the data of the last hillclimber result, use plotdata.py.
+
 # Team50
 
 Minor Programmeren UvA: Programmeertheorie
@@ -11,14 +13,14 @@ Programmers: Christian Bijvoets, David van Grinsven and Natasja Wezel
 
 Long strands of Amino Acids make proteins. Proteins are important for many processes in the human body. It is known that proteins in body cells are folded in specific ways. These foldings determine the functioning of the protein. If it's a wrong fold, the proteins can cause many diseases. Therefore it is of great importance for pharmaceutical industry and medical science to be able to say something about the exact form of folding
 
-Some things are known about the mechanism of folding: hydrophobic/polar amino acids (H) 'like' to be side by side. Hydrophylic/apolar amino acids (P) don't have that preferation. If two hydrophobic amino acids lie next to each other, there is some sort of stability by the attractive forces between the two. The more of this stability, te bigger the total stability of the protein. For scientists and pharmacists it is important to know what the maximum stability is a protein can reach. 
+Some things are known about the mechanism of folding: hydrophobic/polar amino acids (H) 'like' to be side by side. Hydrophylic/apolar amino acids (P) don't have that preferation. If two hydrophobic amino acids lie next to each other, there is some sort of stability by the attractive forces between the two. The more of this stability, te bigger the total stability of the protein. For scientists and pharmacists it is important to know what the maximum stability is a protein can reach.
 
 The goal is of this project is to fold the given proteins so that they are maximally stable. To reach this goal we will make a program that folds a protein in it's most stable configuration. The program takes a protein string as user input. The program folds proteins that are made of only P's and H's. H's are the hydrophobic Amino Acids here and if they are next to eachother, this counts as -1 for stability.
 
 # "Protein Optimization Program"
 With rotation matrices.
 
-To use the program you only need to run one file: main.py. This file has dependencies on 10 other files: message, input_string, init_grid, update_grid, print_protein, fold, score, global_vars, algo_brute_force.
+To use the program you only need to run one file: main.py in the "theWAY" folder. Uncomment the type of algorithm you want to use in the main file. This file has dependencies on 11 other files: message, input_string, init_grid, update_grid, print_protein, fold, score, global_vars, algo_brute_force, hillclimber, plotdata.
 
 To plot the data from the last hillclimber you used, run: plotdata.py.
 
@@ -56,14 +58,14 @@ This dataplotter, which you can run by typing 'python plotdata.py' plots the las
 # "Old data structure"
 Maybe we just delete this later on, but not yet.
 
-To use the program you only need to run one file: main.py. This file has dependencies on 4 other files: initialize, folder, score, animation, amino, and helper_prints. 
+To use the program you only need to run one file: main.py. This file has dependencies on 4 other files: initialize, folder, score, animation, amino, and helper_prints.
 
 INITIALIZE
 
 FOLDER
 
 SCORE
-In the score file a function is implemented that takes a grid as input and returns the stability as an integer. It does this by iterating over the grid and distracting 0.5 from the stability everytime an H is above, under, left or right from another H. Than it adds 1 for each 'real' bond. 
+In the score file a function is implemented that takes a grid as input and returns the stability as an integer. It does this by iterating over the grid and distracting 0.5 from the stability everytime an H is above, under, left or right from another H. Than it adds 1 for each 'real' bond.
 
 ANIMATION
 In the animation file two functions are implemented: one to print the protein in a nice way, and one to clear the screen and to wait a little to make a real animation. This way you can choose: do you want to see all different folded proteins beneath eachother, or do you want to see an animation of the folding process.
@@ -73,10 +75,3 @@ The amino file only contains the class Amino. In Amino there are saved some vari
 
 HELPER_PRINTS
 The helper prints file contains two print functions: print_coordinates to print all of the coordinates of all Amino Acids (mainly used for debugging) and print_protein to print the protein (really plain, without bonds etc.).
-
-
-
-
-
-
-
