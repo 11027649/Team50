@@ -8,6 +8,7 @@ from score import score
 from hillclimber import hillclimber
 from algo_brute_force import algo_brute_force
 from plotdata import plotdata
+import csv
 
 # Import all the global variables.
 import global_vars
@@ -29,13 +30,20 @@ message("Folding summary:")
 
 """>>>>>> UNCOMMENT THE ALGORITHM YOU WANT TO USE BELOW <<<<<<"""
 
-<<<<<<< HEAD
-algo_brute_force()
-# hillclimber()
-=======
-# algo_brute_force()
-hillclimber()
->>>>>>> 4c4270e908a72b0e150e494b23df1b7ae5187fc4
+with open('optimum.csv', 'w', newline='') as csvfile:
+    writer = csv.writer(csvfile)
+
+    for i in range(4, 15):
+        # algo_brute_force()
+
+        print(i)
+        forloop = 5
+        for j in range(forloop):
+            hillclimber(i)
+            writer.writerow([i] + [global_vars.winning_score])
+
+
+
 
 # Print the best solution.
 print_protein()

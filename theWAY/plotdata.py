@@ -3,7 +3,7 @@ import numpy as np
 import csv
 
 def plotdata():
-    data = np.genfromtxt('data.csv', delimiter=',', names=['x', 'y'])
+    data = np.genfromtxt('optimum.csv', delimiter=',', names=['x', 'y'])
 
     fig = plt.figure()
 
@@ -15,6 +15,6 @@ def plotdata():
     ax1.set_xlabel('Iteration')
     ax1.set_ylabel('Stability')
 
-    ax1.plot(data['x'], data['y'], color='r', label='stability')
+    ax1.scatter(data['x'], data['y'], color='r', label='stability')
 
     plt.show()
