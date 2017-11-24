@@ -7,6 +7,7 @@ from fold import fold
 from score import score
 from hillclimber import hillclimber
 from algo_brute_force import algo_brute_force
+from plotdata import plotdata
 
 # Import all the global variables.
 import global_vars
@@ -29,7 +30,9 @@ message("Folding summary:")
 """>>>>>> UNCOMMENT THE ALGORITHM YOU WANT TO USE BELOW <<<<<<"""
 
 # algo_brute_force()
-# hillclimber()
+hillclimber()
 
 # Print the best solution.
 print_protein()
+
+plotdata()
