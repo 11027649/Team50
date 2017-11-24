@@ -24,12 +24,12 @@ def hillclimber():
         datawriter = csv.writer(csvfile)
 
         # do 1000 random folds and keep track of the highest value
-        for i in range(1000):
+        for i in range(10000):
 
             # store data in .csv
             datawriter.writerow([i] + [best_score])
-            
-            for j in range(5):
+
+            for j in range(10):
                 random_value = getrandvalue()
                 fold(random_value[0], random_value[1])
 
