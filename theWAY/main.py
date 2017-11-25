@@ -30,6 +30,7 @@ message("Folding summary:")
 
 """>>>>>> UNCOMMENT THE ALGORITHM YOU WANT TO USE BELOW <<<<<<"""
 
+<<<<<<< HEAD
 with open('optimum.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
 
@@ -46,7 +47,11 @@ with open('optimum.csv', 'w', newline='') as csvfile:
 
 
 
+=======
+fold(3, "L")
+>>>>>>> cf3599043f978550172a53b59f74d638a4e877e0
 # Print the best solution.
 print_protein()
+fancy_print_protein()
 
 plotdata()

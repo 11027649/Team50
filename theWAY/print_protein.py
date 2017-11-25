@@ -58,32 +58,50 @@ def fancy_print_protein():
 
     print("hoi")
     # get grid, print heigth and width to the screen
-    #
-    # grid = global_vars.grid
-    #
-    # print_protein()
-    #
-    # fancy_grid_width = len(grid[0]) * 2 - 1
-    # fancy_grid_height = len(grid) * 2 - 1
-    #
-    # print(fancy_grid_height)
-    # print(fancy_grid_width)
-    #
-    # fancy_grid = [[" " for j in range(fancy_grid_height)] for i in range(fancy_grid_width)]
-    #
-    # for i in range(len(global_vars.protein_string)):
-    #     fancy_grid[coordinates[i][0] * 2][coordinates[i][1] * 2] = grid[coordinates[i][0]][coordinates[i][1]]
-    #
-    # for j in range(fancy_grid_width):
-    #
-    #     for i in range(fancy_grid_height):
-    #
-    #         if (grid[i][j] == 0):
-    #             print(" ", end=" ")
-    #
-    #         else:
-    #             print(grid[i][j].num_id, end=" ")
-    #
-    #     print()
-    #
-    # print()
+
+    grid = global_vars.grid
+    coordinates = global_vars.coordinates
+
+    print_protein()
+
+    fancy_grid_width = len(grid[0]) * 2 - 1
+    fancy_grid_height = len(grid) * 2 - 1
+    print(fancy_grid_width, end = 'MAX X')
+    print()
+    print(fancy_grid_height, end = 'MAX Y')
+    print()
+
+
+    fancy_grid = [[" " for j in range(fancy_grid_height)] for i in range(fancy_grid_width)]
+
+
+
+
+
+    for i in range(len(global_vars.protein_string)):
+        current_coordinates = [coordinates[i][0] * 2, coordinates[i][1] * 2]
+        previous_coordinates = []
+        if i > 0:
+            previous_coordinates = [coordinates[i - 1][0] * 2, coordinates[i - i][1] * 2]
+
+
+
+
+        fancy_grid[current_coordinates[0]][current_coordinates[1]] = grid[coordinates[i][0]][coordinates[i][1]]
+
+
+
+    for j in range(fancy_grid_height):
+
+        for i in range(fancy_grid_width):
+            print(j, end = "<y>")
+            print(i, end = "<x>")
+            if (grid[i][j] == 0):
+                print(" ", end=" ")
+
+            else:
+                print(grid[i][j].num_id, end=" ")
+
+        print()
+
+    print()
