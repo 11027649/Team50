@@ -34,5 +34,3 @@ fold(3, "L")
 # Print the best solution.
 print_protein()
 fancy_print_protein()
-
-plotdata()
