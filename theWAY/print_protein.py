@@ -53,7 +53,6 @@ def print_protein():
 
 def fancy_print_protein():
 
-    print("hoi")
     # get grid, print heigth and width to the screen
 
     grid = global_vars.grid
@@ -67,19 +66,13 @@ def fancy_print_protein():
 
     fancy_grid = [["  " for j in range(fancy_grid_height)] for i in range(fancy_grid_width)]
 
-    print (coordinates)
 
-    print(fancy_grid_width, end = 'FG WIDTH')
-    print(fancy_grid_height, end = 'FG HEIGHT')
+
     # put all the aminos at the right location and the layout
     for i in range(len(global_vars.protein_string)):
         # calculate the coordinates for the new grid and put it in the new grid
         current_coordinates = [coordinates[i][0] * 2, coordinates[i][1] * 2]
-        print(str(i) + "LOOP")
-        print(current_coordinates[0])
-        print(current_coordinates[1])
-        print(grid[coordinates[i][0]][0])
-        print(grid[0][coordinates[i][1]])
+
         fancy_grid[current_coordinates[0]][current_coordinates[1]] = grid[coordinates[i][0]][coordinates[i][1]]
 
         # if there is a previous amino acid add the correspondending layout

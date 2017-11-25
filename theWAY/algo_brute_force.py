@@ -11,6 +11,7 @@ from global_vars import amino
 from score import score
 from fold import fold
 from print_protein import print_protein
+from print_protein import fancy_print_protein
 import time
 import copy
 
@@ -36,6 +37,7 @@ def algo_brute_force():
 
             global_vars.winning_score = current_score
             global_vars.winning_grid = copy.deepcopy(global_vars.grid)
+            global_vars.winning_coordinates = copy.deepcopy(global_vars.coordinates)
             global_vars.amount += 1
             # print(winning_coordinates)
             print("\n\nBest so far, stability of " + str(global_vars.winning_score) + ":\n")
@@ -73,6 +75,7 @@ def algo_brute_force():
 
         # print(winning_coordinates)
         global_vars.grid = global_vars.winning_grid
+        global_vars.coordinates = global_vars.winning_coordinates
 
     else:
         print("\nStopping program\n")

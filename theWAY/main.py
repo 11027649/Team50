@@ -35,4 +35,4 @@ algo_brute_force()
 
 # Print the best solution.
 print_protein()
-# fancy_print_protein()
+fancy_print_protein()
