@@ -64,22 +64,27 @@ def fancy_print_protein():
 
     print_protein()
 
-    fancy_grid_width = len(grid[0]) * 2
-    fancy_grid_height = len(grid) * 2
+    fancy_grid_height = len(grid[0]) * 2
+    fancy_grid_width = len(grid) * 2
 
 
     fancy_grid = [["  " for j in range(fancy_grid_height)] for i in range(fancy_grid_width)]
 
+    print (coordinates)
 
-
-
+    print(fancy_grid_width, end = 'FG WIDTH')
+    print(fancy_grid_height, end = 'FG HEIGHT')
     # put all the aminos at the right location and the layout
     for i in range(len(global_vars.protein_string)):
         # calculate the coordinates for the new grid and put it in the new grid
         current_coordinates = [coordinates[i][0] * 2, coordinates[i][1] * 2]
-        print(i)
+        print(str(i) + "LOOP")
+        print(current_coordinates[0])
+        print(current_coordinates[1])
+        print(grid[coordinates[i][0]][0])
+        print(grid[0][coordinates[i][1]])
         fancy_grid[current_coordinates[0]][current_coordinates[1]] = grid[coordinates[i][0]][coordinates[i][1]]
-    
+
         # if there is a previous amino acid add the correspondending layout
         if i > 0:
             previous_coordinates = [coordinates[i - 1][0] * 2, coordinates[i - 1][1] * 2]
@@ -90,7 +95,7 @@ def fancy_print_protein():
                 fancy_grid[current_coordinates[0] - 1][current_coordinates[1]] = '--'
             # if the previous was right
             elif previous_coordinates[0] == current_coordinates[0] + 2:
-                fancy_grid[current_coordinates[0] - 1][current_coordinates[1]] = '--'
+                fancy_grid[current_coordinates[0] + 1][current_coordinates[1]] = '--'
 
             # if the previous was up
             elif previous_coordinates[1] == current_coordinates[1] + 2:

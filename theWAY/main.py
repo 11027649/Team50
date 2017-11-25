@@ -30,7 +30,8 @@ message("Folding summary:")
 
 """>>>>>> UNCOMMENT THE ALGORITHM YOU WANT TO USE BELOW <<<<<<"""
 
-fold(3, "R")
+algo_brute_force()
+
 # Print the best solution.
 print_protein()
 fancy_print_protein()
