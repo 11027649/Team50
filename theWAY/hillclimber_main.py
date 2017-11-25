@@ -37,7 +37,7 @@ def main():
 		# print the best solution
 		print_protein()
 
-		# plotdata(i)
+		# plotdata()
 
 
 if __name__ == '__main__':
