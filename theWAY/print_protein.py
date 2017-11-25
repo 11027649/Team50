@@ -16,9 +16,6 @@ def print_protein():
     rows = len(grid[0])
     columns = len(grid)
 
-    print("Height grid: " + str(rows))
-    print("Width grid: " + str(columns), end="\n\n")
-
     # iterate over rows
     for j in range(rows):
 

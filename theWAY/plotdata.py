@@ -2,19 +2,17 @@ import matplotlib.pyplot as plt
 import numpy as np
 import csv
 
-def plotdata():
-    data = np.genfromtxt('optimum.csv', delimiter=',', names=['x', 'y'])
+def plotdata(i):
+    data = np.genfromtxt('hillclimber.csv', delimiter=',', names=['x', 'y'])
 
     fig = plt.figure()
 
-    ax1 = fig.add_subplot(111)
+    graph = fig.add_subplot(111)
 
+    graph.set_title("Hill Climber" + str(i))
+    graph.set_xlabel('Iteration')
+    graph.set_ylabel('Stability')
 
-
-    ax1.set_title("Hill Climber")
-    ax1.set_xlabel('Iteration')
-    ax1.set_ylabel('Stability')
-
-    ax1.scatter(data['x'], data['y'], color='r', label='stability')
+    graph.plot(data['x'], data['y'], color='r', label='stability')
 
     plt.show()
