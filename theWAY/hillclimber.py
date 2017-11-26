@@ -32,7 +32,7 @@ def hillclimber():
 
             datawriter.writerow([i] + [best_score])
 
-            for j in range(4):
+            for j in range(14):
                 random_value = get_random_value()
                 fold(random_value[0], random_value[1])
 

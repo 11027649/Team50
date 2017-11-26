@@ -14,25 +14,30 @@ import csv
 import global_vars
 global_vars.init()
 
-message("This is a protein-fold-optimizer by Team50")
 
-# Get the user's choice of protein.
-input_string()
+def main():
+    message("This is a protein-fold-optimizer by Team50")
 
-message("Protein received")
+    # Get the user's choice of protein.
+    input_string()
 
-# Print starting configuration of the protein
-print_protein()
+    message("Protein received")
 
-message("Protein initiated, starting algorithm.")
+    # Print starting configuration of the protein
+    print_protein()
 
-message("Folding summary:")
+    message("Protein initiated, starting algorithm.")
 
-""">>>>>> UNCOMMENT THE ALGORITHM YOU WANT TO USE BELOW <<<<<<"""
+    message("Folding...")
 
-# hillclimber()
-algo_brute_force()
+    """>>>>>> UNCOMMENT THE ALGORITHM YOU WANT TO USE BELOW <<<<<<"""
 
-# Print the best solution.
-print_protein()
-fancy_print_protein()
+    hillclimber()
+    # algo_brute_force()
+
+    # Print the best solution.
+
+    fancy_print_protein()
+
+if __name__ == '__main__':
+	main()

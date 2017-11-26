@@ -7,6 +7,13 @@ from global_vars import amino
 import global_vars
 global_vars.init()
 
+class color:
+   BLUE = '\033[94m'
+   ORANGE = '\033[93m'
+   RED = '\033[91m'
+   FIRST = '\033[4m'
+   END = '\033[0m'
+
 def print_protein():
     """ Prints the grid in which the protein lays. """
 
@@ -53,12 +60,12 @@ def print_protein():
 
 def fancy_print_protein():
 
+    print()
+
     # get grid, print heigth and width to the screen
 
     grid = global_vars.grid
     coordinates = global_vars.coordinates
-
-    print_protein()
 
     fancy_grid_height = len(grid[0]) * 2
     fancy_grid_width = len(grid) * 2
@@ -82,33 +89,43 @@ def fancy_print_protein():
             # if the previous was left
             if previous_coordinates[0] == current_coordinates[0] - 2:
                 # the current x coordinate - 1 will become the right layout
-                fancy_grid[current_coordinates[0] - 1][current_coordinates[1]] = '--'
+                fancy_grid[current_coordinates[0] - 1][current_coordinates[1]] = '---'
             # if the previous was right
             elif previous_coordinates[0] == current_coordinates[0] + 2:
-                fancy_grid[current_coordinates[0] + 1][current_coordinates[1]] = '--'
+                fancy_grid[current_coordinates[0] + 1][current_coordinates[1]] = '---'
 
             # if the previous was up
             elif previous_coordinates[1] == current_coordinates[1] + 2:
-                fancy_grid[current_coordinates[0]][current_coordinates[1] + 1] ='| '
+                fancy_grid[current_coordinates[0]][current_coordinates[1] + 1] = '| '
             # if the previous was down
-            elif previous_coordinates[1] == current_coordinates[1] -2:
-                fancy_grid[current_coordinates[0]][current_coordinates[1] - 1] ='| '
-
-
-
-
-
-
-
-
+            elif previous_coordinates[1] == current_coordinates[1] - 2:
+                fancy_grid[current_coordinates[0]][current_coordinates[1] - 1] = '| '
 
     for j in range(fancy_grid_height):
 
         for i in range(fancy_grid_width):
+
             if type(fancy_grid[i][j]) == str:
                 print(fancy_grid[i][j], end='')
             else:
-                print("" + fancy_grid[i][j].letter + "", end = ' ')
+                if fancy_grid[i][j].num_id == 0:
+                    if fancy_grid[i][j].letter == "H":
+                        print(color.BLUE + color.FIRST + fancy_grid[i][j].letter + color.END, end = '')
+                    elif fancy_grid[i][j].letter == "P":
+                        print(color.RED + color.FIRST + fancy_grid[i][j].letter + color.END, end = '')
+                    elif fancy_grid[i][j].letter == "C":
+                        print(color.ORANGE + color.FIRST + fancy_grid[i][j].letter + color.END, end = '')
+                elif fancy_grid[i][j].letter == "H":
+                    print(color.BLUE + fancy_grid[i][j].letter + color.END, end = '') #BLUE
+                elif fancy_grid[i][j].letter == "P":
+                    print(color.RED + fancy_grid[i][j].letter + color.END, end = '') #RED
+                elif fancy_grid[i][j].letter == "C":
+                    print(color.ORANGE + fancy_grid[i][j].letter + color.END, end = '') #Orange
+                else:
+                    print(fancy_grid[i][j].letter, end = '') #Black
+
+            if i < fancy_grid_width - 1 and not fancy_grid[i][j] == "| " and (not type(fancy_grid[i + 1][j]) == str or fancy_grid[i + 1][j] == "  ") and not fancy_grid[i][j] == "---" and not fancy_grid[i][j] == "  ":
+                print(" ", end='')
 
         print()
 
