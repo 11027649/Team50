@@ -39,5 +39,7 @@ def main():
 
     fancy_print_protein()
 
+    print("Score: " + str(global_vars.winning_score), end = '\n\n')
+
 if __name__ == '__main__':
 	main()
