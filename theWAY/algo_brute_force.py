@@ -1,7 +1,8 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# Contains: algo_brute_force, recursive_function.
+# Contains: brute_force, foldings_recursive.
 #
-# The algo_brute_force tries every foldation of the protein.
+# The algo_brute_force tries every foldation of the protein (multiple times for
+# for now ;-P). 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 from global_vars import amino
