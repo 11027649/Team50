@@ -13,6 +13,10 @@ import global_vars
 global_vars.init()
 
 def main():
+	""" This is a main function written for the hillclimber algorithm. It allows
+		you to input how many times you want to run a hillclimber. For now it 
+		returns from each hillclimber the best folded protein. """
+
 	message("This is a protein-fold-optimizer by Team50")
 
 	# get the user's choice of protein
@@ -36,8 +40,6 @@ def main():
 		print("The best solution of the " + str(i) + "th hillclimber is the following protein, with a stability of: " + str(global_vars.winning_score))
 		# print the best solution
 		print_protein()
-
-		# plotdata()
 
 
 if __name__ == '__main__':

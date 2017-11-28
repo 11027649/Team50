@@ -92,7 +92,7 @@ def fancy_print_protein():
     fancy_grid = [["  " for j in range(fancy_grid_height)] for i in range(fancy_grid_width)]
 
     # will fill the grid with layout depending on the answer of the user
-    if input("Do you wish to show the bonds? (y/n) ").upper() == "Y":
+    if input("Do you wish to show the hydrophobic interactions? (y/n) ").upper() == "Y":
         fancy_grid = fancy_grid_Bonds(fancy_grid, grid, coordinates)
     else:
         fancy_grid= fancy_grid_noBonds(fancy_grid, grid, coordinates)

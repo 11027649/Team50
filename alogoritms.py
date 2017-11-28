@@ -15,7 +15,6 @@ def algo_brute_force(protein, grid):
 
 def recursive_function(depth, protein, grid):
 
-
     current_score = score(grid, protein)
 
     if current_score < winning_score:
