@@ -27,7 +27,7 @@ def algo_brute_force():
         In a unlogical, unefficient way for now..
         It's not working yet to save the winning coordinates."""
 
-def algo_brute_force():
+    print("Brute forcing...")
 
     def recursive_function(depth):
 

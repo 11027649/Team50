@@ -12,9 +12,9 @@ global_vars.init()
 
 def hillclimber():
 
-    global_vars.winning_score = 0
+    print("Hillclimbing...")
 
-    print("Hillclimber in progress...")
+    global_vars.winning_score = 0
 
     # will keep track of the score
     best_score = global_vars.winning_score

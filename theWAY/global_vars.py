@@ -17,8 +17,6 @@ def init():
     amount = 0
 
 class amino():
-    def __init__(self, num_id, letter, x, y):
+    def __init__(self, num_id, letter):
         self.num_id = num_id
         self.letter = letter
-        self.x = x
-        self.y = y

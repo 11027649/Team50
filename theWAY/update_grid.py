@@ -48,8 +48,7 @@ def update_grid():
     # put the right AA's at the grid points
     for i in range(len(coordinates)):
         global_vars.grid[coordinates[i][0]][coordinates[i][1]] = \
-            amino(i, global_vars.protein_string[i], coordinates[i][0], \
-            coordinates[i][1])
+            amino(i, global_vars.protein_string[i])
 
     # put the new coordinates in the global coordinates
     global_vars.coordinates = coordinates

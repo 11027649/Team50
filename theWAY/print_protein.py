@@ -7,10 +7,14 @@ from global_vars import amino
 import global_vars
 global_vars.init()
 
+from colorama import init
+init()
+
 class color:
    BLUE = '\033[94m'
    ORANGE = '\033[93m'
    RED = '\033[91m'
+   GREY = '\033[33m'
    FIRST = '\033[4m'
    END = '\033[0m'
 
@@ -58,7 +62,7 @@ def print_protein():
 
     print()
 
-def fancy_print_protein():
+def fancy_print_protein(show_bonds = ''):
 
     print()
 
@@ -82,31 +86,60 @@ def fancy_print_protein():
 
         fancy_grid[current_coordinates[0]][current_coordinates[1]] = grid[coordinates[i][0]][coordinates[i][1]]
 
-        # if there is a previous amino acid add the correspondending layout
-        if i > 0:
-            previous_coordinates = [coordinates[i - 1][0] * 2, coordinates[i - 1][1] * 2]
+        # if down is an amino
+        if current_coordinates[1] - 2 >= 0:
+            if type(fancy_grid[current_coordinates[0]][current_coordinates[1] - 2]) == amino:
+                # if id is one lower add the layout
+                if fancy_grid[current_coordinates[0]][current_coordinates[1] - 2].num_id == i - 1:
+                    fancy_grid[current_coordinates[0]][current_coordinates[1] - 1] = '| '
+                # if not one lower print the bond
+                elif fancy_grid[current_coordinates[0]][current_coordinates[1] - 2].letter == fancy_grid[current_coordinates[0]][current_coordinates[1]].letter:
+                    if not fancy_grid[current_coordinates[0]][current_coordinates[1]].letter == 'P':
+                        fancy_grid[current_coordinates[0]][current_coordinates[1] - 1] = ': '
 
-            # if the previous was left
-            if previous_coordinates[0] == current_coordinates[0] - 2:
-                # the current x coordinate - 1 will become the right layout
-                fancy_grid[current_coordinates[0] - 1][current_coordinates[1]] = '---'
-            # if the previous was right
-            elif previous_coordinates[0] == current_coordinates[0] + 2:
-                fancy_grid[current_coordinates[0] + 1][current_coordinates[1]] = '---'
+        # if there is up an amino
+        if current_coordinates[1] + 2 < fancy_grid_height:
+            if type(fancy_grid[current_coordinates[0]][current_coordinates[1] + 2]) == amino:
+                if fancy_grid[current_coordinates[0]][current_coordinates[1] + 2].num_id == i - 1:
+                    fancy_grid[current_coordinates[0]][current_coordinates[1] + 1] = '| '
+                elif fancy_grid[current_coordinates[0]][current_coordinates[1] + 2].letter == fancy_grid[current_coordinates[0]][current_coordinates[1]].letter:
+                    if not fancy_grid[current_coordinates[0]][current_coordinates[1]].letter == 'P':
+                        fancy_grid[current_coordinates[0]][current_coordinates[1] + 1] = ': '
 
-            # if the previous was up
-            elif previous_coordinates[1] == current_coordinates[1] + 2:
-                fancy_grid[current_coordinates[0]][current_coordinates[1] + 1] = '| '
-            # if the previous was down
-            elif previous_coordinates[1] == current_coordinates[1] - 2:
-                fancy_grid[current_coordinates[0]][current_coordinates[1] - 1] = '| '
+        # if there is left an amino
+        if current_coordinates[0] - 2 >= 0:
+
+            if type(fancy_grid[current_coordinates[0] - 2][current_coordinates[1]]) == amino:
+                # if id is one lower add the layout
+                if fancy_grid[current_coordinates[0] - 2][current_coordinates[1]].num_id == i - 1:
+                    fancy_grid[current_coordinates[0] - 1][current_coordinates[1]] = '---'
+                # if not one lower print the bond
+                elif fancy_grid[current_coordinates[0] - 2][current_coordinates[1]].letter == fancy_grid[current_coordinates[0]][current_coordinates[1]].letter:
+                    if not fancy_grid[current_coordinates[0]][current_coordinates[1]].letter == 'P':
+                        fancy_grid[current_coordinates[0] - 1][current_coordinates[1]] = '...'
+        # if there is right an amino
+        if current_coordinates[0] + 2 < fancy_grid_width:
+            if type(fancy_grid[current_coordinates[0] + 2][current_coordinates[1]]) == amino:
+                # if id is one lower add the layout
+                if fancy_grid[current_coordinates[0] + 2][current_coordinates[1]].num_id == i - 1:
+                    fancy_grid[current_coordinates[0] + 1][current_coordinates[1]] = '---'
+                # if not one lower print the bond
+                elif fancy_grid[current_coordinates[0] + 2][current_coordinates[1]].letter == fancy_grid[current_coordinates[0]][current_coordinates[1]].letter:
+                    if not fancy_grid[current_coordinates[0]][current_coordinates[1]].letter == 'P':
+                        fancy_grid[current_coordinates[0] + 1][current_coordinates[1]] = '...'
+
+
+
 
     for j in range(fancy_grid_height):
 
         for i in range(fancy_grid_width):
 
             if type(fancy_grid[i][j]) == str:
-                print(fancy_grid[i][j], end='')
+                if fancy_grid[i][j] == "..." or fancy_grid[i][j] == ": ":
+                    print(color.GREY + fancy_grid[i][j] + color.END, end='')
+                else:
+                    print(fancy_grid[i][j], end='')
             else:
                 if fancy_grid[i][j].num_id == 0:
                     if fancy_grid[i][j].letter == "H":
@@ -124,7 +157,9 @@ def fancy_print_protein():
                 else:
                     print(fancy_grid[i][j].letter, end = '') #Black
 
-            if i < fancy_grid_width - 1 and not fancy_grid[i][j] == "| " and (not type(fancy_grid[i + 1][j]) == str or fancy_grid[i + 1][j] == "  ") and not fancy_grid[i][j] == "---" and not fancy_grid[i][j] == "  ":
+            if i < fancy_grid_width - 1 and not fancy_grid[i][j] == "| " \
+            and not fancy_grid[i][j] == ": " and (not type(fancy_grid[i + 1][j]) == str or fancy_grid[i + 1][j] == "  ") \
+            and not fancy_grid[i][j] == "---" and not fancy_grid[i][j] == "..." and not fancy_grid[i][j] == "  ":
                 print(" ", end='')
 
         print()

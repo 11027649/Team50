@@ -2,7 +2,7 @@
 # Contains: fold. A function that folds a protein. Does this by finding an
 # origin and rotating the rest of the protein with a rotation matrix (left or
 # right), depending on the direction in which the protein is being fold.
-# 
+#
 # Takes: num_id and direction, global vars coordinates, grid and protein_string
 # Updates: global var coordinates
 # Calls: update_grid()
@@ -56,15 +56,17 @@ def fold(num_id, direction):
     elif(direction == "L"):
         rotation_matrix = rotation_matrix_left
 
+    for_range = range(num_id + 1, protein_length)
+
     # iterates over the aminos, beginning at the one after the amino acid where
     # we'll fold
-    for i in range(num_id + 1, protein_length):
+    for i in for_range:
 
         # cleans all aminos from where we'll fold
         grid[coordinates[i][0]][coordinates[i][1]] = 0
 
     # iterates over the aminos, beginning at the one after where we'll fold
-    for i in range(num_id + 1, protein_length):
+    for i in for_range:
 
         from_coords = coordinates[i]
         to_coords = np.dot(rotation_matrix, np.subtract(from_coords, rot_origin)) + rot_origin
@@ -82,17 +84,6 @@ def fold(num_id, direction):
             coordinates = backup_coordinates
             returncode = True
             break
-
-        elif (str(type(grid[to_coords[0]][to_coords[1]])) ==
-                    "<class 'global_vars.amino'>"):
-
-            # print where the collision was detected
-            # print("Collision detected while folding amino " + str(num_id)
-                      # + "\n -> Stopped this fold, cause amino " + str(i) + " was colliding")
-
-            # reset coordinates and break out of the function
-            coordinates = backup_coordinates
-            break;
 
         else:
             coordinates[i] = [to_coords[0], to_coords[1]]

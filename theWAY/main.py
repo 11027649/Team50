@@ -28,16 +28,14 @@ def main():
 
     message("Protein initiated, starting algorithm.")
 
-    message("Folding...")
-
     """>>>>>> UNCOMMENT THE ALGORITHM YOU WANT TO USE BELOW <<<<<<"""
 
     hillclimber()
     # algo_brute_force()
 
     # Print the best solution.
-
-    fancy_print_protein()
+    print_protein()
+    fancy_print_protein("show bonds")
 
     print("Score: " + str(global_vars.winning_score), end = '\n\n')
 
