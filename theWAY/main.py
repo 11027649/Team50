@@ -5,7 +5,11 @@ from update_grid import update_grid
 from fold import fold
 from score import score
 from hillclimber import hillclimber
+<<<<<<< HEAD
 from plots import plothillclimber
+=======
+
+>>>>>>> d3401577c477492bca59af995edec052416a71bc
 import csv
 
 # Import all the global variables.
@@ -28,12 +32,14 @@ def main():
 
     """>>>>>> UNCOMMENT THE ALGORITHM YOU WANT TO USE BELOW <<<<<<"""
 
-    # algo_brute_force()
 
     # Print the best solution.
 
-
-    hillclimber()
+    fold(1, "L")
+    fold(2, "L")
+    fold(4, "R")
+    fold(5, "R")
+    debug_print_protein()
     print_protein()
     print("Score: " + str(global_vars.winning_score), end = '\n\n')
 
