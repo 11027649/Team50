@@ -160,32 +160,31 @@ def print_protein():
 
 def add_layout(direction, current_coordinates, print_grid, i, print_grid_height, print_grid_width):
 
-
-
     if direction == "U":
+        add_x = 0
+        add_y = 2
+        to_check = print_grid_height
+        minus_factor = - 1
 
-        # if down is an amino
-        if current_coordinates[1] - 2 > - 1:
-            if type(print_grid[current_coordinates[0]][current_coordinates[1] - 2]) == amino:
-                # if id is one lower add the layout
-                if print_grid[current_coordinates[0]][current_coordinates[1] - 2].num_id == i - 1:
-                    print_grid[current_coordinates[0]][current_coordinates[1] - 1] = '| '
+    if direction =="D":
+        add_x = 0
+        add_y = - 2
+        to_check = - 1
+        minus_factor = 1
 
-                # if not one lower print the bond
-                elif print_grid[current_coordinates[0]][current_coordinates[1] - 2].letter == print_grid[current_coordinates[0]][current_coordinates[1]].letter:
-                    if not print_grid[current_coordinates[0]][current_coordinates[1]].letter == 'P':
-                        print_grid[current_coordinates[0]][current_coordinates[1] - 1] = ': '
-    if direction == "D":
-        # if there is up an amino
-        if -(current_coordinates[1] + 2) > -print_grid_height:
-            if type(print_grid[current_coordinates[0]][current_coordinates[1] + 2]) == amino:
 
-                # if id is one lower add the layout
-                if print_grid[current_coordinates[0]][current_coordinates[1] + 2].num_id == i - 1:
-                    print_grid[current_coordinates[0]][current_coordinates[1] + 1] = '| '
 
-                # if not one lower print the bond
-                elif print_grid[current_coordinates[0]][current_coordinates[1] + 2].letter == print_grid[current_coordinates[0]][current_coordinates[1]].letter:
-                    if not print_grid[current_coordinates[0]][current_coordinates[1]].letter == 'P':
-                        print_grid[current_coordinates[0]][current_coordinates[1] + 1] = ': '
+
+    # if down is an amino
+    if minus_factor * (current_coordinates[1] + add_y) > minus_factor * to_check:
+        if type(print_grid[current_coordinates[0] + add_x][current_coordinates[1] + add_y]) == amino:
+            # if id is one lower add the layout
+            if print_grid[current_coordinates[0] + add_x][current_coordinates[1] + add_y].num_id == i - 1:
+                print_grid[current_coordinates[0] + int(0.5 * add_x)][current_coordinates[1] + int(0.5 * add_y)] = '| '
+
+            # if not one lower print the bond
+            elif print_grid[current_coordinates[0] + add_x][current_coordinates[1] + add_y].letter == print_grid[current_coordinates[0]][current_coordinates[1]].letter:
+                if not print_grid[current_coordinates[0]][current_coordinates[1]].letter == 'P':
+                    print_grid[current_coordinates[0] + int(0.5 * add_x)][current_coordinates[1] + int(0.5 * add_y)] = ': '
+
     return print_grid
