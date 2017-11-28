@@ -35,7 +35,7 @@ def main():
 
     # Print the best solution.
     print_protein()
-    fancy_print_protein("show bonds")
+    fancy_print_protein()
 
     print("Score: " + str(global_vars.winning_score), end = '\n\n')
 
