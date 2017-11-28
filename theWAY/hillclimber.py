@@ -3,6 +3,7 @@ from score import score
 from fold import fold
 from print_protein import print_protein
 import time
+import os
 from random import randint
 import copy
 import csv
@@ -23,7 +24,7 @@ def hillclimber():
     global_vars.winning_grid = copy.deepcopy(global_vars.grid)
     global_vars.winning_coordinates = copy.deepcopy(global_vars.coordinates)
 
-    iterations = 5000
+    iterations = 10000
 
     # store data in .csv
     with open('hillclimber.csv', 'w', newline='') as csvfile:
@@ -47,11 +48,15 @@ def hillclimber():
                 best_score = stability
                 global_vars.winning_score = best_score
 
-                # print_protein()
+                os.system("cls")
+                print("Best stability so far: " + str(best_score))
+                print_protein()
+                time.sleep(0.5)
 
             else:
                 global_vars.grid = copy.deepcopy(global_vars.winning_grid)
                 global_vars.coordinates = copy.deepcopy(global_vars.winning_coordinates)
+        os.system("cls")
 
 
 # return an array with a random direction and aminonumber

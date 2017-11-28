@@ -5,8 +5,7 @@ from update_grid import update_grid
 from fold import fold
 from score import score
 from hillclimber import hillclimber
-
-from plotdata import plotdata
+from plots import plothillclimber
 import csv
 
 # Import all the global variables.
@@ -36,8 +35,10 @@ def main():
 
     hillclimber()
     print_protein()
-
     print("Score: " + str(global_vars.winning_score), end = '\n\n')
+
+    plothillclimber()
+
 
 if __name__ == '__main__':
 	main()
