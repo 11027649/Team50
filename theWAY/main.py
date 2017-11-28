@@ -31,10 +31,11 @@ def main():
 
     # Print the best solution.
     debug_print_protein()
+    hillclimber()
     print_protein()
     print("Score: " + str(global_vars.winning_score), end = '\n\n')
 
-    plothillclimber()
+
 
 
 if __name__ == '__main__':
