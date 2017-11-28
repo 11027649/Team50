@@ -14,6 +14,8 @@ def hillclimber():
 
     global_vars.winning_score = 0
 
+    print("Hillclimber in progress...")
+
     # will keep track of the score
     best_score = global_vars.winning_score
 
