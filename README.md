@@ -1,5 +1,3 @@
-Kunnen jullie voor de punten aanvraag de github map van 10:44 (de tijd dat we het (tweede) mailtje stuurden) gebruiken...
-
 Usage: In folder "theWAY" run main.py, uncomment the type of algorithm you want to use. To plot the data of the last hillclimber result, use plotdata.py.
 
 # Team50
@@ -74,6 +72,3 @@ In the animation file two functions are implemented: one to print the protein in
 
 AMINO
 The amino file only contains the class Amino. In Amino there are saved some variables: the letter (P or H), the position of the next Amino (which can be L, R, or C), the coordinates of the Amino and the direction (which can be 0 (up), 1 (right), 2 (down) or 3 (up)).
-
-HELPER_PRINTS
-The helper prints file contains two print functions: print_coordinates to print all of the coordinates of all Amino Acids (mainly used for debugging) and print_protein to print the protein (really plain, without bonds etc.).
