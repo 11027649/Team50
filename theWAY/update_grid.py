@@ -51,4 +51,6 @@ def update_grid():
             amino(i, global_vars.protein_string[i])
 
     # put the new coordinates in the global coordinates
+    ###### IT SEEMS THIS SENTENCE IS DOING NOTHING, BUT ISN'T IT WEIRD TO NOT UPDATE
+    ###### THE COORDINATES?
     global_vars.coordinates = coordinates
