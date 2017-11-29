@@ -10,7 +10,16 @@ from global_vars import amino
 import global_vars
 global_vars.init()
 
-from termcolor import colored
+from colorama import init
+init()
+
+class color:
+   BLUE = '\033[94m'
+   ORANGE = '\033[93m'
+   RED = '\033[91m'
+   GREY = '\033[33m'
+   FIRST = '\033[4m'
+   END = '\033[0m'
 
 def print_protein():
     """ Prints how the protein is folded with layout, colors and bonds. """
@@ -44,19 +53,18 @@ def print_protein():
             # if it is a string print the string
             if type(print_grid[i][j]) == str:
                 if print_grid[i][j] == "..." or print_grid[i][j] == ": ":
-                    print(colored(print_grid[i][j], 'cyan'), end='')
+                    print(color.GREY + print_grid[i][j] + color.END, end='')
                 else:
                     print(print_grid[i][j], end='')
 
             # if it is an amino add the correct layout
             else:
-
                 if print_grid[i][j].letter == "H":
-                    print(colored(print_grid[i][j].letter, 'blue'), end = '') #BLUE
+                    print(color.BLUE + print_grid[i][j].letter + color.END, end = '') #BLUE
                 elif print_grid[i][j].letter == "P":
-                    print(colored(print_grid[i][j].letter, 'green'), end = '') #RED
+                    print(color.RED + print_grid[i][j].letter + color.END, end = '') #RED
                 elif print_grid[i][j].letter == "C":
-                    print(colored(print_grid[i][j].letter, 'yellow'), end = '') #Orange
+                    print(color.ORANGE + print_grid[i][j].letter + color.END, end = '') #Orange
                 else:
                     print(print_grid[i][j].letter, end = '') #Black
 
