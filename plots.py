@@ -3,7 +3,7 @@ import numpy as np
 import csv
 
 def plothillclimber():
-    data = np.genfromtxt('hillclimber.csv', delimiter=',', names=['x', 'y'])
+    data = np.genfromtxt('data/hillclimber.csv', delimiter=',', names=['x', 'y'])
 
     fig = plt.figure()
 

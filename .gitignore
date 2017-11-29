@@ -3,4 +3,5 @@ __pycache__/
 *.pyc
 
 # IGNORE generated csv files
+data/
 *.csv

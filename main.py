@@ -29,20 +29,21 @@ def main():
 
     """>>>>>> UNCOMMENT THE ALGORITHM YOU WANT TO USE BELOW <<<<<<"""
 
-    with open('optimization.csv', 'a', newline='') as csvfile:
-        writer = csv.writer(csvfile)
+    # with open('optimization.csv', 'a', newline='') as csvfile:
+    #     writer = csv.writer(csvfile)
 
-        for i in range(2, 14):
-            print(i)
-            for j in range(25):
-                print("  ", end='')
-                print(j)
-                hillclimber(i)
-                writer.writerow([i] + [global_vars.winning_score])
+    #     for i in range(2, 14):
+    #         print(i)
+    #         for j in range(25):
+    #             print("  ", end='')
+    #             print(j)
+    #             hillclimber(i)
+    #             writer.writerow([i] + [global_vars.winning_score])
 
-    # print_protein()
-    # print("Score: " + str(global_vars.winning_score), end = '\n\n')
-    # plothillclimber()
+    hillclimber()
+    print_protein()
+    print("Score: " + str(global_vars.winning_score), end = '\n\n')
+    plothillclimber()
 
 
 

@@ -31,6 +31,7 @@ def score():
         cur_id = grid[x][y].num_id
 
         # if it's an H, do something with the score
+        # check only under and to the right to not count interactions double
         if grid[x][y].letter == "H" or "C":
 
             # check 4 things:
@@ -43,22 +44,10 @@ def score():
                 and (grid[x - 1][y].letter == "H" or grid[x - 1][y].letter == "C") \
                 and abs(cur_id - grid[x - 1][y].num_id) > 1:
 
-                # score - 0.5 to not count the interactions double
                 if grid[x][y].letter == "H" and grid[x - 1][y].letter == "H":
-                    score -= 0.5
+                    score -= 1
                 if grid[x][y].letter == "C" and grid[x - 1][y].letter == "C":
-                    score -= 2.5
-
-            # same for left
-            if x < width - 1 \
-                and type(grid[x + 1][y]) == amino \
-                and (grid[x + 1][y].letter == "H" or grid[x + 1][y].letter == "C") \
-                and abs(cur_id - grid[x + 1][y].num_id) > 1:
-
-                if grid[x][y].letter == "H" and grid[x + 1][y].letter == "H":
-                    score -= 0.5
-                if grid[x][y].letter == "C" and grid[x + 1][y].letter == "C":
-                    score -= 2.5
+                    score -= 5
 
             # same for under
             if y > 0 \
@@ -67,19 +56,8 @@ def score():
                 and abs(cur_id - grid[x][y - 1].num_id) > 1:
 
                 if grid[x][y].letter == "H" and grid[x][y - 1].letter == "H":
-                    score -= 0.5
+                    score -= 1
                 if grid[x][y].letter == "C" and grid[x][y - 1].letter == "C":
-                    score -= 2.5
-
-            # same for above
-            if y < height - 1 \
-                and type(grid[x][y + 1]) == amino \
-                and (grid[x][y + 1].letter == "H" or grid[x][y + 1].letter == "C") \
-                and abs(cur_id - grid[x][y + 1].num_id) > 1:
-
-                if grid[x][y].letter == "H" and grid[x][y + 1].letter == "H":
-                    score -= 0.5
-                if grid[x][y].letter == "C" and grid[x][y + 1].letter == "C":
-                    score -= 2.5
+                    score -= 5
 
     return score
