@@ -7,7 +7,7 @@
 # Calls: init_grid()
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from init_grid import init_grid
+from utility.init_grid import init_grid
 
 import global_vars
 global_vars.init()
@@ -21,7 +21,7 @@ def input_string():
 
     protein_input = input("Insert amino string or type assignment letter + number e.g. B2: ")
 
-    # input must be 2 AA's or one of the assignements which are also 2 chars 
+    # input must be 2 AA's or one of the assignements which are also 2 chars
     # (see assignements.txt)
     if len(protein_input) < 2:
         print("\nPlease enter at least 2 characters.\n")
@@ -30,7 +30,7 @@ def input_string():
         # if the input starts with /, put it in protein_string no matter what
         if protein_input.startswith("/"):
             protein_string = protein_input[1:]
-        
+
         # allow only the assignements strings, e.g. A1, B1-B4 and C1-C4
         elif not protein_input[0].isalpha() or (len(protein_input) > 2 and not protein_input[2:].isalpha()):
             print("\nOnly the second entry in the string can be a number. e.g. B2.\n")
@@ -44,13 +44,13 @@ def input_string():
                     print("\nThis string contains invalid amino characters.\n")
                     exit(1)
             protein_string = protein_input
-        
+
         # if 2nd char is a digit, check which assignement
         elif (protein_input[1].isdigit()):
             if len(protein_input) > 2:
                 print("\nThis string is not valid.\n")
                 exit(1)
-            protein_lines = open("assignments.txt").read().splitlines()
+            protein_lines = open("input files/assignments.txt").read().splitlines()
 
             # search for assignement
             for line in protein_lines:

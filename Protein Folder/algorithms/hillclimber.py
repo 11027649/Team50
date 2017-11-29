@@ -1,7 +1,8 @@
 from global_vars import amino
-from score import score
-from fold import fold
-from print_protein import print_protein
+from utility.score import score
+from utility.fold import fold
+from visualization.print_protein import print_protein
+
 import time
 import os
 from random import randint
@@ -27,7 +28,7 @@ def hillclimber():
     iterations = 5000
 
     # store data in .csv
-    with open('data/hillclimber.csv', 'w', newline='') as csvfile:
+    with open('result files/hillclimber.csv', 'w', newline='') as csvfile:
         datawriter = csv.writer(csvfile)
 
         # do "iterations" random folds and keep track of the highest value

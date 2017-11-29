@@ -8,12 +8,13 @@
 # Calls: update_grid()
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-import numpy as np
-from update_grid import update_grid
+from utility.update_grid import update_grid
 from global_vars import amino
 
 import global_vars
 global_vars.init()
+
+import numpy as np
 
 def fold(num_id, direction):
     """ Finds an origin to fold around and multiplies the coordinates of the aminos

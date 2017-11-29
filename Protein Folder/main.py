@@ -1,11 +1,12 @@
-from message import message
-from input_string import input_string
-from print_protein import print_protein
-from update_grid import update_grid
-from fold import fold
-from score import score
-from hillclimber import hillclimber
-from plots import plothillclimber
+from visualization.message import message
+from utility.input_string import input_string
+from visualization.print_protein import print_protein
+from utility.update_grid import update_grid
+from utility.fold import fold
+from utility.score import score
+from algorithms.hillclimber import hillclimber
+from plotting.plots import plothillclimber
+
 import csv
 
 # Import all the global variables.

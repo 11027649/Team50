@@ -2,7 +2,7 @@
 # Contains: score(). A function that returns the score.
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from update_grid import update_grid
+from utility.update_grid import update_grid
 from global_vars import amino
 
 import global_vars
