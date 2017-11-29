@@ -11,9 +11,9 @@ import csv
 import global_vars
 global_vars.init()
 
-def hillclimber():
+def hillclimber(amount):
 
-    print("Hillclimbing...")
+    # print("Hillclimbing...")
 
     global_vars.winning_score = 0
 
@@ -24,46 +24,42 @@ def hillclimber():
     global_vars.winning_grid = copy.deepcopy(global_vars.grid)
     global_vars.winning_coordinates = copy.deepcopy(global_vars.coordinates)
 
-    iterations = 2000
+    iterations = 5000
 
-    # store data in .csv
-    with open('hillclimber.csv', 'w', newline='') as csvfile:
-        datawriter = csv.writer(csvfile)
+    # # store data in .csv
+    # with open('hillclimber.csv', 'w', newline='') as csvfile:
+    #     datawriter = csv.writer(csvfile)
 
-        invalid = 0
+    # do "iterations" random folds and keep track of the highest value
+    for i in range(iterations):
 
-        # do "iterations" random folds and keep track of the highest value
-        for i in range(iterations):
+            # datawriter.writerow([i] + [best_score])
 
-            datawriter.writerow([i] + [best_score])
-
-            for j in range(10):
+        for j in range(amount):
+            random_value = get_random_value()
+            return_code = fold(random_value[0], random_value[1])
+            while not return_code == 0:
                 random_value = get_random_value()
                 return_code = fold(random_value[0], random_value[1])
-                while not return_code == 0:
-                    random_value = get_random_value()
-                    return_code = fold(random_value[0], random_value[1])
-                    invalid += 1
-                    print(invalid)
 
-            stability = score()
+        stability = score()
 
             # if the score is lower save that particular grid in winning grid
-            if stability < best_score:
-                global_vars.winning_grid = copy.deepcopy(global_vars.grid)
-                global_vars.winning_coordinates = copy.deepcopy(global_vars.coordinates)
-                best_score = stability
-                global_vars.winning_score = best_score
+        if stability < best_score:
+            global_vars.winning_grid = copy.deepcopy(global_vars.grid)
+            global_vars.winning_coordinates = copy.deepcopy(global_vars.coordinates)
+            best_score = stability
+            global_vars.winning_score = best_score
 
-                # os.system("cls")
-                print("Best stability so far: " + str(best_score))
-                print_protein()
-                time.sleep(0.5)
+            # os.system("cls")
+            # print("Best stability so far: " + str(best_score))
+            # print_protein()
+            # time.sleep(0.5)
 
-            else:
-                global_vars.grid = copy.deepcopy(global_vars.winning_grid)
-                global_vars.coordinates = copy.deepcopy(global_vars.winning_coordinates)
-        # os.system("cls")
+        else:
+            global_vars.grid = copy.deepcopy(global_vars.winning_grid)
+            global_vars.coordinates = copy.deepcopy(global_vars.winning_coordinates)
+    # os.system("cls")
 
 
 # return an array with a random direction and aminonumber
