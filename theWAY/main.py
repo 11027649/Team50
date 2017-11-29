@@ -14,6 +14,7 @@ global_vars.init()
 
 
 def main():
+
     message("This is a protein-fold-optimizer by Team50")
 
     # Get the user's choice of protein.
@@ -28,12 +29,22 @@ def main():
 
     """>>>>>> UNCOMMENT THE ALGORITHM YOU WANT TO USE BELOW <<<<<<"""
 
+    with open('optimization.csv', 'a', newline='') as csvfile:
+        writer = csv.writer(csvfile)
 
-    # Print the best solution.
-    hillclimber()
-    print_protein()
-    print("Score: " + str(global_vars.winning_score), end = '\n\n')
-    plothillclimber()
+        for i in range(2, 14):
+            print(i)
+            for j in range(25):
+                print("  ", end='')
+                print(j)
+                hillclimber(i)
+                writer.writerow([i] + [global_vars.winning_score])
+
+    # print_protein()
+    # print("Score: " + str(global_vars.winning_score), end = '\n\n')
+    # plothillclimber()
+
+
 
 
 
