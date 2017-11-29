@@ -38,9 +38,7 @@ def hillclimber(amount):
         for j in range(amount):
             random_value = get_random_value()
             return_code = fold(random_value[0], random_value[1])
-            while not return_code == 0:
-                random_value = get_random_value()
-                return_code = fold(random_value[0], random_value[1])
+
 
         stability = score()
 
