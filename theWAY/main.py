@@ -14,6 +14,7 @@ global_vars.init()
 
 
 def main():
+
     message("This is a protein-fold-optimizer by Team50")
 
     # Get the user's choice of protein.
@@ -34,6 +35,8 @@ def main():
     print_protein()
     print("Score: " + str(global_vars.winning_score), end = '\n\n')
     plothillclimber()
+
+
 
 
 

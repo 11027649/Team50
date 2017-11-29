@@ -36,8 +36,8 @@ def fold(num_id, direction):
     if num_id >= protein_length or num_id < 1:
         print("This fold index doesn't exist.")
 
-        # returncode 1: an invalid place to fold
-        return 1
+        # returncode 2: an invalid place to fold
+        return "out of range"
 
     # find the rotation origin and print it's coordinates
     rot_origin = [coordinates[num_id][0], coordinates[num_id][1]]
@@ -93,4 +93,6 @@ def fold(num_id, direction):
     update_grid()
 
     if returncode == True:
-        return 1
+        return "collision"
+    else:
+        return 0
