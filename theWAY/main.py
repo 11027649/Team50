@@ -1,6 +1,6 @@
 from message import message
 from input_string import input_string
-from print_protein import print_protein, debug_print_protein
+from print_protein import print_protein
 from update_grid import update_grid
 from fold import fold
 from score import score
@@ -22,7 +22,7 @@ def main():
     message("Protein received")
 
     # Print starting configuration of the protein
-    debug_print_protein()
+    print_protein()
 
     message("Protein initiated, starting algorithm.")
 
@@ -30,7 +30,6 @@ def main():
 
 
     # Print the best solution.
-    debug_print_protein()
     hillclimber()
     print_protein()
     print("Score: " + str(global_vars.winning_score), end = '\n\n')
