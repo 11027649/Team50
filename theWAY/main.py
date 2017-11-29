@@ -33,7 +33,7 @@ def main():
     hillclimber()
     print_protein()
     print("Score: " + str(global_vars.winning_score), end = '\n\n')
-
+    plothillclimber()
 
 
 
