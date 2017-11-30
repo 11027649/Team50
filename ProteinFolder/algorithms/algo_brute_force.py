@@ -8,7 +8,7 @@
 from global_vars import amino
 from utility.score import score
 from utility.fold import fold
-from visualization print_protein import print_protein
+from visualization.print_protein import print_protein
 
 import time
 import copy

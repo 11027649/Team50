@@ -5,6 +5,7 @@ from utility.update_grid import update_grid
 from utility.fold import fold
 from utility.score import score
 from algorithms.hillclimber import hillclimber
+from algorithms.algo_brute_force import brute_force
 from plotting.plots import plothillclimber
 
 import csv
@@ -29,24 +30,15 @@ def main():
     message("Protein initiated, starting algorithm.")
 
     """>>>>>> UNCOMMENT THE ALGORITHM YOU WANT TO USE BELOW <<<<<<"""
+    # brute_force()
 
-    # with open('optimization.csv', 'a', newline='') as csvfile:
-    #     writer = csv.writer(csvfile)
-
-    #     for i in range(2, 14):
-    #         print(i)
-    #         for j in range(25):
-    #             print("  ", end='')
-    #             print(j)
-    #             hillclimber(i)
-    #             writer.writerow([i] + [global_vars.winning_score])
-
-    hillclimber()
+    # hillclimber()
+    
     print_protein()
     print("Score: " + str(global_vars.winning_score), end = '\n\n')
-    plothillclimber()
-
-
+    
+    """>>>>> UNCOMMENT THIS IF YOU WANT TO RUN A HILLCLIMBER ÁND PLOT THE DATA <<<<<<"""
+    # plothillclimber()
 
 
 

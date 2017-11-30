@@ -28,7 +28,7 @@ def hillclimber():
     iterations = 5000
 
     # store data in .csv
-    with open('result files/hillclimber.csv', 'w', newline='') as csvfile:
+    with open('hillclimber.csv', 'w', newline='') as csvfile:
         datawriter = csv.writer(csvfile)
 
         # do "iterations" random folds and keep track of the highest value
@@ -43,7 +43,7 @@ def hillclimber():
 
             stability = score()
 
-                # if the score is lower save that particular grid in winning grid
+            # if the score is lower save that particular grid in winning grid
             if stability < best_score:
                 global_vars.winning_grid = copy.deepcopy(global_vars.grid)
                 global_vars.winning_coordinates = copy.deepcopy(global_vars.coordinates)
