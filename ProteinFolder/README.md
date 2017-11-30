@@ -16,7 +16,7 @@ The goal is of this project is to fold the given proteins so that they are maxim
 ## The Protein Optimization Program
 With rotation matrices.
 
-The main file has dependencies on 11 other files: message, input_string, init_grid, update_grid, print_protein, fold, score, global_vars, algo_brute_force, hillclimber, plots.
+The main file has dependencies on a lot of other files with other functions. Here, the most important ones are explained.
 
 GLOBAL_VARS
 Holds all the global variables that are needed in every file: protein_string, grid, coordinates, winning score, current score and the class amino with in it: an ID, the letter (H/P/C), and x,y coordinates
@@ -24,11 +24,8 @@ Holds all the global variables that are needed in every file: protein_string, gr
 INPUT_STRING
 After you run the main file, the input_string function is the first one to be called. It wil ask you for a string input. The assignements we need to are saved in a .txt file. This way you can put in A1,B1,B2,C1, etc. You can also put in a string containing H,P and C. This function calls the init_grid function.
 
-INIT_GRID
-The init_grid function is called once in the whole program. It initializes the grid and the coordinates of the protein string.
-
-PRINT_PROTEIN
-Prints the protein.
+INIT_GRID, UPDATE_GRID
+The init_grid function is called once in the whole program. It initializes the grid and the coordinates of the protein string. The update_grid function takes it from there, updating the grid using the coordinates of the amino acids.
 
 FOLD
 The fold function takes the ID of the amino that's being folded, and the direction to which it's folded. The aminos from the ID are cleared in the grid. The new coordinates are calculated using a rotation matrix. There's checked if there are no collisions. If there are none, the fold is done. If there are, the fold is made undone and the aminos are putted back in the grid.
