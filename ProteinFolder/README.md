@@ -2,7 +2,9 @@
 In this project we try to write algorithms that fold proteins to their most stable configuration. The proteins are solely made of  unspecified hydrophobic (H) and polar (P) amino acids, and Cystein (C). Hydrophobic interactions between H's and sulphur bounds between Cysteins contribute to the stabitity of proteins. 
 
 ## Getting Started
-Get this program on your computer by downloading the Team50 github repository. Uncomment the type of algorithm you want to use in main.py inside the Protein Folder. If you choose the hillclimber, you can plot the data by adding the function plothillclimber() in the main.py after you've run the hillclimber.
+Get this program on your computer by downloading the Team50 github repository. 
+Uncomment the type of algorithm you want to use in main.py inside the Protein Folder. The program will ask you for an input: this can be A1, B1-B4 or C1-C4 for the proteins specified for our problem. You can find these proteins in assignements.txt in the inputFolder. You can also type your own protein, consisting of H,P and C amino acids.
+If you choose the hillclimber algorithm, you can plot the data by adding the function plothillclimber() in the main.py after you've run the hillclimber.
 
 ## More about the problem this case is based on
 Long strands of Amino Acids make proteins. Proteins are important for many processes in the human body. It is known that proteins in body cells are folded in specific ways. These foldings determine the functioning of the protein. If it's a wrong fold, the proteins can cause many diseases. Therefore it is of great importance for pharmaceutical industry and medical science to be able to say something about the exact form of folding
