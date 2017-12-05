@@ -81,3 +81,4 @@ def foldings_recursive(depth):
     fold(depth, "L")
 
     def brute_force_tyfen():
+        print("hoi")
