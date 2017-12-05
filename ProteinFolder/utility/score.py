@@ -40,7 +40,7 @@ def score():
                 # if that class object's letter is an "H"
                 # if the two are not "bonded" by checking id's
             if type(grid[x + 1][y]) == amino \
-                and (grid[x + 1][y].letter == "H" or grid[x + 1][y].letter == "C") \
+                and not grid[x + 1][y].letter == "P" \
                 and abs(cur_id - grid[x + 1][y].num_id) > 1:
 
                 if grid[x][y].letter == "H" and grid[x + 1][y].letter == "H":
@@ -50,7 +50,7 @@ def score():
 
             # same for under
             if type(grid[x][y + 1]) == amino \
-                and (grid[x][y + 1].letter == "H" or grid[x][y + 1].letter == "C") \
+                and not grid[x][y + 1].letter == "P" \
                 and abs(cur_id - grid[x][y + 1].num_id) > 1:
 
                 if grid[x][y].letter == "H" and grid[x][y + 1].letter == "H":
