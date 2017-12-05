@@ -27,25 +27,31 @@ def main():
     # Print starting configuration of the protein
     print_protein()
 
-    algorithm = 0
 
-    while not algorithm == 1 and not algorithm == 2 and not algorithm == 3:
-        algorithm = int(input("Type 1 for Brute Force \n Type 2 for Hill Climber \n Type 3 for Hill Climber with Simulated Annealing \n What algorithm do you want to use? "))
+    algo_functions = {"Brute Force": brute_force, "Hill Climber": hillclimber}
 
-    message("Protein initiated, starting algorithm.")
+    algorithms = []
+    for key, value in algo_functions.items():
+        algorithms.append(key)
 
-    if algorithm == 1:
-        brute_force()
+    print("Please choose which algorithm you want to apply.")
 
-    if algorithm == 2:
-        hillclimber()
+    for alg in algorithms:
+        print(" ( " + str(algorithms.index(alg)) + " )   " + str(alg))
+    print()
 
-    if algorithm == 3:
-        print("This algorithm hasn't been implemented yet!")
-    
+    algorithm_choice = len(algorithms)
+
+    while algorithm_choice > len(algorithms) - 1:
+        algorithm_choice = int(input("Chosen algorithm's number: "))
+
+    message("Protein initiated, algorithm chosen, starting algorithm now.")
+
+    algo_functions[algorithms[algorithm_choice]]()
+
     print_protein()
     print("Score: " + str(global_vars.winning_score), end = '\n\n')
-    
+
     if algorithm == 2:
         plothillclimber()
 
