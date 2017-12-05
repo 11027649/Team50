@@ -27,7 +27,6 @@ def main():
     # Print starting configuration of the protein
     print_protein()
 
-
     algo_functions = {"Brute Force": brute_force, "Hill Climber": hillclimber}
 
     algorithms = []
@@ -52,7 +51,7 @@ def main():
     print_protein()
     print("Score: " + str(global_vars.winning_score), end = '\n\n')
 
-    if algorithm == 2:
+    if algorithms[algorithm_choice] == "Hill Climber":
         plothillclimber()
 
 
