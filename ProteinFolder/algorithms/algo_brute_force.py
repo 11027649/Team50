@@ -79,3 +79,5 @@ def foldings_recursive(depth):
     fold(depth, "R")
     foldings_recursive(depth - 1)
     fold(depth, "L")
+
+    def brute_force_tyfen():
