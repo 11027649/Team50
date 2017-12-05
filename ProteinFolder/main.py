@@ -5,6 +5,7 @@ from utility.update_grid import update_grid
 from utility.fold import fold
 from utility.score import score
 from algorithms.hillclimber import hillclimber
+from algorithms.simulated_annealing import simulated_annealing
 from algorithms.algo_brute_force import brute_force, brute_force_tyfen
 from plotting.plots import plothillclimber
 
@@ -27,7 +28,7 @@ def main():
     # Print starting configuration of the protein
     print_protein()
 
-    algo_functions = {"Brute Force": brute_force, "Brute Force Tyfen": brute_force_tyfen, "Hill Climber": hillclimber}
+    algo_functions = {"Brute Force": brute_force, "Brute Force Tyfen": brute_force_tyfen, "Hill Climber": hillclimber, "Simulated Annealing": simulated_annealing}
 
     algorithms = []
     for key, value in algo_functions.items():
