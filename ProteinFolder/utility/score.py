@@ -43,19 +43,22 @@ def score():
                 and not grid[x + 1][y].letter == "P" \
                 and abs(cur_id - grid[x + 1][y].num_id) > 1:
 
-                if grid[x][y].letter == "H" and grid[x + 1][y].letter == "H":
-                    score -= 1
-                if grid[x][y].letter == "C" and grid[x + 1][y].letter == "C":
-                    score -= 5
+                if grid[x][y].letter == grid[x + 1][y].letter:
+                    if grid[x][y].letter == "C":
+                        score -= 5
+                    else:
+                        score -= 1
+
 
             # same for under
             if type(grid[x][y + 1]) == amino \
                 and not grid[x][y + 1].letter == "P" \
                 and abs(cur_id - grid[x][y + 1].num_id) > 1:
 
-                if grid[x][y].letter == "H" and grid[x][y + 1].letter == "H":
-                    score -= 1
-                if grid[x][y].letter == "C" and grid[x][y + 1].letter == "C":
-                    score -= 5
+                if grid[x][y].letter == grid[x][y + 1].letter:
+                    if grid[x][y].letter == "C":
+                        score -= 5
+                    else:
+                        score -= 1
 
     return score
