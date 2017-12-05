@@ -85,7 +85,15 @@ def foldings_recursive(depth):
 
 def brute_force_tyfen():
 
-    tyfen_recursive()
+    layer = protein_length -1
 
-def tyfen_recursive([[[]]]):
+    while layer > 0:
+        for i in range(layer, protein_length):
+            for j in range(4):
+                
+        layer -= 1
+
+
+
+def tyfen_recursive():
     print("hoi")
