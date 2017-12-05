@@ -22,7 +22,11 @@ def init_grid():
     grid = global_vars.grid
     coordinates = global_vars.coordinates
 
-    grid = [[amino(i, protein_string[i]) for j in range(1)] for i in range(protein_length)]
+    # initialize the grid with aminos
+    grid = [[0 for j in range(2)] for i in range(protein_length + 1)]
+    for i in range(protein_length):
+        grid[i][0] = amino(i, protein_string[i])
+
 
     # update coordinates
     coordinates = [[i ,0] for i in range(protein_length)]
