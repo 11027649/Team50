@@ -43,7 +43,7 @@ def update_grid():
     # initialize the grid heigth and width, and make the grid
     grid_width = xmax - xmin + 1
     grid_height = ymax - ymin + 1
-    global_vars.grid = [[0 for j in range(grid_height)] for i in range(grid_width)]
+    global_vars.grid = [[0 for j in range(grid_height + 1)] for i in range(grid_width + 1)]
 
     # put the right AA's at the grid points
     for i in range(len(coordinates)):
