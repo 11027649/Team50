@@ -13,7 +13,9 @@ import global_vars
 global_vars.init()
 
 def hillclimber():
-
+    # if accept is True, folds that collide will count
+    # if False only folds that pass will happen
+    accept = False
     # print("Hillclimbing...")
 
     global_vars.winning_score = 0
@@ -36,9 +38,14 @@ def hillclimber():
 
             datawriter.writerow([i] + [best_score])
 
-            for j in range(3):
+            for j in range(6):
                 random_value = get_random_value()
-                return_code = fold(random_value[0], random_value[1])
+                if accept == True:
+                    fold(random_value[0], random_value[1])
+                else:
+                    while fold(random_value[0], random_value[1]) == "collision":
+                        random_value = get_random_value()
+
 
 
             stability = score()
