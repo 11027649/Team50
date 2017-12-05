@@ -29,6 +29,9 @@ def brute_force():
     depth = length - 2
     steps = pow(3, len(global_vars.protein_string) - 2)
     sps = 3000
+    # initialize winning grid and coordinates to make sure they are not empty
+    global_vars.winning_grid = copy.deepcopy(global_vars.grid)
+    global_vars.winning_coordinates = copy.deepcopy(global_vars.coordinates)
 
     if input("This brute force algorithm will take " + str(steps) + " steps. \nThat equals approx. "+ str(int(steps / (sps * 60))) +"m "+ str(round(60*((steps / (sps * 60)) % 1), 2)) +"s.\n Are you sure you want to start? (y/n) ").upper() == "Y":
         print()
@@ -43,8 +46,9 @@ def brute_force():
         print()
 
         # save winning coordinates and grid
-        global_vars.grid = global_vars.winning_grid
-        global_vars.coordinates = global_vars.winning_coordinates
+        global_vars.grid = copy.deepcopy(global_vars.winning_grid)
+        global_vars.coordinates = copy.deepcopy(global_vars.winning_coordinates)
+
 
     else:
         print("\nStopping program\n")
