@@ -7,7 +7,7 @@ from utility.score import score
 from algorithms.hillclimber import hillclimber
 from algorithms.simulated_annealing import simulated_annealing
 from algorithms.algo_brute_force import brute_force
-from plotting.plots import plothillclimber
+from plotting.plots import plothillclimber, plot_best_protein
 
 import csv
 
@@ -51,6 +51,7 @@ def main():
 
     print_protein()
     print("Score: " + str(global_vars.winning_score), end = '\n\n')
+    plot_best_protein()
 
     if algorithms[algorithm_choice] == "Hill Climber":
         plothillclimber()
