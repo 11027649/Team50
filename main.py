@@ -28,7 +28,7 @@ def main():
     # Print starting configuration of the protein
     print_protein()
 
-    algo_functions = {"Brute Force": brute_force, "Hill Climber": hillclimber, "Fold Control Hillclimber": fold_control_hillclimber, "Simulated Annealing": simulated_annealing}
+    algo_functions = {"Brute Force": brute_force, "Hill Climber": hillclimber, "Fold Control Hillclimber": fold_control_hillclimber, "Extend Fold Hillclimber": extend_fold_hillclimber, "Simulated Annealing": simulated_annealing}
 
     algorithms = []
     for key, value in algo_functions.items():
