@@ -6,7 +6,7 @@ from utility.fold import fold
 from utility.score import score
 from algorithms.hillclimber import hillclimber
 from algorithms.simulated_annealing import simulated_annealing
-from algorithms.algo_brute_force import brute_force, brute_force_tyfen
+from algorithms.algo_brute_force import brute_force
 from plotting.plots import plothillclimber
 
 import csv
