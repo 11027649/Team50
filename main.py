@@ -4,7 +4,7 @@ from visualization.print_protein import print_protein
 from utility.update_grid import update_grid
 from utility.fold import fold
 from utility.score import score
-from algorithms.hillclimber import hillclimber
+from algorithms.hillclimber import hillclimber, fold_control_hillclimber
 from algorithms.simulated_annealing import simulated_annealing
 from algorithms.algo_brute_force import brute_force
 from plotting.plots import plothillclimber, plot_best_protein
@@ -28,7 +28,7 @@ def main():
     # Print starting configuration of the protein
     print_protein()
 
-    algo_functions = {"Brute Force": brute_force, "Hill Climber": hillclimber, "Simulated Annealing": simulated_annealing}
+    algo_functions = {"Brute Force": brute_force, "Hill Climber": hillclimber, "Fold Control Hillclimber": fold_control_hillclimber, "Simulated Annealing": simulated_annealing}
 
     algorithms = []
     for key, value in algo_functions.items():
@@ -51,7 +51,7 @@ def main():
 
     print_protein()
     print("Score: " + str(global_vars.winning_score), end = '\n\n')
-    plot_best_protein()
+    # plot_best_protein()
 
     if algorithms[algorithm_choice] == "Hill Climber":
         plothillclimber()

@@ -12,7 +12,7 @@ import csv
 import global_vars
 global_vars.init()
 
-def hillclimber_normal():
+def hillclimber():
     # if accept is True, folds that collide will count
     # if False only folds that pass will happen
     accept = False
@@ -82,7 +82,7 @@ def get_random_value():
     return [aminonumber, direction]
 
 #  hillclimber which selects the best out of 14
-def hillclimber():
+def fold_control_hillclimber():
     # print("Hillclimbing...")
 
     global_vars.winning_score = 0
@@ -124,9 +124,9 @@ def hillclimber():
 
                     os.system("cls")
                     print("Best stability so far: " + str(best_score))
+                    print("iteration = " + str(j))
                     print_protein()
+                    break
                 # set the winning grid back as current grid
             global_vars.grid = copy.deepcopy(global_vars.winning_grid)
             global_vars.coordinates = copy.deepcopy(global_vars.winning_coordinates)
-
-    os.system("cls")
