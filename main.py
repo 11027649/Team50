@@ -7,7 +7,7 @@ from utility.score import score
 from algorithms.hillclimber import hillclimber, fold_control_hillclimber, extend_fold_hillclimber
 from algorithms.simulated_annealing import simulated_annealing
 from algorithms.algo_brute_force import brute_force
-from plotting.plots import plothillclimber, plot_best_protein
+from plotting.plots import plot_hillclimber, plot_best_protein
 
 import csv
 
