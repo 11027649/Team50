@@ -2,6 +2,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 import csv
 
+# import global vars to use te coordinates in plot protein
+import global_vars
+global_vars.init()
+
 def plothillclimber():
     data = np.genfromtxt('hillclimber.csv', delimiter=',', names=['x', 'y'])
 
@@ -17,20 +21,35 @@ def plothillclimber():
 
     plt.show()
 
-from mpl_toolkits.mplot3d import axes3d
+from mpl_toolkits.mplot3d import Axes3D
 
 def plot_best_protein():
-	# data = np.genfromtxt('protein.csv', delimiter=',', names=['x','y','z'])
 
 	fig = plt.figure()
 	ax = fig.add_subplot(111, projection='3d')
 
-	X,Y,Z = [1,2,3,4,5,6,7,8,9,10],[5,6,8,13,4,1,2,4,8],[2,3,3,3,5,7,9,11,9,10]
+	coor = global_vars.winning_coordinates
+	protein = global_vars.protein_string 
+
+	X = []
+	Y = []
+
+	# add coordinates to X and Y array
+	for i in range(len(protein)):
+		X.append(coor[i][0])
+		Y.append(coor[i][1])
+
+
+	for i in range(len(protein)):
+		if protein[i] == 'H':
+			ax.scatter(X[i],Y[i],0, marker = 'o', s = 375, color="blue")
+		else:
+			ax.scatter(X[i],Y[i],0, marker='o', s = 375, color="red")
 
 	ax.set_title('Protein with best score')
-	# ax.scatter(data['x'], data['y'], data['z'], c='r', marker='o')
-	ax.plot_wireframe(X,Y,Z)
-	# ax.scatter(X,Y,Z, c='r', marker='o')
 
+	ax.plot(X,Y,0, linestyle='-', color="black")
 
+	plt.axis('equal')
+	plt.axis('off')
 	plt.show()

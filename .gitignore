@@ -5,3 +5,6 @@ __pycache__/
 # IGNORE generated csv files
 data/
 *.csv
+
+# IGNORE generated cProfile files
+.cprof
