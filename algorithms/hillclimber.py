@@ -12,7 +12,7 @@ import csv
 import global_vars
 global_vars.init()
 
-def hillclimber():
+def hillclimber_normal():
     # if accept is True, folds that collide will count
     # if False only folds that pass will happen
     accept = False
@@ -80,3 +80,53 @@ def get_random_value():
     else:
         direction = "R"
     return [aminonumber, direction]
+
+#  hillclimber which selects the best out of 14
+def hillclimber():
+    # print("Hillclimbing...")
+
+    global_vars.winning_score = 0
+
+    # will keep track of the score
+    best_score = global_vars.winning_score
+
+    length = len(global_vars.protein_string)
+    global_vars.winning_grid = copy.deepcopy(global_vars.grid)
+    global_vars.winning_coordinates = copy.deepcopy(global_vars.coordinates)
+
+    iterations = 5000
+
+    # store data in .csv
+    with open('hillclimber.csv', 'w', newline='') as csvfile:
+        datawriter = csv.writer(csvfile)
+
+        # do "iterations" random folds and keep track of the highest value
+        for i in range(iterations):
+
+            datawriter.writerow([i] + [best_score])
+
+            for j in range(14):
+                random_value = get_random_value()
+
+                while fold(random_value[0], random_value[1]) == "collision":
+                    random_value = get_random_value()
+
+
+
+                stability = score()
+
+                # if the score is lower save that particular grid in winning grid
+                if stability < best_score:
+                    global_vars.winning_grid = copy.deepcopy(global_vars.grid)
+                    global_vars.winning_coordinates = copy.deepcopy(global_vars.coordinates)
+                    best_score = stability
+                    global_vars.winning_score = best_score
+
+                    os.system("cls")
+                    print("Best stability so far: " + str(best_score))
+                    print_protein()
+                # set the winning grid back as current grid
+            global_vars.grid = copy.deepcopy(global_vars.winning_grid)
+            global_vars.coordinates = copy.deepcopy(global_vars.winning_coordinates)
+
+    os.system("cls")
