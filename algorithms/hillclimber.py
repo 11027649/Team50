@@ -128,7 +128,7 @@ def extend_fold_hillclimber():
     for i in range(iterations):
 
         print("Iteration: " + str(i))
-        extend = 100
+        extend = 2
         counter = 0
         found = False
 
@@ -167,11 +167,12 @@ def extend_fold_hillclimber():
                 counter += 1
 
                 if counter > 1000:
-                    extend -= 1
+                    extend += 1
                     counter = 0
                     # print("Extend amount: " + str(extend))
 
-                if extend < 0:
+                print("                      extend: " + str(extend))
+                if extend > 100:
                     exit(1)
 
 
