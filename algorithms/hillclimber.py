@@ -70,12 +70,9 @@ def hillclimber():
 
 #  hillclimber which selects the best out of 14
 def fold_control_hillclimber():
-    # print("Hillclimbing...")
-
-    global_vars.winning_score = 0
 
     # will keep track of the score
-    best_score = global_vars.winning_score
+    best_score = global_vars.winning_score = 0
 
     length = len(global_vars.protein_string)
     global_vars.winning_grid = copy.deepcopy(global_vars.grid)
@@ -87,7 +84,6 @@ def fold_control_hillclimber():
 
     # do "iterations" random folds and keep track of the highest value
     for i in range(iterations):
-
 
         for j in range(14):
             random_value = get_random_value()
