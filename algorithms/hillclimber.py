@@ -127,13 +127,18 @@ def extend_fold_hillclimber():
     # do "iterations" random folds and keep track of the highest value
     for i in range(iterations):
 
+        print("Iteration: " + str(i))
         extend = 2
         counter = 0
         found = False
 
         while found == False:
 
+            # print("Found: " + str(found))
+
             for j in range(extend):
+
+                # print(" i ")
 
                 random_value = get_random_value()
 
@@ -152,21 +157,22 @@ def extend_fold_hillclimber():
                     global_vars.winning_score = best_score
 
                     print("Best stability so far: " + str(best_score))
-                    print("Iteration: ")
+                    print("Iteration: " + str(i))
                     print("Fold nr: " + str(j))
                     print("Extend amount: " + str(extend))
-
+                    found = True
                     print_protein()
                     break
 
                 counter += 1
 
-                if counter > 100:
+                if counter > 1000:
                     extend += 1
                     counter = 0
-                    print("Extend amount: " + str(extend))
+                    # print("Extend amount: " + str(extend))
 
-            found = True
+                if extend > 200:
+                    exit(1)
 
 
 
