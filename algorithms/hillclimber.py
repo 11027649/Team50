@@ -83,14 +83,11 @@ def fold_control_hillclimber():
 
     iterations = 5000
 
-    # store data in .csv
-    with open('hillclimber.csv', 'w', newline='') as csvfile:
-        datawriter = csv.writer(csvfile)
+
 
     # do "iterations" random folds and keep track of the highest value
     for i in range(iterations):
 
-        datawriter.writerow([i] + [best_score])
 
         for j in range(14):
             random_value = get_random_value()
@@ -109,7 +106,6 @@ def fold_control_hillclimber():
                 best_score = stability
                 global_vars.winning_score = best_score
 
-                os.system("cls")
                 print("Best stability so far: " + str(best_score))
                 print("iteration = " + str(j))
                 print_protein()
@@ -140,7 +136,7 @@ def extend_fold_hillclimber():
         found = False
 
         while found == False:
-            
+
             for j in range(extend):
 
                 random_value = get_random_value()
