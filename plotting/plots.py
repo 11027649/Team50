@@ -54,8 +54,6 @@ def plot_best_protein():
 		X.append(coor[i][0])
 		Y.append(coor[i][1])
 
-	print(X,Y)
-
 	# scatter points, plot the aminos in the right colors
 	for i in range(len(protein)):
 		if protein[i] == 'H':

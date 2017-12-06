@@ -58,19 +58,27 @@ def simulated_annealing():
             else:
                 # calculate acceptance chance
                 difference = global_vars.winning_score - current_score
-                print("winning_score: ", global_vars.winning_score, "current score: ", current_score)
 
                 acceptance_chance = math.exp(difference / Ti)
 
                 print("Acceptance chance = " + str(acceptance_chance) + "\n")
 
-                if not acceptance_chance > randint(0,100) / 100:
-                    # if accepted, store the changes anyway in winning_grid
+                value = randint(1,10000)/10000
+                print("Compare value (randint) = ", value)
+                
+                # FIX DIT DAT HET MOOI WORDT
+                # not accepted
+                if acceptance_chance <= value:
+                    # if not accepted, store the changes anyway in winning_grid
+                    hoi = 1
+
+                else:
                     global_vars.grid = copy.deepcopy(global_vars.winning_grid)
                     global_vars.coordinates = copy.deepcopy(global_vars.winning_coordinates)
-                else:
+
                     print("                                                         Accepted")
 
+            print("winning_score: ", global_vars.winning_score, "current score: ", current_score)
             # print_protein()
 
             # cool system
