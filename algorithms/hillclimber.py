@@ -68,19 +68,6 @@ def hillclimber():
 
     os.system("cls")
 
-
-# return an array with a random direction and aminonumber
-def get_random_value():
-    length = len(global_vars.protein_string) - 1
-    aminonumber = randint(1, length)
-    value = randint(0,1)
-    direction = ""
-    if value == 1:
-        direction = "L"
-    else:
-        direction = "R"
-    return [aminonumber, direction]
-
 #  hillclimber which selects the best out of 14
 def fold_control_hillclimber():
     # print("Hillclimbing...")
@@ -130,3 +117,81 @@ def fold_control_hillclimber():
                 # set the winning grid back as current grid
             global_vars.grid = copy.deepcopy(global_vars.winning_grid)
             global_vars.coordinates = copy.deepcopy(global_vars.winning_coordinates)
+
+
+def extend_fold_hillclimber():
+
+    global_vars.winning_score = 0
+
+    # will keep track of the score
+    best_score = global_vars.winning_score
+
+    length = len(global_vars.protein_string)
+    global_vars.winning_grid = copy.deepcopy(global_vars.grid)
+    global_vars.winning_coordinates = copy.deepcopy(global_vars.coordinates)
+
+    iterations = 30
+
+        # do "iterations" random folds and keep track of the highest value
+        for i in range(iterations):
+
+            extend = 2
+            counter = 0
+            found == False
+
+            while found == False:
+
+                for j in range(extend):
+
+                    random_value = get_random_value()
+
+                    # do a valid fold
+                    while fold(random_value[0], random_value[1]) == "collision":
+                        random_value = get_random_value()
+
+                    # if the score is lower save that particular grid in winning grid
+
+                    stability = score()
+
+                    if stability < best_score:
+                        global_vars.winning_grid = copy.deepcopy(global_vars.grid)
+                        global_vars.winning_coordinates = copy.deepcopy(global_vars.coordinates)
+                        best_score = stability
+                        global_vars.winning_score = best_score
+
+                        print("Best stability so far: " + str(best_score))
+                        print("Iteration: ")
+                        print("Fold nr: " + str(j))
+                        print("Extend amount: " + str(extend))
+
+                        print_protein()
+                        break
+
+                    counter += 1
+
+                    if counter > 100:
+                        extend += 1
+                        counter = 0
+                        print("Extend amount: " + str(extend))
+
+                found = True:
+
+
+
+            # set the winning grid back as current grid
+            global_vars.grid = copy.deepcopy(global_vars.winning_grid)
+            global_vars.coordinates = copy.deepcopy(global_vars.winning_coordinates)
+
+
+
+# return an array with a random direction and aminonumber
+def get_random_value():
+    length = len(global_vars.protein_string) - 1
+    aminonumber = randint(1, length)
+    value = randint(0,1)
+    direction = ""
+    if value == 1:
+        direction = "L"
+    else:
+        direction = "R"
+    return [aminonumber, direction]

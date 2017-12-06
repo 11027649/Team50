@@ -4,7 +4,7 @@ from visualization.print_protein import print_protein
 from utility.update_grid import update_grid
 from utility.fold import fold
 from utility.score import score
-from algorithms.hillclimber import hillclimber, fold_control_hillclimber
+from algorithms.hillclimber import hillclimber, fold_control_hillclimber, extend_fold_hillclimber
 from algorithms.simulated_annealing import simulated_annealing
 from algorithms.algo_brute_force import brute_force
 from plotting.plots import plothillclimber, plot_best_protein
