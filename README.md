@@ -46,5 +46,6 @@ This program was made in the context of the Minor Programming we followed at the
 Case: Protein Powder
 
 _So far so good (ofcourse we're still busy improving this):_
+
 [![BCH compliance](https://bettercodehub.com/edge/badge/Segouta/Team50?branch=master)](https://bettercodehub.com/)
 
