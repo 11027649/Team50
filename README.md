@@ -1,5 +1,4 @@
 # Protein folding algorithms (for folding in 2D)
-## Description
 In this project we try to write algorithms that fold proteins to their most stable configuration. The proteins are solely made of  unspecified hydrophobic (H) and polar (P) amino acids, and Cystein (C). Hydrophobic interactions between H's and sulphur bounds between Cysteins contribute to the stabitity of proteins. 
 
 ## Getting Started
