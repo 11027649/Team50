@@ -7,21 +7,24 @@ import global_vars
 global_vars.init()
 
 def plot_hillclimber():
-    data = np.genfromtxt('hillclimber.csv', delimiter=',', names=['x', 'y'])
-    fig = plt.figure()
+	filepath = global_vars.filepath
+	data = np.genfromtxt(filepath, delimiter=',', names=['x', 'y'])
+    
+	fig = plt.figure()
 
-    ax = fig.add_subplot(111)
+	ax = fig.add_subplot(111)
 
-    ax.set_title('Hill Climber')
-    ax.set_xlabel('Iteration')
-    ax.set_ylabel('Stability')
+	ax.set_title('Hill Climber')
+	ax.set_xlabel('Iteration')
+	ax.set_ylabel('Stability')
 
-    ax.plot(data['x'], data['y'], color='r', label='stability')
+	ax.plot(data['x'], data['y'], color='r', label='stability')
 
-    plt.show()
+	plt.show()
 
 def plot_simulated_annealing():
-	data = np.genfromtxt('simulated_annealing.csv', delimiter=',', names=['x', 'y'])
+	filepath = global_vars.filepath
+	data = np.genfromtxt(filepath, delimiter=',', names=['x', 'y'])
 	fig = plt.figure()
 
 	ax = fig.add_subplot(111)
@@ -31,6 +34,7 @@ def plot_simulated_annealing():
 	ax.set_ylabel('Stability')
 
 	ax.plot(data['x'], data['y'], color = 'r', label = 'stability')
+	
 	plt.show()
 
 
@@ -70,5 +74,7 @@ def plot_best_protein():
 
 	plt.axis('equal')
 	plt.axis('off')
+
+	fig.text(.1,.1, "Stability: " + str(global_vars.winning_score))
 	
 	plt.show()

@@ -2,8 +2,10 @@ from global_vars import amino
 from utility.score import score
 from utility.fold import fold
 from visualization.print_protein import print_protein
+from algorithms.hillclimber import get_random_value
 
 import time
+import datetime
 import os
 from random import randint
 import copy
@@ -26,9 +28,15 @@ def simulated_annealing():
     T0 = Ti = 1
     Tn = 0
 
+    date = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
+    filepath = "data\simulated_annealing\sa_" + str(date) + ".csv"
+    global_vars.filepath = filepath
+
     # store data in .csv
-    with open('simulated_annealing.csv', 'w', newline='') as csvfile:
+    with open(filepath, 'w', newline='') as csvfile:
         datawriter = csv.writer(csvfile)
+        datawriter.writerow(["# This is a datafile generated for protein: " + str(global_vars.protein_string)])
+        datawriter.writerow(["# It is generated with a Simulated Annealing algorithm."])
 
         # do N times 3 random folds and keep track of the best value
         for i in range(N):
@@ -41,6 +49,7 @@ def simulated_annealing():
                 random_value = get_random_value()
                 return_code = fold(random_value[0], random_value[1])
 
+            old_score = current_score
             # calculate stability of the protein
             current_score = score()
 
@@ -48,52 +57,33 @@ def simulated_annealing():
             if current_score <= global_vars.winning_score:
                 global_vars.winning_grid = copy.deepcopy(global_vars.grid)
                 global_vars.winning_coordinates = copy.deepcopy(global_vars.coordinates)
-            
+                
+                # update winning_score
                 global_vars.winning_score = current_score
-
-                print("Best stability so far: " + str(global_vars.winning_score))
-
 
             # if the score is higher, calculate acceptance chance
             else:
                 # calculate acceptance chance
                 difference = global_vars.winning_score - current_score
-
                 acceptance_chance = math.exp(difference / Ti)
 
-                print("Acceptance chance = " + str(acceptance_chance) + "\n")
-
+                # generate random compare value
                 value = randint(1,10000)/10000
-                print("Compare value (randint) = ", value)
                 
-                # FIX DIT DAT HET MOOI WORDT
-                # not accepted
-                if acceptance_chance <= value:
-                    # if not accepted, store the changes anyway in winning_grid
-                    hoi = 1
-
-                else:
+                # if acceptance_chance <= value, the deterioration is not accepted
+                if acceptance_chance < value:
+                    
+                    # if not accepted, restore the old grid
                     global_vars.grid = copy.deepcopy(global_vars.winning_grid)
                     global_vars.coordinates = copy.deepcopy(global_vars.winning_coordinates)
+                    current_score = old_score
 
-                    print("                                                         Accepted")
+                # if accepted
+                else:
+                    # update changes anyway in the grid
+                    global_vars.winning_grid = copy.deepcopy(global_vars.grid)
+                    global_vars.winning_coordinates = copy.deepcopy(global_vars.coordinates)
 
-            print("winning_score: ", global_vars.winning_score, "current score: ", current_score)
-            # print_protein()
-
-            # cool system
+            # cool system linear
             Ti = T0 - (i * (T0 - Tn) / N)
-            print("Current temperature = " + str(Ti))
 
-
-# return an array with a random direction and aminonumber
-def get_random_value():
-    length = len(global_vars.protein_string) - 1
-    aminonumber = randint(1, length)
-    value = randint(0,1)
-    direction = ""
-    if value == 1:
-        direction = "L"
-    else:
-        direction = "R"
-    return [aminonumber, direction]

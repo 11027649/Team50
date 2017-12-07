@@ -50,6 +50,7 @@ def input_string():
             if len(protein_input) > 2:
                 print("\nThis string is not valid.\n")
                 exit(1)
+            
             protein_lines = open("inputFiles/assignments.txt").read().splitlines()
 
             # search for assignement

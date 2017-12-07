@@ -8,6 +8,7 @@ import os
 from random import randint
 import copy
 import csv
+import datetime
 
 import global_vars
 global_vars.init()
@@ -29,8 +30,12 @@ def hillclimber():
 
     iterations = 5000
 
+    date = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
+    filepath = "data\hillclimber\hc_" + str(date) + ".csv"
+    global_vars.filepath = filepath
+
     # store data in .csv
-    with open('hillclimber.csv', 'w', newline='') as csvfile:
+    with open(filepath, 'w', newline='') as csvfile:
         datawriter = csv.writer(csvfile)
 
         # do "iterations" random folds and keep track of the highest value
@@ -183,8 +188,10 @@ def extend_fold_hillclimber():
 
 
 
-# return an array with a random direction and aminonumber
 def get_random_value():
+    """ This is a function that returns an array with a random direction and 
+        aminonumber, to make random folds. Also used in Simulated Annealing. """
+
     length = len(global_vars.protein_string) - 1
     aminonumber = randint(1, length)
     value = randint(0,1)

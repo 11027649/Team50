@@ -16,6 +16,9 @@ def init():
     global amount
     amount = 0
 
+    global filepath
+    filepath = ""
+
 class amino():
     def __init__(self, num_id, letter):
         self.num_id = num_id
