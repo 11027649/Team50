@@ -177,7 +177,7 @@ def extend_fold_hillclimber():
                     # print("Extend amount: " + str(extend))
 
                 print("                      extend: " + str(extend))
-                if extend > 100:
+                if extend > 50:
                     exit(1)
 
 
@@ -189,7 +189,7 @@ def extend_fold_hillclimber():
 
 
 def get_random_value():
-    """ This is a function that returns an array with a random direction and 
+    """ This is a function that returns an array with a random direction and
         aminonumber, to make random folds. Also used in Simulated Annealing. """
 
     length = len(global_vars.protein_string) - 1
