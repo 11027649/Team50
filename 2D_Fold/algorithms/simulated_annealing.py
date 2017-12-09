@@ -24,7 +24,7 @@ def simulated_annealing():
     global_vars.winning_coordinates = copy.deepcopy(global_vars.coordinates)
 
     # initialize iterations, begin and end temperature
-    N = 5000
+    N = 10000
     T0 = Ti = 1
     Tn = 0
 
