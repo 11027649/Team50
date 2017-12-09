@@ -47,6 +47,7 @@ def brute_force():
         global_vars.grid = copy.deepcopy(global_vars.winning_grid)
         global_vars.protein.coordinates = copy.deepcopy(global_vars.protein.winning_coordinates)
 
+        print(global_vars.protein.winning_coordinates)
 
     else:
         print("\nStopping program\n")
@@ -55,25 +56,25 @@ def brute_force():
 def foldings_recursive(depth):
 
     current_score = score()
-    print("I came past the score, score is: ", current_score)
 
-    if current_score < global_vars.protein.winning_score:
+    if current_score <= global_vars.protein.winning_score:
 
         global_vars.protein.winning_score = current_score
         global_vars.winning_grid = copy.deepcopy(global_vars.grid)
         global_vars.protein.winning_coordinates = copy.deepcopy(global_vars.protein.coordinates)
         global_vars.amount += 1
-        # print(winning_coordinates)
-        print("\n\nBest so far, stability of " + str(global_vars.protein.winning_score) + ":\n")
 
+        print("\n\nBest so far, stability of " + str(global_vars.protein.winning_score) + ":\n")
 
     if (depth < 1):
         return
 
     fold(depth, "L")
     foldings_recursive(depth - 1)
+
     fold(depth, "R")
     foldings_recursive(depth - 1)
+
     fold(depth, "R")
     foldings_recursive(depth - 1)
     fold(depth, "L")

@@ -46,8 +46,7 @@ def main():
 
     algo_functions[algorithms[algorithm_choice]]()
 
-    print_protein()
-    print("Score: " + str(global_vars.winning_score), end = '\n\n')
+    print("Score: " + str(global_vars.protein.winning_score), end = '\n\n')
     plot_best_protein()
 
     if algorithms[algorithm_choice] == "Hill Climber":

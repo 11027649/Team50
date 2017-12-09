@@ -18,50 +18,47 @@ def update_grid():
         Initializes the grid.  """
 
     # get coordinates
-    coordinates = global_vars.protein.coordinates
+    coor = global_vars.protein.coordinates[:]
 
     # initiate min and max coordinates
-    xmax = xmin = coordinates[0][0]
-    ymax = ymin = coordinates[0][1]
-    zmax = zmin = coordinates[0][2]
+    xmax = xmin = coor[0][0]
+    ymax = ymin = coor[0][1]
+    zmax = zmin = coor[0][2]
 
     # get the right min and max coordinates
     for i in range(1, len(global_vars.protein.protein_string)):
-        if coordinates[i][0] > xmax:
-            xmax = coordinates[i][0]
-        elif coordinates[i][0] < xmin:
-            xmin = coordinates[i][0]
+        if coor[i][0] > xmax:
+            xmax = coor[i][0]
+        elif coor[i][0] < xmin:
+            xmin = coor[i][0]
         
-        if coordinates[i][1] > ymax:
-            ymax = coordinates[i][1]
-        elif coordinates[i][1] < ymin:
-            ymin = coordinates[i][1]
+        if coor[i][1] > ymax:
+            ymax = coor[i][1]
+        elif coor[i][1] < ymin:
+            ymin = coor[i][1]
 
-        if coordinates[i][2] > zmax:
-            zmax = coordinates[i][1]
-        elif coordinates[i][2] < ymin:
-            ymin = coordinates[i][1]
+        if coor[i][2] > zmax:
+            zmax = coor[i][1]
+        elif coor[i][2] < ymin:
+            ymin = coor[i][1]
 
     # correct all the coordinates of the AA's with xmin, ymin and zmin
     for i in range(len(global_vars.protein.protein_string)):
-        coordinates[i][0] -= xmin
-        coordinates[i][1] -= ymin
-        coordinates[i][2] -= zmin
+        coor[i][0] -= xmin
+        coor[i][1] -= ymin
+        coor[i][2] -= zmin
 
     # initialize the grid heigth and width, and make the grid
-    grid_width = xmax - xmin + 1
-    grid_height = ymax - ymin + 1
-    grid_breadth = zmax - zmin + 1
+    grid_x = xmax - xmin + 1
+    grid_y = ymax - ymin + 1
+    grid_z = zmax - zmin + 1
     
-    global_vars.grid = [[[0 for i in range(grid_breadth + 1)] for j in range(grid_height + 1)] for k in range(grid_width + 1)]
+    global_vars.grid = [[[0 for i in range(grid_z + 1)] for j in range(grid_y + 1)] for k in range(grid_x + 1)]
 
     # put the right AA's at the grid points
     for i in range(len(global_vars.protein.protein_string)):
-        print(i, coordinates[i], len(global_vars.protein.protein_string))
-        global_vars.grid[coordinates[i][0]][coordinates[i][1]][coordinates[i][2]] = \
-            Amino(i, global_vars.protein.protein_string[i])
+        print(i, coor[i][0], coor[i][1], coor[i][2])
+        global_vars.grid[coor[i][0]][coor[i][1]][coor[i][2]] = Amino(i, global_vars.protein.protein_string[i])
 
     # put the new coordinates in the global coordinates
-    ###### IT SEEMS THIS SENTENCE IS DOING NOTHING, BUT ISN'T IT WEIRD TO NOT UPDATE
-    ###### THE COORDINATES?
-    global_vars.protein.coordinates = coordinates
+    global_vars.protein.coordinates = coor[:]

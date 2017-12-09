@@ -47,34 +47,36 @@ def plot_best_protein():
 	ax = fig.add_subplot(111, projection='3d')
 	plt.rcParams["font.size"] = 10
 
-	coor = global_vars.winning_coordinates
-	protein = global_vars.protein_string 
+	coor = global_vars.protein.winning_coordinates
+	protein = global_vars.protein.protein_string 
 
 	X = []
 	Y = []
+	Z = []
 
 	# add coordinates to X and Y array
 	for i in range(len(protein)):
 		X.append(coor[i][0])
 		Y.append(coor[i][1])
+		Z.append(coor[i][2])
 
 	# scatter points, plot the aminos in the right colors
 	for i in range(len(protein)):
 		if protein[i] == 'H':
-			ax.scatter(X[i],Y[i],0, marker = 'o', s = 300, color="blue", zorder = 2)
+			ax.scatter(X[i],Y[i], Z[i], marker = 'o', s = 300, color="blue", zorder = 2)
 		elif protein[i] == 'C':
-			ax.scatter(X[i], Y[i], marker = 'o', s = 300, color = "yellow", zorder = 3)
+			ax.scatter(X[i], Y[i], Z[i], marker = 'o', s = 300, color = "yellow", zorder = 3)
 		else:
-			ax.scatter(X[i],Y[i],0, marker='o', s = 300, color="red", zorder = 4)
+			ax.scatter(X[i],Y[i], Z[i], marker='o', s = 300, color="red", zorder = 4)
 
 	ax.set_title('Protein with best score')
 
 	# plot solid lines for bonds
-	ax.plot(X,Y,0, linestyle='solid', color="black", zorder = 1)
+	ax.plot(X,Y,Z, linestyle='solid', color="black", zorder = 1)
 
 	plt.axis('equal')
 	plt.axis('off')
 
-	fig.text(.1,.1, "Stability: " + str(global_vars.winning_score))
+	fig.text(.1,.1, "Stability: " + str(global_vars.protein.winning_score))
 	
 	plt.show()

@@ -15,12 +15,11 @@ def score():
 
     score = 0
     grid = global_vars.grid
-    coordinates = global_vars.protein.coordinates
-    print(global_vars.protein.coordinates)
+    coordinates = global_vars.protein.coordinates[:]
 
     # for all aminos in the protein
-    for i in range(len(global_vars.protein.protein_string)  - 1):
-
+    for i in range(len(global_vars.protein.protein_string)):
+        
         # the coordinates are stored in an array. i is the amino acid that you're
         # looking for, [0] or [1] are x and y
         x = coordinates[i][0]
@@ -55,6 +54,17 @@ def score():
                 and abs(cur_id - grid[x][y + 1][z].num_id) > 1:
 
                 if grid[x][y][z].letter == grid[x][y + 1][z].letter:
+                    if grid[x][y][z].letter == "C":
+                        score -= 5
+                    else:
+                        score -= 1
+
+            # same for "beneath" (at z axis)
+            if type(grid[x][y][z + 1]) == Amino \
+                and not grid[x][y][z + 1] == "P" \
+                and abs(cur_id - grid[x][y][z + 1].num_id) > 1:
+
+                if grid[x][y][z].letter == grid[x][y][z + 1].letter:
                     if grid[x][y][z].letter == "C":
                         score -= 5
                     else:
