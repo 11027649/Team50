@@ -55,6 +55,12 @@ def brute_force():
 
 def foldings_recursive(depth):
 
+    
+    fold(3, "R")
+    fold(4, "L")
+    fold(5, "L")
+    fold(5, "D")
+
     current_score = score()
 
     if current_score <= global_vars.protein.winning_score:
@@ -66,16 +72,16 @@ def foldings_recursive(depth):
 
         print("\n\nBest so far, stability of " + str(global_vars.protein.winning_score) + ":\n")
 
-    if (depth < 1):
-        return
+    # if (depth < 1):
+    #     return
 
-    fold(depth, "L")
-    foldings_recursive(depth - 1)
+    # fold(depth, "L")
+    # foldings_recursive(depth - 1)
 
-    fold(depth, "R")
-    foldings_recursive(depth - 1)
+    # fold(depth, "R")
+    # foldings_recursive(depth - 1)
 
-    fold(depth, "R")
-    foldings_recursive(depth - 1)
-    fold(depth, "L")
+    # fold(depth, "R")
+    # foldings_recursive(depth - 1)
+    # fold(depth, "L")
 

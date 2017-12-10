@@ -38,9 +38,9 @@ def update_grid():
             ymin = coor[i][1]
 
         if coor[i][2] > zmax:
-            zmax = coor[i][1]
-        elif coor[i][2] < ymin:
-            ymin = coor[i][1]
+            zmax = coor[i][2]
+        elif coor[i][2] < zmin:
+            zmin = coor[i][2]
 
     # correct all the coordinates of the AA's with xmin, ymin and zmin
     for i in range(len(global_vars.protein.protein_string)):
@@ -57,7 +57,7 @@ def update_grid():
 
     # put the right AA's at the grid points
     for i in range(len(global_vars.protein.protein_string)):
-        print(i, coor[i][0], coor[i][1], coor[i][2])
+        # print(i, coor[i][0], coor[i][1], coor[i][2], len(global_vars.grid), len(global_vars.grid[0]), len(global_vars.grid[0][0]))
         global_vars.grid[coor[i][0]][coor[i][1]][coor[i][2]] = Amino(i, global_vars.protein.protein_string[i])
 
     # put the new coordinates in the global coordinates

@@ -63,18 +63,28 @@ def plot_best_protein():
 	# scatter points, plot the aminos in the right colors
 	for i in range(len(protein)):
 		if protein[i] == 'H':
-			ax.scatter(X[i],Y[i], Z[i], marker = 'o', s = 300, color="blue", zorder = 2)
+			ax.scatter(X[i],Y[i], Z[i], marker = 'o', s = 200, color="blue")
 		elif protein[i] == 'C':
-			ax.scatter(X[i], Y[i], Z[i], marker = 'o', s = 300, color = "yellow", zorder = 3)
+			ax.scatter(X[i], Y[i], Z[i], marker = 'o', s = 200, color = "yellow")
 		else:
-			ax.scatter(X[i],Y[i], Z[i], marker='o', s = 300, color="red", zorder = 4)
+			ax.scatter(X[i],Y[i], Z[i], marker='o', s = 200, color="red")
 
 	ax.set_title('Protein with best score')
 
 	# plot solid lines for bonds
-	ax.plot(X,Y,Z, linestyle='solid', color="black", zorder = 1)
+	ax.plot(X,Y,Z, linestyle='solid', color="black")
 
-	plt.axis('equal')
+	# Create cubic bounding box to simulate equal aspect ratio
+	# max_range = np.array([X.max()-X.min(), Y.max()-Y.min(), Z.max()-Z.min()]).max()
+	# Xb = 0.5*max_range*np.mgrid[-1:2:2,-1:2:2,-1:2:2][0].flatten() + 0.5*(X.max()+X.min())
+	# Yb = 0.5*max_range*np.mgrid[-1:2:2,-1:2:2,-1:2:2][1].flatten() + 0.5*(Y.max()+Y.min())
+	# Zb = 0.5*max_range*np.mgrid[-1:2:2,-1:2:2,-1:2:2][2].flatten() + 0.5*(Z.max()+Z.min())
+
+	# Comment or uncomment following both lines to test the fake bounding box:
+	# for xb, yb, zb in zip(Xb, Yb, Zb):
+	#    ax.plot([xb], [yb], [zb], 'w')
+
+
 	plt.axis('off')
 
 	fig.text(.1,.1, "Stability: " + str(global_vars.protein.winning_score))
