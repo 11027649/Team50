@@ -123,14 +123,17 @@ def simulated_annealing_control():
                 while fold(random_value[0], random_value[1]) == "collision":
                     random_value = get_random_value()
 
-                stability = score()
+                old_score = current_score
+                # calculate stability of the protein
+                current_score = score()
+
                 # if the score is lower save that particular grid in winning grid
-                if stability < global_vars.winning_score:
+                if current_score < global_vars.protein.winning_score:
                     global_vars.winning_grid = copy.deepcopy(global_vars.grid)
                     global_vars.protein.winning_coordinates = copy.deepcopy(global_vars.protein.coordinates)
-                    global_vars.protein.winning_score = stability
+                    global_vars.protein.winning_score = current_score
 
-                    print("Best stability so far: " + str(best_score))
+                    print("Best stability so far: " + str(global_vars.protein.winning_score))
                     print("iteration = " + str(j))
 
                 else:
@@ -141,19 +144,19 @@ def simulated_annealing_control():
                     # generate random compare value
                     value = randint(1,10000)/10000
 
-                # if acceptance_chance <= value, the deterioration is not accepted
-                if acceptance_chance < value:
+                    # if acceptance_chance <= value, the deterioration is not accepted
+                    if acceptance_chance < value:
 
-                    # if not accepted, restore the old grid
-                    global_vars.grid = copy.deepcopy(global_vars.winning_grid)
-                    global_vars.protein.coordinates = copy.deepcopy(global_vars.protein.winning_coordinates)
-                    current_score = old_score
+                        # if not accepted, restore the old grid
+                        global_vars.grid = copy.deepcopy(global_vars.winning_grid)
+                        global_vars.protein.coordinates = copy.deepcopy(global_vars.protein.winning_coordinates)
+                        current_score = old_score
 
-                # if accepted
-                else:
-                    # update changes anyway in the grid
-                    global_vars.winning_grid = copy.deepcopy(global_vars.grid)
-                    global_vars.protein.winning_coordinates = copy.deepcopy(global_vars.protein.coordinates)
+                    # if accepted
+                    else:
+                        # update changes anyway in the grid
+                        global_vars.winning_grid = copy.deepcopy(global_vars.grid)
+                        global_vars.protein.winning_coordinates = copy.deepcopy(global_vars.protein.coordinates)
 
             # cool system linear
             Ti = T0 - (i * (T0 - Tn) / N)
