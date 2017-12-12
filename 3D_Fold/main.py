@@ -53,6 +53,8 @@ def main():
     algo_functions[algorithms[algorithm_choice]]()
 
     mixer.music.stop()
+    mixer.music.load("ping.mp3")
+    mixer.music.play()
 
     print("Score: " + str(global_vars.protein.winning_score), end = '\n\n')
     plot_best_protein()

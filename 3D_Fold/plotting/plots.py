@@ -134,7 +134,7 @@ def plot_best_protein():
 
 		# same for "beneath" (at z axis)
 			if type(grid[x][y][z + 1]) == Amino \
-			and grid[x][y][z + 1] == grid[x][y][z].letter \
+			and grid[x][y][z + 1].letter == grid[x][y][z].letter \
 			and abs(cur_id - grid[x][y][z + 1].num_id) > 1:
 
 				to_id = grid[x][y][z + 1].num_id
