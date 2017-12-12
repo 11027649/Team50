@@ -98,7 +98,7 @@ def simulated_annealing_control():
     global_vars.protein.winning_coordinates = copy.deepcopy(global_vars.protein.coordinates)
 
     # initialize iterations, begin and end temperature
-    N = 10000
+    N = 5000
     T0 = Ti = 1
     Tn = 0
 
@@ -114,6 +114,8 @@ def simulated_annealing_control():
 
         # do N times 3 random folds and keep track of the best value
         for i in range(N):
+
+            printProgressBar(i, N)
 
             # write score and iteration to a csv file
             datawriter.writerow([i] + [current_score])
@@ -135,9 +137,6 @@ def simulated_annealing_control():
                     global_vars.winning_grid = copy.deepcopy(global_vars.grid)
                     global_vars.protein.winning_coordinates = copy.deepcopy(global_vars.protein.coordinates)
                     global_vars.protein.winning_score = current_score
-
-                    print("Best stability so far: " + str(global_vars.protein.winning_score))
-                    print("iteration = " + str(j))
 
                 else:
                     # calculate acceptance chance
