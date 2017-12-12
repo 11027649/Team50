@@ -75,7 +75,10 @@ def plot_best_protein():
 	ax.plot(X,Y,Z, linestyle='solid', color="black")
 
 	# plot dashed lines for interactions
-	ax.plot(X[1:5], Y[1:5], Z[1:5], linestyle='dashed', color="black")
+	XX = [X[1], X[4]]
+	YY = [Y[1], Y[4]]
+	ZZ = [Z[1], Z[4]]
+	ax.plot(XX, YY, ZZ, linestyle='dashed', color="black")
 
 
 	X = np.array(X)
