@@ -9,7 +9,7 @@ global_vars.init()
 def plot_hillclimber():
 	filepath = global_vars.filepath
 	data = np.genfromtxt(filepath, delimiter=',', names=['x', 'y'])
-    
+
 	fig = plt.figure()
 
 	ax = fig.add_subplot(111)
@@ -34,7 +34,7 @@ def plot_simulated_annealing():
 	ax.set_ylabel('Stability')
 
 	ax.plot(data['x'], data['y'], color = 'r', label = 'stability')
-	
+
 	plt.show()
 
 
@@ -48,7 +48,7 @@ def plot_best_protein():
 	plt.rcParams["font.size"] = 10
 
 	coor = global_vars.protein.winning_coordinates
-	protein = global_vars.protein.protein_string 
+	protein = global_vars.protein.protein_string
 
 	X = []
 	Y = []
@@ -86,7 +86,7 @@ def plot_best_protein():
 	Z = np.array(Z)
 
 	# create cubic bounding box to simulate equal aspect ratio
-	# source: 
+	# source:
 	max_range = np.array([X.max()-X.min(), Y.max()-Y.min(), Z.max()-Z.min()]).max()
 	Xb = 0.5*max_range*np.mgrid[-1:2:2,-1:2:2,-1:2:2][0].flatten() + 0.5*(X.max()+X.min())
 	Yb = 0.5*max_range*np.mgrid[-1:2:2,-1:2:2,-1:2:2][1].flatten() + 0.5*(Y.max()+Y.min())
@@ -97,5 +97,5 @@ def plot_best_protein():
 	   ax.plot([xb], [yb], [zb], 'w')
 
 	fig.text(.1,.1, "Stability: " + str(global_vars.protein.winning_score))
-	
+
 	plt.show()

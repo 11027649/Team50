@@ -10,6 +10,9 @@ from algorithms.algo_brute_force import brute_force
 from plotting.plots import plot_hillclimber, plot_best_protein, plot_simulated_annealing
 
 import csv
+from pygame import mixer
+
+mixer.init()
 
 # Import all the global variables.
 import global_vars
@@ -44,7 +47,12 @@ def main():
 
     message("Protein initiated, algorithm chosen, starting algorithm now.")
 
+    mixer.music.load("elevator.mp3")
+    mixer.music.play()
+
     algo_functions[algorithms[algorithm_choice]]()
+
+    mixer.music.stop()
 
     print("Score: " + str(global_vars.protein.winning_score), end = '\n\n')
     plot_best_protein()
