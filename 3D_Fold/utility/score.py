@@ -19,7 +19,7 @@ def score():
 
     # for all aminos in the protein
     for i in range(len(global_vars.protein.protein_string)):
-        
+
         # the coordinates are stored in an array. i is the amino acid that you're
         # looking for, [0] or [1] are x and y
         x = coordinates[i][0]
@@ -31,7 +31,7 @@ def score():
 
         # if it's an H, do something with the score
         # check only under and to the right to not count interactions double
-        if grid[x][y][z].letter == "H" or "C":
+        if grid[x][y][z].letter == "H" or grid[x][y][z].letter == "C":
 
             # check 4 things for right:
                 # if it's not the first column (for out of range purposes)

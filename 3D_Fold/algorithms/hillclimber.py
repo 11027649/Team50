@@ -178,7 +178,7 @@ def extend_fold_hillclimber():
 
                 print("                      extend: " + str(extend))
                 if extend > 100:
-                    exit(1)
+                    return
 
 
 
