@@ -8,17 +8,29 @@ def init():
     global amount
     amount = 0
 
-    global filepath
-    filepath = ""
+    global csvfile
+    csvfile = File("", "", "")
 
     global protein
     protein = Protein("", [], [], 0, [])
 
-# class File():
-#     def __init__(self, filepath):
-#         self.filepath = filepath
+class File():
+    def __init__(self, filepath, protein_input, algorithm):
+        self.filepath = filepath
+        self.protein_name = protein_input
+        self.algorithm = algorithm
 
-#     def generate_filename():
+
+    # def generate_filename():
+    #     date = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
+        
+    #     filepath = "data\hillclimber\hc_" + str(date) + ".csv"
+    #     File.filepath = filepath
+
+
+    # def generate_header():
+
+
 
 
 class Protein():
@@ -30,7 +42,7 @@ class Protein():
         self.winning_score = winning_score
         self.aminos = aminos
 
-    # def initialize():
+    # def initialize(): string aminos omzetten in lijst
 
 
 class Amino():
