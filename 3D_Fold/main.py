@@ -28,7 +28,7 @@ def main():
 
     message("Protein received")
 
-    algo_functions = {"Brute Force": brute_force, "Hill Climber": hillclimber, "Fold Control Hillclimber": fold_control_hillclimber, "Extend Fold Hillclimber": extend_fold_hillclimber, "Simulated Annealing": simulated_annealing, "simulated annealing control": simulated_annealing_control}
+    algo_functions = {"Brute Force": brute_force, "Hill Climber": hillclimber, "Fold Control Hillclimber": fold_control_hillclimber, "Extend Fold Hillclimber": extend_fold_hillclimber, "Simulated Annealing": simulated_annealing, "Simulated Annealing Control": simulated_annealing_control}
 
     algorithms = []
     for key, value in algo_functions.items():
@@ -45,7 +45,7 @@ def main():
     while algorithm_choice > len(algorithms) - 1:
         algorithm_choice = int(input("Chosen algorithm's number: "))
 
-    message("Protein initiated, algorithm chosen, starting algorithm now.")
+    message("Protein initiated, algorithm chosen, please be patient.")
 
     mixer.music.load("elevator.mp3")
     mixer.music.play()

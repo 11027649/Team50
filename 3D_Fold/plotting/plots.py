@@ -2,6 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import csv
 
+from global_vars import Amino
+
 # import global vars to use te coordinates in plot protein
 import global_vars
 global_vars.init()
@@ -75,11 +77,72 @@ def plot_best_protein():
 	ax.plot(X,Y,Z, linestyle='solid', color="black")
 
 	# plot dashed lines for interactions
-	XX = [X[1], X[4]]
-	YY = [Y[1], Y[4]]
-	ZZ = [Z[1], Z[4]]
-	ax.plot(XX, YY, ZZ, linestyle='dotted', color="black")
+	# XX = [X[1], X[4]]
+	# YY = [Y[1], Y[4]]
+	# ZZ = [Z[1], Z[4]]
+	# ax.plot(XX, YY, ZZ, linestyle='dotted', color="black")
 
+	# ax = plot_dotted_lines(ax)
+
+	grid = global_vars.grid
+	coordinates = global_vars.protein.coordinates[:]
+
+	# for all aminos in the protein
+	for i in range(len(global_vars.protein.protein_string)):
+
+	# the coordinates are stored in an array. i is the amino acid that you're
+	# looking for, [0] or [1] are x and y
+		x = coordinates[i][0]
+		y = coordinates[i][1]
+		z = coordinates[i][2]
+
+		# save the current id of the amino acid
+		cur_id = grid[x][y][z].num_id
+
+		# if it's an H, do something with the score
+		# check only under and to the right to not count interactions double
+		if grid[x][y][z].letter == "H" or grid[x][y][z].letter == "C":
+
+		# check 4 things for right:
+		# if it's not the first column (for out of range purposes)
+		# if there's an Amino class object on the gridpoint on the left
+		# if that class object's letter is an "H"
+		# if the two are not "bonded" by checking id's
+
+			if type(grid[x + 1][y][z]) == Amino and grid[x + 1][y][z].letter == grid[x][y][z].letter and abs(cur_id - grid[x + 1][y][z].num_id) > 1:
+
+				to_id = grid[x + 1][y][z].num_id
+
+				XX = [X[cur_id], X[to_id]]
+				YY = [Y[cur_id], Y[to_id]]
+				ZZ = [Z[cur_id], Z[to_id]]
+				ax.plot(XX, YY, ZZ, linestyle='dotted', color="black")
+
+
+		# same for under
+			if type(grid[x][y + 1][z]) == Amino \
+			and grid[x][y + 1][z].letter == grid[x][y][z].letter \
+			and abs(cur_id - grid[x][y + 1][z].num_id) > 1:
+
+				to_id = grid[x][y + 1][z].num_id
+
+				XX = [X[cur_id], X[to_id]]
+				YY = [Y[cur_id], Y[to_id]]
+				ZZ = [Z[cur_id], Z[to_id]]
+				ax.plot(XX, YY, ZZ, linestyle='dotted', color="black")
+
+
+		# same for "beneath" (at z axis)
+			if type(grid[x][y][z + 1]) == Amino \
+			and grid[x][y][z + 1] == grid[x][y][z].letter \
+			and abs(cur_id - grid[x][y][z + 1].num_id) > 1:
+
+				to_id = grid[x][y][z + 1].num_id
+
+				XX = [X[cur_id], X[to_id]]
+				YY = [Y[cur_id], Y[to_id]]
+				ZZ = [Z[cur_id], Z[to_id]]
+				ax.plot(XX, YY, ZZ, linestyle='dotted', color="black")
 
 	X = np.array(X)
 	Y = np.array(Y)
@@ -99,3 +162,7 @@ def plot_best_protein():
 	fig.text(.1,.1, "Stability: " + str(global_vars.protein.winning_score))
 
 	plt.show()
+
+def plot_dotted_lines(ax):
+
+	return ax
