@@ -28,15 +28,18 @@ def simulated_annealing():
     T0 = Ti = 1
     Tn = 0
 
-    date = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
-    filepath = "data\simulated_annealing\sa_" + str(date) + ".csv"
-    global_vars.filepath = filepath
+    # store algorithm in file, write a header
+    global_vars.csvfile.algorithm = "Simulated Annealing"
 
+    # generate a filepath
+    date = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
+    global_vars.csvfile.filepath = "data\hillclimber\hc_" + str(date) + ".csv"
+      
     # store data in .csv
-    with open(filepath, 'w', newline='') as csvfile:
+    with open(global_vars.csvfile.filepath, 'w', newline='') as csvfile:
         datawriter = csv.writer(csvfile)
         datawriter.writerow(["# This is a datafile generated for protein: " + str(global_vars.protein.protein_string)])
-        datawriter.writerow(["# It is generated with a Simulated Annealing algorithm."])
+        datawriter.writerow(["# It is generated with a" +  global_vars.csvfile.algorithm + "algorithm."])
 
         # do N times 10 random folds and keep track of the best value
         for i in range(N):

@@ -9,14 +9,18 @@ import global_vars
 global_vars.init()
 
 def plot_hillclimber():
-	filepath = global_vars.filepath
+	filepath = global_vars.csvfile.filepath
 	data = np.genfromtxt(filepath, delimiter=',', names=['x', 'y'])
 
 	fig = plt.figure()
 
 	ax = fig.add_subplot(111)
 
-	ax.set_title('Hill Climber')
+	if not global_vars.csvfile.protein_name == "":
+		ax.set_title('Hill Climber for: ' + global_vars.csvfile.protein_name)
+	else:
+		ax.set_title('Hill Climber for your own protein')
+
 	ax.set_xlabel('Iteration')
 	ax.set_ylabel('Stability')
 
@@ -25,13 +29,17 @@ def plot_hillclimber():
 	plt.show()
 
 def plot_simulated_annealing():
-	filepath = global_vars.filepath
+	filepath = global_vars.csvfile.filepath
 	data = np.genfromtxt(filepath, delimiter=',', names=['x', 'y'])
 	fig = plt.figure()
 
 	ax = fig.add_subplot(111)
 
-	ax.set_title('Simulated Annealing')
+	if not global_vars.csvfile.protein_name == "":
+		ax.set_title('Simulated Annealing for: ' + global_vars.csvfile.protein_name)
+	else:
+		ax.set_title('Simulated Annealing for your own protein')
+
 	ax.set_xlabel('Iteration')
 	ax.set_ylabel('Stability')
 
@@ -72,18 +80,14 @@ def plot_best_protein():
 			ax.scatter(X[i],Y[i], Z[i], marker='o', s = 200, color="red")
 
 	ax.set_title('Protein with best score')
+	ax.set_xlabel('X axis')
+	ax.set_ylabel('Y axis')
+	ax.set_zlabel('Z axis')
 
 	# plot solid lines for bonds
 	ax.plot(X,Y,Z, linestyle='solid', color="black")
 
 	# plot dashed lines for interactions
-	# XX = [X[1], X[4]]
-	# YY = [Y[1], Y[4]]
-	# ZZ = [Z[1], Z[4]]
-	# ax.plot(XX, YY, ZZ, linestyle='dotted', color="black")
-
-	# ax = plot_dotted_lines(ax)
-
 	grid = global_vars.grid
 	coordinates = global_vars.protein.coordinates[:]
 
@@ -103,13 +107,9 @@ def plot_best_protein():
 		# check only under and to the right to not count interactions double
 		if grid[x][y][z].letter == "H" or grid[x][y][z].letter == "C":
 
-		# check 4 things for right:
-		# if it's not the first column (for out of range purposes)
-		# if there's an Amino class object on the gridpoint on the left
-		# if that class object's letter is an "H"
-		# if the two are not "bonded" by checking id's
-
-			if type(grid[x + 1][y][z]) == Amino and grid[x + 1][y][z].letter == grid[x][y][z].letter and abs(cur_id - grid[x + 1][y][z].num_id) > 1:
+			if type(grid[x + 1][y][z]) == Amino \
+				and grid[x + 1][y][z].letter == grid[x][y][z].letter \
+				and abs(cur_id - grid[x + 1][y][z].num_id) > 1:
 
 				to_id = grid[x + 1][y][z].num_id
 
@@ -119,7 +119,7 @@ def plot_best_protein():
 				ax.plot(XX, YY, ZZ, linestyle='dotted', color="black")
 
 
-		# same for under
+			# same for under
 			if type(grid[x][y + 1][z]) == Amino \
 			and grid[x][y + 1][z].letter == grid[x][y][z].letter \
 			and abs(cur_id - grid[x][y + 1][z].num_id) > 1:
@@ -131,8 +131,7 @@ def plot_best_protein():
 				ZZ = [Z[cur_id], Z[to_id]]
 				ax.plot(XX, YY, ZZ, linestyle='dotted', color="black")
 
-
-		# same for "beneath" (at z axis)
+			# same for "beneath" (at z axis)
 			if type(grid[x][y][z + 1]) == Amino \
 			and grid[x][y][z + 1].letter == grid[x][y][z].letter \
 			and abs(cur_id - grid[x][y][z + 1].num_id) > 1:
@@ -162,7 +161,3 @@ def plot_best_protein():
 	fig.text(.1,.1, "Stability: " + str(global_vars.protein.winning_score))
 
 	plt.show()
-
-def plot_dotted_lines(ax):
-
-	return ax

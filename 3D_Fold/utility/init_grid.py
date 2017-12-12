@@ -25,11 +25,9 @@ def init_grid():
     # initialize the grid with aminos, z, y, x
     grid = [[[0 for i in range(2)] for j in range(2)] for k in range(protein_length + 1)]
     
-    print("GRID IS INITIALIZED, x,y,z", len(grid), len(grid[0]), len(grid[0][0]))
 
     for i in range(protein_length):
         grid[i][0][0] = Amino(i, protein_string[i])
-
 
     # update coordinates
     coordinates = [[i ,0, 0] for i in range(protein_length)]

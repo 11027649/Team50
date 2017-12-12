@@ -31,10 +31,10 @@ def hillclimber():
 
     date = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
     filepath = "data\hillclimber\hc_" + str(date) + ".csv"
-    global_vars.filepath = filepath
+    global_vars.csvfile.filepath = filepath
 
     # store data in .csv
-    with open(filepath, 'w', newline='') as csvfile:
+    with open(global_vars.csvfile.filepath, 'w', newline='') as csvfile:
         datawriter = csv.writer(csvfile)
 
         # do "iterations" random folds and keep track of the highest value
@@ -64,8 +64,6 @@ def hillclimber():
             else:
                 global_vars.grid = copy.deepcopy(global_vars.winning_grid)
                 global_vars.protein.coordinates = copy.deepcopy(global_vars.protein.winning_coordinates)
-
-    os.system("cls")
 
 
 def fold_control_hillclimber():

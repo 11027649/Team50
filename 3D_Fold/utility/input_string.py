@@ -52,7 +52,9 @@ def input_string():
                 exit(1)
 
             protein_lines = open("inputFiles/assignments.txt").read().splitlines()
-            print(protein_input)
+            
+            # save protein input here in the file
+            global_vars.csvfile.protein_name = protein_input
 
             # search for assignement
             for line in protein_lines:
@@ -68,8 +70,6 @@ def input_string():
                 exit(1)
 
         # print the users input and store in global vars (in uppercase letters)
-        print("\nInputted: " + protein_string)
         global_vars.protein.protein_string = protein_string.upper()
-        print("This is now the string in class instance of protein: " + global_vars.protein.protein_string)
 
     init_grid()

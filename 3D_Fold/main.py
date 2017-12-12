@@ -56,7 +56,7 @@ def main():
     mixer.music.load("ping.mp3")
     mixer.music.play()
 
-    print("Score: " + str(global_vars.protein.winning_score), end = '\n\n')
+    message("Best score: " + str(global_vars.protein.winning_score))
     plot_best_protein()
 
     if algorithms[algorithm_choice] == "Hill Climber":
@@ -64,6 +64,8 @@ def main():
 
     if algorithms[algorithm_choice] == "Simulated Annealing":
         plot_simulated_annealing()
+
+    message("End of program, thank you for using our application. \n Find your generated data in the data folder. \n")
 
 
 
