@@ -1,4 +1,5 @@
-# Print iterations progress
+
+
 def printProgressBar (iteration, total, prefix = 'Progress', suffix = 'Complete', decimals = 1, length = 100, fill = '█'):
     """
     Call in a loop to create terminal progress bar
