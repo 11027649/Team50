@@ -115,7 +115,7 @@ def simulated_annealing_control():
             # write score and iteration to a csv file
             datawriter.writerow([i] + [current_score])
 
-            # do random folds
+            # do .. random folds and check each fold for a better score
             for j in range(10):
                 # initial random value
                 random_value = get_random_value()
