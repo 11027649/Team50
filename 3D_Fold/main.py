@@ -5,7 +5,7 @@ from utility.update_grid import update_grid
 from utility.fold import fold
 from utility.score import score
 from algorithms.hillclimber import hillclimber, fold_control_hillclimber, extend_fold_hillclimber
-from algorithms.simulated_annealing import simulated_annealing
+from algorithms.simulated_annealing import simulated_annealing, simulated_annealing_control
 from algorithms.algo_brute_force import brute_force
 from plotting.plots import plot_hillclimber, plot_best_protein, plot_simulated_annealing
 
@@ -28,7 +28,7 @@ def main():
 
     message("Protein received")
 
-    algo_functions = {"Brute Force": brute_force, "Hill Climber": hillclimber, "Fold Control Hillclimber": fold_control_hillclimber, "Extend Fold Hillclimber": extend_fold_hillclimber, "Simulated Annealing": simulated_annealing}
+    algo_functions = {"Brute Force": brute_force, "Hill Climber": hillclimber, "Fold Control Hillclimber": fold_control_hillclimber, "Extend Fold Hillclimber": extend_fold_hillclimber, "Simulated Annealing": simulated_annealing, "simulated annealing control": simulated_annealing_control}
 
     algorithms = []
     for key, value in algo_functions.items():
