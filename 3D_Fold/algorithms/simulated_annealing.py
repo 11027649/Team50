@@ -1,7 +1,6 @@
-from global_vars import amino
+from global_vars import Amino
 from utility.score import score
 from utility.fold import fold
-from visualization.print_protein import print_protein
 from algorithms.hillclimber import get_random_value
 
 import time
@@ -17,14 +16,14 @@ global_vars.init()
 
 def simulated_annealing():
 
-    global_vars.winning_score = current_score = 0
+    global_vars.protein.winning_score = current_score = 0
 
-    length = len(global_vars.protein_string)
+    length = len(global_vars.protein.protein_string)
     global_vars.winning_grid = copy.deepcopy(global_vars.grid)
-    global_vars.winning_coordinates = copy.deepcopy(global_vars.coordinates)
+    global_vars.protein.winning_coordinates = copy.deepcopy(global_vars.protein.coordinates)
 
     # initialize iterations, begin and end temperature
-    N = 5000
+    N = 10000
     T0 = Ti = 1
     Tn = 0
 
@@ -35,7 +34,7 @@ def simulated_annealing():
     # store data in .csv
     with open(filepath, 'w', newline='') as csvfile:
         datawriter = csv.writer(csvfile)
-        datawriter.writerow(["# This is a datafile generated for protein: " + str(global_vars.protein_string)])
+        datawriter.writerow(["# This is a datafile generated for protein: " + str(global_vars.protein.protein_string)])
         datawriter.writerow(["# It is generated with a Simulated Annealing algorithm."])
 
         # do N times 3 random folds and keep track of the best value
@@ -54,17 +53,17 @@ def simulated_annealing():
             current_score = score()
 
             # if the score is lower save that particular grid in winning grid
-            if current_score <= global_vars.winning_score:
+            if current_score <= global_vars.protein.winning_score:
                 global_vars.winning_grid = copy.deepcopy(global_vars.grid)
-                global_vars.winning_coordinates = copy.deepcopy(global_vars.coordinates)
+                global_vars.protein.winning_coordinates = copy.deepcopy(global_vars.protein.coordinates)
                 
                 # update winning_score
-                global_vars.winning_score = current_score
+                global_vars.protein.winning_score = current_score
 
             # if the score is higher, calculate acceptance chance
             else:
                 # calculate acceptance chance
-                difference = global_vars.winning_score - current_score
+                difference = global_vars.protein.winning_score - current_score
                 acceptance_chance = math.exp(difference / Ti)
 
                 # generate random compare value
@@ -75,14 +74,14 @@ def simulated_annealing():
                     
                     # if not accepted, restore the old grid
                     global_vars.grid = copy.deepcopy(global_vars.winning_grid)
-                    global_vars.coordinates = copy.deepcopy(global_vars.winning_coordinates)
+                    global_vars.protein.coordinates = copy.deepcopy(global_vars.protein.winning_coordinates)
                     current_score = old_score
 
                 # if accepted
                 else:
                     # update changes anyway in the grid
                     global_vars.winning_grid = copy.deepcopy(global_vars.grid)
-                    global_vars.winning_coordinates = copy.deepcopy(global_vars.coordinates)
+                    global_vars.protein.winning_coordinates = copy.deepcopy(global_vars.protein.coordinates)
 
             # cool system linear
             Ti = T0 - (i * (T0 - Tn) / N)
