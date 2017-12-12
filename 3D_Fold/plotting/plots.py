@@ -9,7 +9,7 @@ global_vars.init()
 def plot_hillclimber():
 	filepath = global_vars.filepath
 	data = np.genfromtxt(filepath, delimiter=',', names=['x', 'y'])
-    
+
 	fig = plt.figure()
 
 	ax = fig.add_subplot(111)
@@ -34,7 +34,7 @@ def plot_simulated_annealing():
 	ax.set_ylabel('Stability')
 
 	ax.plot(data['x'], data['y'], color = 'r', label = 'stability')
-	
+
 	plt.show()
 
 
@@ -48,7 +48,7 @@ def plot_best_protein():
 	plt.rcParams["font.size"] = 10
 
 	coor = global_vars.protein.winning_coordinates
-	protein = global_vars.protein.protein_string 
+	protein = global_vars.protein.protein_string
 
 	X = []
 	Y = []
@@ -89,9 +89,9 @@ def plot_best_protein():
 	   ax.plot([xb], [yb], [zb], 'w')
 
 
-	# plt.axis('off')
-	# plt.axis('equal')
+	plt.axis('off')
+	plt.axis('equal')
 
 	fig.text(.1,.1, "Stability: " + str(global_vars.protein.winning_score))
-	
+
 	plt.show()
