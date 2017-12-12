@@ -125,11 +125,10 @@ def simulated_annealing_control():
 
                 stability = score()
                 # if the score is lower save that particular grid in winning grid
-                if stability < best_score:
+                if stability < global_vars.winning_score:
                     global_vars.winning_grid = copy.deepcopy(global_vars.grid)
                     global_vars.protein.winning_coordinates = copy.deepcopy(global_vars.protein.coordinates)
-                    best_score = stability
-                    global_vars.protein.winning_score = best_score
+                    global_vars.protein.winning_score = stability
 
                     print("Best stability so far: " + str(best_score))
                     print("iteration = " + str(j))
