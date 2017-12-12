@@ -1,7 +1,7 @@
 ![team50-logo](https://github.com/Segouta/Team50/blob/master/doc/logoBanner.png)
 
 # Protein folding algorithms (for folding in 2D)
-In this project we try to write algorithms that fold proteins to their most stable configuration. The proteins are solely built up out of  unspecified hydrophobic (H) and polar (P) amino acids, and Cystein (C). Hydrophobic interactions between H's and sulphur bounds between Cysteins contribute to the stabitity of proteins. 
+In this project we've written algorithms that fold proteins to their most stable configuration. The proteins are solely built up out of  unspecified hydrophobic (H) and polar (P) amino acids, and Cystein (C). Hydrophobic interactions between H's and sulphur bounds between Cysteins contribute to the stabitity of proteins. 
 
 ## Getting Started
 Get this program on your computer by downloading the Team50 github repository. 
