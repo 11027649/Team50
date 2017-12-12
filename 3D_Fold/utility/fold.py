@@ -49,28 +49,63 @@ def fold(num_id, direction):
     # print("Pivot origin: ", rot_origin[0], ",", rot_origin[1], ",", rot_origin[2])
 
     # rotations matrixes around z axis
-    rotation_matrix_left = [[0, -1, 0], [1, 0, 0], [0, 0, 1]]
-    rotation_matrix_right = [[0, 1, 0], [-1, 0, 0],[0, 0, 1]]
-    
+    rotation_matrix_down_z = [[0, -1, 0], [1, 0, 0], [0, 0, 1]]
+    rotation_matrix_up_z = [[0, 1, 0], [-1, 0, 0],[0, 0, 1]]
+
     # rotations around y axis
-    rotation_matrix_down = [[0, 0, -1], [0, 1, 0],[1, 0, 0]]
-    rotation_matrix_up = [[0, 0, 1], [0, 1, 0], [-1, 0, 0]]
+    rotation_matrix_down_y = [[0, 0, -1], [0, 1, 0],[1, 0, 0]]
+    rotation_matrix_up_y = [[0, 0, 1], [0, 1, 0], [-1, 0, 0]]
 
     # rotations around x axis
-    rotation_matrix_down2 = [[1, 0, 0], [0, 0, -1], [0, 1, 0]]
-    rotation_matrix_up2 = [[1, 0, 0], [0, 0, 1], [0, -1, 0]]
+    rotation_matrix_down_x = [[1, 0, 0], [0, 0, -1], [0, 1, 0]]
+    rotation_matrix_up_x = [[1, 0, 0], [0, 0, 1], [0, -1, 0]]
 
     returncode = False
 
-    # for folds to Left or Right, set up the right rotation matrix
-    if(direction == "R"):
-        rotation_matrix = rotation_matrix_right
-    elif(direction == "L"):
-        rotation_matrix = rotation_matrix_left
-    elif(direction == "D"):
-        rotation_matrix = rotation_matrix_down2
-    elif(direction == "U"):
-        rotation_matrix = rotation_matrix_up
+    # determine the axis of rotations
+    next_coords = [coordinates[num_id + 1][0], coordinates[num_id + 1][1], coordinates[num_id + 1][2]]
+
+    axis = ""
+
+    if (next_coords[0] != rot_origin[0]):
+        if (direction == "R"):
+            rotation_matrix = rotation_matrix_up_z
+        elif (direction == "L"):
+            rotation_matrix = rotation_matrix_down_z
+        elif (direction == "U"):
+            rotation_matrix = rotation_matrix_up_y
+        elif (direction == "D"):
+            rotation_matrix = rotation_matrix_down_y
+
+    elif (next_coords[1] != rot_origin[1]):
+        if (direction == "R"):
+            rotation_matrix = rotation_matrix_up_z
+        elif (direction == "L"):
+            rotation_matrix = rotation_matrix_down_z
+        elif (direction == "U"):
+            rotation_matrix = rotation_matrix_up_x
+        elif (direction == "D"):
+            rotation_matrix = rotation_matrix_down_x
+
+    elif (next_coords[2] != rot_origin[2]):
+        if (direction == "R"):
+            rotation_matrix = rotation_matrix_up_x
+        elif (direction == "L"):
+            rotation_matrix = rotation_matrix_down_x
+        elif (direction == "U"):
+            rotation_matrix = rotation_matrix_up_y
+        elif (direction == "D"):
+            rotation_matrix = rotation_matrix_down_y
+
+    # if(direction == "R"):
+    #     if (axis == "X")
+    #         rotation_matrix = rotation_matrix_up_z
+    # elif(direction == "L"):
+    #     rotation_matrix = rotation_matrix_left
+    # elif(direction == "D"):
+    #     rotation_matrix = rotation_matrix_down2
+    # elif(direction == "U"):
+    #     rotation_matrix = rotation_matrix_up
 
     # iterates over the aminos, beginning at the one after the amino acid where
     # we'll fold

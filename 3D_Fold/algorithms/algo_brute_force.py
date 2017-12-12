@@ -55,9 +55,9 @@ def brute_force():
 
 def foldings_recursive(depth):
 
-    fold(1, "U")
-    fold(2, "D")
-    fold(3, "U")
+    fold(1, "R")
+    fold(2, "U")
+    fold(3, "L")
 
 
     current_score = score()
