@@ -72,7 +72,7 @@ def hillclimber():
 
     os.system("cls")
 
- 
+
 def fold_control_hillclimber():
     """ Hillclimber which selects the best out of 14. """
 
@@ -109,7 +109,7 @@ def fold_control_hillclimber():
 
                 print("Best stability so far: " + str(best_score))
                 print("iteration = " + str(j))
-                
+
                 break
             # set the winning grid back as current grid
         global_vars.grid = copy.deepcopy(global_vars.winning_grid)
@@ -166,7 +166,7 @@ def extend_fold_hillclimber():
                     print("Fold nr: " + str(j))
                     print("Extend amount: " + str(extend))
                     found = True
-                    
+
                     break
 
                 counter += 1
@@ -188,15 +188,19 @@ def extend_fold_hillclimber():
 
 
 def get_random_value():
-    """ This is a function that returns an array with a random direction and 
+    """ This is a function that returns an array with a random direction and
         aminonumber, to make random folds. Also used in Simulated Annealing. """
 
-    length = len(global_vars.protein.protein_string) - 1
+    length = len(global_vars.protein.protein_string) - 2
     aminonumber = randint(1, length)
-    value = randint(0,1)
+    value = randint(0,3)
     direction = ""
     if value == 1:
         direction = "L"
-    else:
+    elif value == 2:
         direction = "R"
+    elif value == 3:
+        direction = "U"
+    else:
+        direction = "D"
     return [aminonumber, direction]

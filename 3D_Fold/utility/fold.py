@@ -89,13 +89,13 @@ def fold(num_id, direction):
 
     elif (next_coords[2] != rot_origin[2]):
         if (direction == "R"):
-            rotation_matrix = rotation_matrix_up_x
-        elif (direction == "L"):
-            rotation_matrix = rotation_matrix_down_x
-        elif (direction == "U"):
             rotation_matrix = rotation_matrix_up_y
-        elif (direction == "D"):
+        elif (direction == "L"):
             rotation_matrix = rotation_matrix_down_y
+        elif (direction == "U"):
+            rotation_matrix = rotation_matrix_up_x
+        elif (direction == "D"):
+            rotation_matrix = rotation_matrix_down_x
 
     # if(direction == "R"):
     #     if (axis == "X")

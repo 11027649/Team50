@@ -57,7 +57,8 @@ def foldings_recursive(depth):
 
     fold(1, "R")
     fold(2, "U")
-    fold(3, "L")
+    fold(3, "U")
+    fold(5, "D")
 
 
     current_score = score()
