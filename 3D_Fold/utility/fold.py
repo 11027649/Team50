@@ -97,16 +97,6 @@ def fold(num_id, direction):
         elif (direction == "D"):
             rotation_matrix = rotation_matrix_down_x
 
-    # if(direction == "R"):
-    #     if (axis == "X")
-    #         rotation_matrix = rotation_matrix_up_z
-    # elif(direction == "L"):
-    #     rotation_matrix = rotation_matrix_left
-    # elif(direction == "D"):
-    #     rotation_matrix = rotation_matrix_down2
-    # elif(direction == "U"):
-    #     rotation_matrix = rotation_matrix_up
-
     # iterates over the aminos, beginning at the one after the amino acid where
     # we'll fold
     for i in range(num_id + 1, protein_length):
