@@ -1,6 +1,7 @@
 from global_vars import Amino
 from utility.score import score
 from utility.fold import fold
+from algorithms.progress_bar import printProgressBar
 
 import time
 import os
@@ -16,7 +17,6 @@ def hillclimber():
     # if accept is True, folds that collide will count
     # if False only folds that pass will happen
     accept = False
-    # print("Hillclimbing...")
 
     global_vars.protein.winning_score = 0
 
@@ -40,6 +40,8 @@ def hillclimber():
         # do "iterations" random folds and keep track of the highest value
         for i in range(iterations):
 
+            printProgressBar(i, iterations)
+
             datawriter.writerow([i] + [best_score])
 
             for j in range(6):
@@ -60,11 +62,6 @@ def hillclimber():
                 global_vars.protein.winning_coordinates = copy.deepcopy(global_vars.protein.coordinates)
                 best_score = stability
                 global_vars.protein.winning_score = best_score
-
-                os.system("cls")
-                print("Best stability so far: " + str(best_score))
-
-                time.sleep(0.5)
 
             else:
                 global_vars.grid = copy.deepcopy(global_vars.winning_grid)

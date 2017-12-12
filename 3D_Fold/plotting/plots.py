@@ -78,7 +78,7 @@ def plot_best_protein():
 	XX = [X[1], X[4]]
 	YY = [Y[1], Y[4]]
 	ZZ = [Z[1], Z[4]]
-	ax.plot(XX, YY, ZZ, linestyle='dashed', color="black")
+	ax.plot(XX, YY, ZZ, linestyle='dotted', color="black")
 
 
 	X = np.array(X)
