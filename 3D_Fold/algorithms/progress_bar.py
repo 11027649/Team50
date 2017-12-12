@@ -1,4 +1,4 @@
-
+# source: https://stackoverflow.com/questions/3173320/text-progress-bar-in-the-console
 
 def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, length = 30, fill = '█'):
     """
@@ -18,4 +18,4 @@ def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, 
     print('\r%s |%s| %s%% %s' % (prefix, bar, percent, suffix), end = '\r')
     # Print New Line on Complete
     if iteration == total: 
-        print()
+        print() 

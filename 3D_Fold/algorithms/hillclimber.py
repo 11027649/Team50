@@ -52,8 +52,6 @@ def hillclimber():
                     while fold(random_value[0], random_value[1]) == "collision":
                         random_value = get_random_value()
 
-
-
             stability = score()
 
             # if the score is lower save that particular grid in winning grid
@@ -82,18 +80,16 @@ def fold_control_hillclimber():
 
     iterations = 5000
 
-
-
     # do "iterations" random folds and keep track of the highest value
     for i in range(iterations):
+
+        printProgressBar(i, iterations)
 
         for j in range(14):
             random_value = get_random_value()
 
             while fold(random_value[0], random_value[1]) == "collision":
                 random_value = get_random_value()
-
-
 
             stability = score()
 
@@ -103,9 +99,6 @@ def fold_control_hillclimber():
                 global_vars.protein.winning_coordinates = copy.deepcopy(global_vars.protein.coordinates)
                 best_score = stability
                 global_vars.protein.winning_score = best_score
-
-                print("Best stability so far: " + str(best_score))
-                print("iteration = " + str(j))
 
                 break
             # set the winning grid back as current grid
@@ -129,18 +122,15 @@ def extend_fold_hillclimber():
     # do "iterations" random folds and keep track of the highest value
     for i in range(iterations):
 
-        print("Iteration: " + str(i))
         extend = 2
         counter = 0
         found = False
 
         while found == False:
 
-            # print("Found: " + str(found))
-
             for j in range(extend):
 
-                # print(" i ")
+                printProgressBar(extend, 101)
 
                 random_value = get_random_value()
 
@@ -158,10 +148,6 @@ def extend_fold_hillclimber():
                     best_score = stability
                     global_vars.protein.winning_score = best_score
 
-                    print("Best stability so far: " + str(best_score))
-                    print("Iteration: " + str(i))
-                    print("Fold nr: " + str(j))
-                    print("Extend amount: " + str(extend))
                     found = True
 
                     break
@@ -171,13 +157,9 @@ def extend_fold_hillclimber():
                 if counter > 1000:
                     extend += 1
                     counter = 0
-                    # print("Extend amount: " + str(extend))
 
-                print("                      extend: " + str(extend))
                 if extend > 100:
                     return
-
-
 
         # set the winning grid back as current grid
         global_vars.grid = copy.deepcopy(global_vars.winning_grid)

@@ -2,6 +2,7 @@ from global_vars import Amino
 from utility.score import score
 from utility.fold import fold
 from algorithms.hillclimber import get_random_value
+from algorithms.progress_bar import printProgressBar
 
 import time
 import datetime
@@ -37,8 +38,10 @@ def simulated_annealing():
         datawriter.writerow(["# This is a datafile generated for protein: " + str(global_vars.protein.protein_string)])
         datawriter.writerow(["# It is generated with a Simulated Annealing algorithm."])
 
-        # do N times 3 random folds and keep track of the best value
+        # do N times 10 random folds and keep track of the best value
         for i in range(N):
+
+            printProgressBar(i, N)
 
             # write score and iteration to a csv file
             datawriter.writerow([i] + [current_score])
