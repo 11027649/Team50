@@ -53,53 +53,53 @@ def brute_force():
         print("\nStopping program\n")
         exit(1)
 
-def foldings_recursive(depth):
+# def foldings_recursive(depth):
 
-    protein_array
-    coordinates_array
-    directions_array
+#     protein_array
+#     coordinates_array
+#     directions_array
 
-    # check which i changed:
-        for i in range(j, length):
-            # make coordinates empty
-            corrdinates[i] =[]
+#     # check which i changed:
+#         for i in range(j, length):
+#             # make coordinates empty
+#             corrdinates[i] =[]
 
-        # do the fold
+#         # do the fold
 
-        current_coordinates = coordinates[i]
-        # give the coordinates again to the amino acid afther i
-        for i in range(j, length - 1):
-            coordinates[i + 1] = coordinates[i]
+#         current_coordinates = coordinates[i]
+#         # give the coordinates again to the amino acid afther i
+#         for i in range(j, length - 1):
+#             coordinates[i + 1] = coordinates[i]
 
-            # x direction
-            if directions_array[i] == 0:
-                coordinates[i + 1][0] = coordinates[i][0] + 1
-            elif directions_array[i] == 1:
-                coordinates[i + 1][0] = coordinates[i][0] - 1
+#             # x direction
+#             if directions_array[i] == 0:
+#                 coordinates[i + 1][0] = coordinates[i][0] + 1
+#             elif directions_array[i] == 1:
+#                 coordinates[i + 1][0] = coordinates[i][0] - 1
 
-            # y direction
-            elif directions_array[i] == 2:
-                coordinates[i + 1][1] = coordinates[i][1] + 1
-            elif directions_array[i] == 3:
-                coordinates[i + 1][1] = coordinates[i][1] - 1
+#             # y direction
+#             elif directions_array[i] == 2:
+#                 coordinates[i + 1][1] = coordinates[i][1] + 1
+#             elif directions_array[i] == 3:
+#                 coordinates[i + 1][1] = coordinates[i][1] - 1
 
-            # z direction
-            elif directions_array[i] == 4:
-                coordinates[i + 1][2] = coordinates[i][1] + 1
-            elif directions_array[i] == 5:
-                coordinates[i + 1][2] = coordinates[i][1] - 1
+#             # z direction
+#             elif directions_array[i] == 4:
+#                 coordinates[i + 1][2] = coordinates[i][1] + 1
+#             elif directions_array[i] == 5:
+#                 coordinates[i + 1][2] = coordinates[i][1] - 1
 
 
-            # set the amino at the right coordinates in the grid
-            x_coor = coordinates[i + 1][0]
-            y_coor = coordinates[i + 1][1]
-            Z_coor = coordinates[i + 1][2]
-            grid[x_coor][y_coor][z_coor]
+#             # set the amino at the right coordinates in the grid
+#             x_coor = coordinates[i + 1][0]
+#             y_coor = coordinates[i + 1][1]
+#             Z_coor = coordinates[i + 1][2]
+#             grid[x_coor][y_coor][z_coor]
 
-        # check score afther the grid is filled
-        score = score()
-        # safe the winning protein
-        if score < global_vars.protein.winning_score:
-            global_vars.protein.winning_score = score
-            global_vars.protein.winning_coordinates = coordinates
-            global_vars.protein.winning_grid = grid
+#         # check score afther the grid is filled
+#         score = score()
+#         # safe the winning protein
+#         if score < global_vars.protein.winning_score:
+#             global_vars.protein.winning_score = score
+#             global_vars.protein.winning_coordinates = coordinates
+#             global_vars.protein.winning_grid = grid

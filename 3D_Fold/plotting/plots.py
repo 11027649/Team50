@@ -84,7 +84,6 @@ def plot_best_protein():
 	else:
 		ax.set_title('Best score for: your own protein')
 
-	ax.set_title('Best score for: ')
 	ax.set_xlabel('X axis')
 	ax.set_ylabel('Y axis')
 	ax.set_zlabel('Z axis')
