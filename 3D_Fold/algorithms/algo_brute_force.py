@@ -55,32 +55,51 @@ def brute_force():
 
 def foldings_recursive(depth):
 
-    fold(1, "R")
-    fold(2, "U")
-    fold(3, "U")
-    fold(5, "D")
+    protein_array
+    coordinates_array
+    directions_array
+
+    # check which i changed:
+        for i in range(j, length):
+            # make coordinates empty
+            corrdinates[i] =[]
+
+        # do the fold
+
+        current_coordinates = coordinates[i]
+        # give the coordinates again to the amino acid afther i
+        for i in range(j, length - 1):
+            coordinates[i + 1] = coordinates[i]
+
+            # x direction
+            if directions_array[i] == 0:
+                coordinates[i + 1][0] = coordinates[i][0] + 1
+            elif directions_array[i] == 1:
+                coordinates[i + 1][0] = coordinates[i][0] - 1
+
+            # y direction
+            elif directions_array[i] == 2:
+                coordinates[i + 1][1] = coordinates[i][1] + 1
+            elif directions_array[i] == 3:
+                coordinates[i + 1][1] = coordinates[i][1] - 1
+
+            # z direction
+            elif directions_array[i] == 4:
+                coordinates[i + 1][2] = coordinates[i][1] + 1
+            elif directions_array[i] == 5:
+                coordinates[i + 1][2] = coordinates[i][1] - 1
 
 
-    current_score = score()
+            # set the amino at the right coordinates in the grid
+            x_coor = coordinates[i + 1][0]
+            y_coor = coordinates[i + 1][1]
+            Z_coor = coordinates[i + 1][2]
+            grid[x_coor][y_coor][z_coor]
 
-    if current_score <= global_vars.protein.winning_score:
-
-        global_vars.protein.winning_score = current_score
-        global_vars.winning_grid = copy.deepcopy(global_vars.grid)
-        global_vars.protein.winning_coordinates = copy.deepcopy(global_vars.protein.coordinates)
-        global_vars.amount += 1
-
-        print("\n\nBest so far, stability of " + str(global_vars.protein.winning_score) + ":\n")
-
-    # if (depth < 1):
-    #     return
-
-    # fold(depth, "L")
-    # foldings_recursive(depth - 1)
-
-    # fold(depth, "R")
-    # foldings_recursive(depth - 1)
-
-    # fold(depth, "R")
-    # foldings_recursive(depth - 1)
-    # fold(depth, "L")
+        # check score afther the grid is filled
+        score = score()
+        # safe the winning protein
+        if score < global_vars.protein.winning_score:
+            global_vars.protein.winning_score = score
+            global_vars.protein.winning_coordinates = coordinates
+            global_vars.protein.winning_grid = grid
