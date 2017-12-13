@@ -57,6 +57,7 @@ def main():
     mixer.music.play()
 
     message("Best score: " + str(global_vars.protein.winning_score))
+    
     plot_best_protein()
 
     if algorithms[algorithm_choice] == "Hill Climber":

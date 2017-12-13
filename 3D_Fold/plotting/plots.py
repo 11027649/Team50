@@ -79,7 +79,12 @@ def plot_best_protein():
 		else:
 			ax.scatter(X[i],Y[i], Z[i], marker='o', s = 200, color="red")
 
-	ax.set_title('Protein with best score')
+	if not global_vars.csvfile.protein_name == "":
+		ax.set_title('Best score for: ' + global_vars.csvfile.protein_name)
+	else:
+		ax.set_title('Best score for: your own protein')
+
+	ax.set_title('Best score for: ')
 	ax.set_xlabel('X axis')
 	ax.set_ylabel('Y axis')
 	ax.set_zlabel('Z axis')
