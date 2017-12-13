@@ -34,7 +34,7 @@ def simulated_annealing():
     # generate a filepath
     date = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
     global_vars.csvfile.filepath = "data\hillclimber\hc_" + str(date) + ".csv"
-      
+
     # store data in .csv
     with open(global_vars.csvfile.filepath, 'w', newline='') as csvfile:
         datawriter = csv.writer(csvfile)
