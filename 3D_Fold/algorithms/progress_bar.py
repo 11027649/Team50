@@ -1,8 +1,5 @@
 # source: https://stackoverflow.com/questions/3173320/text-progress-bar-in-the-console
 
-import global_vars
-global_vars.init
-
 def printProgressBar (iteration, total, prefix = 'Progress', suffix = 'Complete', 
         decimals = 1, length = 30, fill = '█'):
     """

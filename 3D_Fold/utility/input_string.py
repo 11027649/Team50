@@ -9,8 +9,8 @@
 
 from utility.init_grid import init_grid
 
-import global_vars
-global_vars.init()
+from info_class import Info
+from protein_class import Protein
 
 allowed_aminos = {"P", "H", "C"}
 assignment_letter = []
@@ -20,6 +20,8 @@ def input_string():
         the input string. Calls the function init_grid to initialize the grid. """
 
     protein_input = input("Insert amino string or type assignment letter + number e.g. B2: ")
+
+    run_info = Info("", "your own protein", "", "")
 
     # input must be 2 AA's or one of the assignements which are also 2 chars
     # (see assignements.txt)
@@ -54,7 +56,7 @@ def input_string():
             protein_lines = open("inputFiles/assignments.txt").read().splitlines()
             
             # save protein input here in the file
-            global_vars.csvfile.protein_name = protein_input
+            run_info.protein_name = protein_input
 
             # search for assignement
             for line in protein_lines:
@@ -69,7 +71,8 @@ def input_string():
                 print("\nThis assignment does not exist.\n")
                 exit(1)
 
-        # print the users input and store in global vars (in uppercase letters)
-        global_vars.protein.protein_string = protein_string.upper()
+        # print the users input and store in protein (in uppercase letters)
+        protein = Protein(protein_string.upper(), len(protein_string), [], [], [], [], 0, [])
 
-    init_grid()
+    protein = init_grid(protein)
+    return [run_info, protein]

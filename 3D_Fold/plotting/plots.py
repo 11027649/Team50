@@ -2,43 +2,21 @@ import matplotlib.pyplot as plt
 import numpy as np
 import csv
 
-from global_vars import Amino
+from protein_class import Amino
 
-# import global vars to use te coordinates in plot protein
-import global_vars
-global_vars.init()
-
-def plot_hillclimber():
-	filepath = global_vars.csvfile.filepath
-	data = np.genfromtxt(filepath, delimiter=',', names=['x', 'y'])
-
-	fig = plt.figure()
-
-	ax = fig.add_subplot(111)
-
-	if not global_vars.csvfile.protein_name == "":
-		ax.set_title('Hill Climber for: ' + global_vars.csvfile.protein_name)
-	else:
-		ax.set_title('Hill Climber for your own protein')
-
-	ax.set_xlabel('Iteration')
-	ax.set_ylabel('Stability')
-
-	ax.plot(data['x'], data['y'], color='r', label='stability')
-
-	plt.show()
-
-def plot_simulated_annealing():
-	filepath = global_vars.csvfile.filepath
+def plot_data(run_info):
+	filepath = run_info.filepath
 	data = np.genfromtxt(filepath, delimiter=',', names=['x', 'y'])
 	fig = plt.figure()
 
 	ax = fig.add_subplot(111)
 
-	if not global_vars.csvfile.protein_name == "":
-		ax.set_title('Simulated Annealing for: ' + global_vars.csvfile.protein_name)
+	if (run_info.dimension == 0):
+		dimension = '2D'
 	else:
-		ax.set_title('Simulated Annealing for your own protein')
+		dimension = '3D'
+	
+	ax.set_title(run_info.algorithm + ' for: ' + run_info.protein_name + ' in: ' + dimension)
 
 	ax.set_xlabel('Iteration')
 	ax.set_ylabel('Stability')
@@ -51,38 +29,34 @@ def plot_simulated_annealing():
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.lines as mlines
 
-def plot_best_protein():
+def plot_best_protein(protein, run_info):
 
 	fig = plt.figure()
 	ax = fig.add_subplot(111, projection='3d')
 	plt.rcParams["font.size"] = 10
 
-	coor = global_vars.protein.winning_coordinates
-	protein = global_vars.protein.protein_string
+	coor = protein.winning_coordinates
 
 	X = []
 	Y = []
 	Z = []
 
 	# add coordinates to X and Y array
-	for i in range(len(protein)):
+	for i in range(protein.protein_length):
 		X.append(coor[i][0])
 		Y.append(coor[i][1])
 		Z.append(coor[i][2])
 
 	# scatter points, plot the aminos in the right colors
-	for i in range(len(protein)):
-		if protein[i] == 'H':
+	for i in range(protein.protein_length):
+		if protein.protein_string[i] == 'H':
 			ax.scatter(X[i],Y[i], Z[i], marker = 'o', s = 200, color="blue")
-		elif protein[i] == 'C':
+		elif protein.protein_string[i] == 'C':
 			ax.scatter(X[i], Y[i], Z[i], marker = 'o', s = 200, color = "yellow")
 		else:
 			ax.scatter(X[i],Y[i], Z[i], marker='o', s = 200, color="red")
 
-	if not global_vars.csvfile.protein_name == "":
-		ax.set_title('Best score for: ' + global_vars.csvfile.protein_name)
-	else:
-		ax.set_title('Best score for: your own protein')
+	ax.set_title('Best score for: ' + run_info.protein_name)
 
 	ax.set_xlabel('X axis')
 	ax.set_ylabel('Y axis')
@@ -92,11 +66,13 @@ def plot_best_protein():
 	ax.plot(X,Y,Z, linestyle='solid', color="black")
 
 	# plot dashed lines for interactions
-	grid = global_vars.grid
-	coordinates = global_vars.protein.coordinates[:]
+	grid = protein.winning_grid
+	coordinates = protein.winning_coordinates[:]
+
+	cystein_appearance = False
 
 	# for all aminos in the protein
-	for i in range(len(global_vars.protein.protein_string)):
+	for i in range(protein.protein_length):
 
 	# the coordinates are stored in an array. i is the amino acid that you're
 	# looking for, [0] or [1] are x and y
@@ -106,6 +82,9 @@ def plot_best_protein():
 
 		# save the current id of the amino acid
 		cur_id = grid[x][y][z].num_id
+
+		if (grid[x][y][z].letter == "C"):
+			cystein_appearance = True
 
 		# if it's an H, do something with the score
 		# check only under and to the right to not count interactions double
@@ -162,6 +141,18 @@ def plot_best_protein():
 	for xb, yb, zb in zip(Xb, Yb, Zb):
 	   ax.plot([xb], [yb], [zb], 'w')
 
-	fig.text(.1,.1, "Stability: " + str(global_vars.protein.winning_score))
+	# set legend
+	polar = mlines.Line2D([], [], color='red', marker='o', markersize=15, label='Polar')
+	apolar = mlines.Line2D([], [], color='blue', marker='o', markersize=15, label='Apolar')
+
+	if cystein_appearance == True:
+		cystein = mlines.Line2D([], [], color='yellow', marker='o', markersize=15, label='Cystein')
+		legend = [cystein, polar, apolar]
+	elif cystein_appearance == False:
+		legend = [polar, apolar]
+	
+	plt.legend(handles=legend)
+
+	fig.text(.1,.1, "Stability: " + str(protein.winning_score))
 
 	plt.show()

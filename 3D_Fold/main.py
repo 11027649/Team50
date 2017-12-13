@@ -1,34 +1,36 @@
 from visualization.message import message
+
 from utility.input_string import input_string
 
-from utility.update_grid import update_grid
-from utility.fold import fold
-from utility.score import score
+# import algorithms
 from algorithms.hillclimber import hillclimber, fold_control_hillclimber, extend_fold_hillclimber
 from algorithms.simulated_annealing import simulated_annealing, simulated_annealing_control
-from algorithms.algo_brute_force import brute_force
-from plotting.plots import plot_hillclimber, plot_best_protein, plot_simulated_annealing
 
-import csv
+# import plot tools
+from plotting.plots import plot_data, plot_best_protein
+
 from pygame import mixer
-
 mixer.init()
-
-# Import all the global variables.
-import global_vars
-global_vars.init()
-
 
 def main():
 
     message("This is a protein-fold-optimizer by Team50")
 
     # Get the user's choice of protein.
-    input_string()
+    info_and_protein = input_string()
+    run_info = info_and_protein[0]
+    protein = info_and_protein[1]
 
     message("Protein received")
 
-    algo_functions = {"Brute Force": brute_force, "Hill Climber": hillclimber, "Fold Control Hillclimber": fold_control_hillclimber, "Extend Fold Hillclimber": extend_fold_hillclimber, "Simulated Annealing": simulated_annealing, "Simulated Annealing Control": simulated_annealing_control}
+    dimension = 2
+    while not (dimension == 0) and not (dimension == 1):
+        print("In what dimension do you want to fold? \n ( 0 ) 2D \n ( 1 ) 3D\n")
+        dimension = int(input("Chosen dimension: "))
+
+    run_info.dimension = dimension
+
+    algo_functions = {"Hill Climber": hillclimber, "Fold Control Hillclimber": fold_control_hillclimber, "Extend Fold Hillclimber": extend_fold_hillclimber, "Simulated Annealing": simulated_annealing, "Simulated Annealing Control": simulated_annealing_control}
 
     algorithms = []
     for key, value in algo_functions.items():
@@ -50,23 +52,22 @@ def main():
     mixer.music.load("elevator.mp3")
     mixer.music.play()
 
-    algo_functions[algorithms[algorithm_choice]]()
+    info_and_protein = algo_functions[algorithms[algorithm_choice]](run_info, protein)
+    run_info = info_and_protein[0]
+    protein = info_and_protein[1]
 
     mixer.music.stop()
     mixer.music.load("ping.mp3")
     mixer.music.play()
 
-    message("Best score: " + str(global_vars.protein.winning_score))
+    message("Best score: " + str(protein.winning_score))
     
-    plot_best_protein()
+    plot_best_protein(protein, run_info)
 
-    if algorithms[algorithm_choice] == "Hill Climber":
-        plot_hillclimber()
+    if algorithms[algorithm_choice] == "Hill Climber" or algorithms[algorithm_choice] == "Simulated Annealing":
+        plot_data(run_info)
 
-    if algorithms[algorithm_choice] == "Simulated Annealing":
-        plot_simulated_annealing()
-
-    message("End of program, thank you for using our application. \n Find your generated data in the data folder. \n")
+    message("End of program, thank you for using our application. \n     Find your generated data in the data folder. \n")
 
 
 

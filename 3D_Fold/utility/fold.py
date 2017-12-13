@@ -9,25 +9,22 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 from utility.update_grid import update_grid
-from global_vars import Amino
-
-import global_vars
-global_vars.init()
+from protein_class import Amino
 
 import numpy as np
 import copy
 
-def fold(num_id, direction):
+def fold(num_id, direction, protein):
     """ Finds an origin to fold around and multiplies the coordinates of the aminos
         that will get a different place with a rotation matrix to get the new
         coordinates. If the fold is not possible, returns and old grid and at which
         amino acid this fold was colliding. """
 
-    coordinates = global_vars.protein.coordinates
+    coordinates = protein.coordinates
     backup_coordinates = coordinates[:]
-    grid = global_vars.grid
+    grid = protein.grid
 
-    protein_length = len(global_vars.protein.protein_string)
+    protein_length = protein.protein_length
     grid_x = len(grid)
     grid_y = len(grid[0])
     grid_z = len(grid[0][0])
@@ -124,7 +121,7 @@ def fold(num_id, direction):
             coordinates[i] = [to_coords[0], to_coords[1], to_coords[2]]
 
         # if fold isn't possible
-        elif (str(type(grid[to_coords[0]][to_coords[1]][to_coords[2]])) == "<class 'global_vars.Amino'>"):
+        elif (str(type(grid[to_coords[0]][to_coords[1]][to_coords[2]])) == "<class 'protein_class.Amino'>"):
             # print("Collision detected while folding amino " + str(num_id) + "\n -> Stopped this fold, cause amino " + str(i) + " was colliding")
             coordinates = backup_coordinates[:]
             returncode = True
@@ -134,10 +131,10 @@ def fold(num_id, direction):
             coordinates[i] = [to_coords[0], to_coords[1], to_coords[2]]
 
     # update global coordinates and update the grid
-    global_vars.protein.coordinates = coordinates[:]
-    update_grid()
+    protein.coordinates = coordinates[:]
+    update_grid(protein)
 
     if returncode == True:
-        return "collision"
+        return ["collision", protein]
     else:
-        return 0
+        return [0, protein]

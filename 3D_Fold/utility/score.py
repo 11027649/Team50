@@ -3,22 +3,19 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 from utility.update_grid import update_grid
-from global_vars import Amino
+from protein_class import Amino
 
-import global_vars
-global_vars.init()
-
-def score():
+def score(protein):
     """ A function that returns a stability score for a specific folding of a
         protein. Does this by taking the global grid, coordinates and protein
         string. . """
 
     score = 0
-    grid = global_vars.grid
-    coordinates = global_vars.protein.coordinates[:]
+    grid = protein.grid
+    coordinates = protein.coordinates
 
     # for all aminos in the protein
-    for i in range(len(global_vars.protein.protein_string)):
+    for i in range(protein.protein_length):
 
         # the coordinates are stored in an array. i is the amino acid that you're
         # looking for, [0] or [1] are x and y

@@ -5,16 +5,6 @@
 # for now ;-P).
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from global_vars import Amino
-from utility.score import score
-from utility.fold import fold
-
-import time
-import copy
-
-import global_vars
-global_vars.init()
-
 def brute_force():
     """ This algorithm tries every possibility of foldation of the protein.
         Therefore it uses the global coordinates. It stores the amount of "best"
