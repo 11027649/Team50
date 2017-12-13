@@ -48,9 +48,9 @@ def main():
 
     message("Protein initiated, algorithm chosen, please be patient.")
 
-    with open('C1_3D_HC.csv', 'a', newline='') as datafile:
+    with open('C2_3D_SA_FC.csv', 'a', newline='') as datafile:
         datawriter = csv.writer(datafile)
-        datawriter.writerow("# These are the best scores for 100 times HC at protein C1, in 3D.")
+        datawriter.writerow("# These are the best scores for 100 times SA with FC at protein C2, in 3D.")
 
         for i in range(100):
             print(i)

@@ -29,40 +29,40 @@ def hillclimber(run_info, protein):
     run_info.algorithm = "Hill Climber"
 
     # store data in .csv
-    # with open(run_info.filepath, 'w', newline='') as datafile:
-    #     datawriter = csv.writer(datafile)
+    with open(run_info.filepath, 'w', newline='') as datafile:
+        datawriter = csv.writer(datafile)
 
-    # do "iterations" random folds and keep track of the highest value
-    for i in range(iterations):
+        # do "iterations" random folds and keep track of the highest value
+        for i in range(iterations):
 
-        # printProgressBar(i, iterations)
-        # datawriter.writerow([i] + [best_score])
+            printProgressBar(i, iterations)
+            datawriter.writerow([i] + [best_score])
 
-        for j in range(6):
-            random_value = get_random_value(run_info.dimension, protein.protein_length - 2)
-            if accept == True:
-                returncode_and_protein = fold(random_value[0], random_value[1], protein)
-                protein = returncode_and_protein[1]
-            else:
-                returncode_and_protein = fold(random_value[0], random_value[1], protein)
-
-                while returncode_and_protein[0] == "collision":
-                    random_value = get_random_value(run_info.dimension, protein.protein_length - 2)
+            for j in range(6):
+                random_value = get_random_value(run_info.dimension, protein.protein_length - 2)
+                if accept == True:
                     returncode_and_protein = fold(random_value[0], random_value[1], protein)
-                protein = returncode_and_protein[1]
+                    protein = returncode_and_protein[1]
+                else:
+                    returncode_and_protein = fold(random_value[0], random_value[1], protein)
 
-        stability = score(protein)
+                    while returncode_and_protein[0] == "collision":
+                        random_value = get_random_value(run_info.dimension, protein.protein_length - 2)
+                        returncode_and_protein = fold(random_value[0], random_value[1], protein)
+                    protein = returncode_and_protein[1]
 
-        # if the score is lower save that particular grid in winning grid
-        if stability < best_score:
-            protein.winning_grid = copy.deepcopy(protein.grid)
-            protein.winning_coordinates = copy.deepcopy(protein.coordinates)
-            best_score = stability
-            protein.winning_score = best_score
+            stability = score(protein)
 
-        else:
-            protein.grid = copy.deepcopy(protein.winning_grid)
-            protein.coordinates = copy.deepcopy(protein.winning_coordinates)
+            # if the score is lower save that particular grid in winning grid
+            if stability < best_score:
+                protein.winning_grid = copy.deepcopy(protein.grid)
+                protein.winning_coordinates = copy.deepcopy(protein.coordinates)
+                best_score = stability
+                protein.winning_score = best_score
+
+            else:
+                protein.grid = copy.deepcopy(protein.winning_grid)
+                protein.coordinates = copy.deepcopy(protein.winning_coordinates)
 
     return [run_info, protein]
 
