@@ -48,11 +48,12 @@ def main():
 
     message("Protein initiated, algorithm chosen, please be patient.")
 
-    with open('C4_3D_SA', 'a', newline='') as datafile:
+    with open('C1_3D_HC.csv', 'a', newline='') as datafile:
         datawriter = csv.writer(datafile)
-        datawriter.writerow("# These are the best scores for 100 times SA at protein C4, in 3D.")
+        datawriter.writerow("# These are the best scores for 100 times HC at protein C1, in 3D.")
 
         for i in range(100):
+            print(i)
 
             info_and_protein = algo_functions[algorithms[algorithm_choice]](run_info, protein)
             run_info = info_and_protein[0]

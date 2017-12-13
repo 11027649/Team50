@@ -29,7 +29,7 @@ def simulated_annealing(run_info, protein):
 
     # generate a filepath
     date = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
-    run_info.filepath = "data\hillclimber\hc_" + str(date) + ".csv"
+    run_info.filepath = "data\hillclimber\sa_" + str(date) + ".csv"
 
     # store data in .csv
     with open(run_info.filepath, 'w', newline='') as datafile:
