@@ -109,7 +109,7 @@ def plot_best_protein(protein, run_info):
 				X_line = [X[cur_id], X[to_id]]
 				Y_line = [Y[cur_id], Y[to_id]]
 				Z_line = [Z[cur_id], Z[to_id]]
-				ax.plot(XX, YY, ZZ, linestyle='dotted', color="black")
+				ax.plot(X_line, Y_line, Z_line, linestyle='dotted', color="black")
 
 	X = np.array(X)
 	Y = np.array(Y)
