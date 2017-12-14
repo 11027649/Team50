@@ -17,8 +17,9 @@ The goal is of this project is to fold the given proteins so that they are maxim
 ## The Protein Optimization Program
 The main file has dependencies on a lot of other files with other functions. Here, the most important ones are explained.
 
-**global_vars**
-Holds all the global variables that are needed in every file: protein_string, grid, coordinates, winning score, current score and the class amino with in it: an ID, the letter (H/P/C), and x,y coordinates
+**classes**
+There are two classes: protein, and run info. In run info all the info for this run is stored, this is information like, what protein string, what algorithm and in which dimension (2D or 3D.)
+Protein holds the coordinates of each amino acid, the protein string, and the grid.
 
 **input_string**
 After you run the main file, the input_string function is the first one to be called. It wil ask you for a string input. The assignements we need to are saved in a .txt file. This way you can put in A1,B1,B2,C1, etc. You can also put in a string containing H,P and C. This function calls the init_grid function.
@@ -32,14 +33,14 @@ The fold function takes the ID of the amino that's being folded, and the directi
 **score**
 In the score file a function is implemented that takes the grid from global_vars as input and returns the stability as an integer. It does this by iterating over the protein and distracting 1 (for H) or 5 (for C) from the stability everytime an H (or C) is under or left from another H (or C) and is not bonded.
 
-**algo_brute_force**
-This Brute Force algorithm searches trough the whole space state and gives the first protein back that had the best score.
-
-**hillclimber**
-This hillclimber algorithm does 3 random foldations, and checks for a better stability. Does this 5000 iterations (for now). We are searching for when all the proteins stabilize to make an estimation for the number of iterations.
+**algorithms**
+The Brute Force algorithm searches trough the whole space state and gives the first protein back that had the best score.
+The hillclimber algorithm does 14 random foldations and checks for a better stability. Does this 5000 iterations.
+The Simulated Annealing algorithm does 14 random foldations and checks for a better stability, but it also calculates an acceptance chance for a detoriation.
 
 **plots**
-This dataplotterplots the scores of the protein at each iteration of the last hillclimber program you ran.
+Plots the scores of the protein at each iteration of the last hillclimber or simulated annealing program you ran.
+Also plots the best protein after you ran an algorithm.
 
 ## Authors
 Christian Bijvoets, David van Grinsven and Natasja Wezel
