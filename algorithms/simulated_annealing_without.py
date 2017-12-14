@@ -19,7 +19,7 @@ def simulated_annealing(protein):
     protein.winning_coordinates = copy.deepcopy(protein.coordinates)
 
     # initialize iterations, begin and end temperature
-    N = 10000
+    N = 8000
     T0 = Ti = 1
     Tn = 0
     current_score = 0
@@ -76,12 +76,14 @@ def simulated_annealing(protein):
 
 def simulated_annealing_control(protein):
 
+    current_score = 0
+
     length = protein.protein_length
     protein.winning_grid = copy.deepcopy(protein.grid)
     protein.winning_coordinates = copy.deepcopy(protein.coordinates)
 
     # initialize iterations, begin and end temperature
-    N = 10000
+    N = 8000
     T0 = Ti = 1
     Tn = 0
 

@@ -110,18 +110,18 @@ def simulated_annealing_control(run_info, protein):
     run_info.algorithm = "Simulated Annealing (with fold control)"
 
     # store data in .csv
-    # with open(filepath, 'w', newline='') as datafile:
-    #     datawriter = csv.writer(datafile)
-    #     datawriter.writerow(["# This is a datafile generated for protein: " + str(protein.protein_string)])
-    #     datawriter.writerow(["# It is generated with a Simulated Annealing with fold control algorithm."])
+    with open(filepath, 'w', newline='') as datafile:
+        datawriter = csv.writer(datafile)
+        datawriter.writerow(["# This is a datafile generated for protein: " + str(protein.protein_string)])
+        datawriter.writerow(["# It is generated with a Simulated Annealing with fold control algorithm."])
 
     # do N times 3 random folds and keep track of the best value
     for i in range(N):
 
-        # printProgressBar(i, N)
+        printProgressBar(i, N)
 
         # write score and iteration to a csv file
-        # datawriter.writerow([i] + [current_score])
+        datawriter.writerow([i] + [current_score])
 
         # do .. random folds and check each fold for a better score
         for j in range(10):

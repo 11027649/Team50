@@ -49,7 +49,7 @@ def main():
 
     message("Protein initiated, algorithm chosen, please be patient.")
 
-    mixer.music.load("elevator.mp3")
+    mixer.music.load("doc\elevator.mp3")
     mixer.music.play()
 
     info_and_protein = algo_functions[algorithms[algorithm_choice]](run_info, protein)
@@ -57,7 +57,7 @@ def main():
     protein = info_and_protein[1]
 
     mixer.music.stop()
-    mixer.music.load("ping.mp3")
+    mixer.music.load("doc\ping.mp3")
     mixer.music.play()
 
     message("Best score: " + str(protein.winning_score))
