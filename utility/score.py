@@ -28,12 +28,11 @@ def score(protein):
 
         # if it's an H, do something with the score
         # check only under and to the right to not count interactions double
-        if grid[x][y][z].letter == "H" or grid[x][y][z].letter == "C":
+        if not grid[x][y][z].letter == "P":
 
             # check 4 things for right:
                 # if it's not the first column (for out of range purposes)
                 # if there's an Amino class object on the gridpoint on the left
-                # if that class object's letter is an "H"
                 # if the two are not "bonded" by checking id's
             if type(grid[x + 1][y][z]) == Amino \
                 and not grid[x + 1][y][z].letter == "P" \
@@ -44,6 +43,8 @@ def score(protein):
                         score -= 5
                     else:
                         score -= 1
+                else:
+                    score -= 1
 
             # same for under
             if type(grid[x][y + 1][z]) == Amino \
@@ -55,6 +56,8 @@ def score(protein):
                         score -= 5
                     else:
                         score -= 1
+                else:
+                    score -= 1
 
             # same for "beneath" (at z axis)
             if type(grid[x][y][z + 1]) == Amino \
@@ -66,5 +69,7 @@ def score(protein):
                         score -= 5
                     else:
                         score -= 1
+                else:
+                    score -= 1
 
     return score

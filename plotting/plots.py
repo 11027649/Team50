@@ -37,9 +37,7 @@ def plot_best_protein(protein, run_info):
 
 	coor = protein.winning_coordinates
 
-	X = []
-	Y = []
-	Z = []
+	X, Y, Z = [], [], []
 
 	# add coordinates to X and Y array
 	for i in range(protein.protein_length):
@@ -56,29 +54,18 @@ def plot_best_protein(protein, run_info):
 		else:
 			ax.scatter(X[i],Y[i], Z[i], marker='o', s = 200, color="red")
 
-	ax.set_title('Best score for: ' + run_info.protein_name)
-
-	ax.set_xlabel('X axis')
-	ax.set_ylabel('Y axis')
-	ax.set_zlabel('Z axis')
-
 	# plot solid lines for bonds
 	ax.plot(X,Y,Z, linestyle='solid', color="black")
 
 	# plot dashed lines for interactions
 	grid = protein.winning_grid
-	coordinates = protein.winning_coordinates[:]
-
 	cystein_appearance = False
 
 	# for all aminos in the protein
 	for i in range(protein.protein_length):
-
-	# the coordinates are stored in an array. i is the amino acid that you're
-	# looking for, [0] or [1] are x and y
-		x = coordinates[i][0]
-		y = coordinates[i][1]
-		z = coordinates[i][2]
+		x = coor[i][0]
+		y = coor[i][1]
+		z = coor[i][2]
 
 		# save the current id of the amino acid
 		cur_id = grid[x][y][z].num_id
@@ -86,44 +73,42 @@ def plot_best_protein(protein, run_info):
 		if (grid[x][y][z].letter == "C"):
 			cystein_appearance = True
 
-		# if it's an H, do something with the score
-		# check only under and to the right to not count interactions double
-		if grid[x][y][z].letter == "H" or grid[x][y][z].letter == "C":
+		# if the the letter is no P, add bonds
+		if not grid[x][y][z].letter == "P":
 
 			if type(grid[x + 1][y][z]) == Amino \
-				and grid[x + 1][y][z].letter == grid[x][y][z].letter \
+				and not grid[x + 1][y][z].letter == "P" \
 				and abs(cur_id - grid[x + 1][y][z].num_id) > 1:
 
 				to_id = grid[x + 1][y][z].num_id
 
-				XX = [X[cur_id], X[to_id]]
-				YY = [Y[cur_id], Y[to_id]]
-				ZZ = [Z[cur_id], Z[to_id]]
-				ax.plot(XX, YY, ZZ, linestyle='dotted', color="black")
-
+				X_line = [X[cur_id], X[to_id]]
+				Y_line = [Y[cur_id], Y[to_id]]
+				Z_line = [Z[cur_id], Z[to_id]]
+				ax.plot(X_line, Y_line, Z_line, linestyle='dotted', color="black")
 
 			# same for under
 			if type(grid[x][y + 1][z]) == Amino \
-			and grid[x][y + 1][z].letter == grid[x][y][z].letter \
+			and not grid[x][y + 1][z].letter == "P" \
 			and abs(cur_id - grid[x][y + 1][z].num_id) > 1:
 
 				to_id = grid[x][y + 1][z].num_id
 
-				XX = [X[cur_id], X[to_id]]
-				YY = [Y[cur_id], Y[to_id]]
-				ZZ = [Z[cur_id], Z[to_id]]
-				ax.plot(XX, YY, ZZ, linestyle='dotted', color="black")
+				X_line = [X[cur_id], X[to_id]]
+				Y_line = [Y[cur_id], Y[to_id]]
+				Z_line = [Z[cur_id], Z[to_id]]
+				ax.plot(X_line, Y_line, Z_line, linestyle='dotted', color="black")
 
 			# same for "beneath" (at z axis)
 			if type(grid[x][y][z + 1]) == Amino \
-			and grid[x][y][z + 1].letter == grid[x][y][z].letter \
+			and not grid[x][y][z + 1].letter == "P" \
 			and abs(cur_id - grid[x][y][z + 1].num_id) > 1:
 
 				to_id = grid[x][y][z + 1].num_id
 
-				XX = [X[cur_id], X[to_id]]
-				YY = [Y[cur_id], Y[to_id]]
-				ZZ = [Z[cur_id], Z[to_id]]
+				X_line = [X[cur_id], X[to_id]]
+				Y_line = [Y[cur_id], Y[to_id]]
+				Z_line = [Z[cur_id], Z[to_id]]
 				ax.plot(XX, YY, ZZ, linestyle='dotted', color="black")
 
 	X = np.array(X)
@@ -131,7 +116,7 @@ def plot_best_protein(protein, run_info):
 	Z = np.array(Z)
 
 	# create cubic bounding box to simulate equal aspect ratio
-	# source:
+	# source:https://stackoverflow.com/questions/13685386/matplotlib-equal-unit-length-with-equal-aspect-ratio-z-axis-is-not-equal-to
 	max_range = np.array([X.max()-X.min(), Y.max()-Y.min(), Z.max()-Z.min()]).max()
 	Xb = 0.5*max_range*np.mgrid[-1:2:2,-1:2:2,-1:2:2][0].flatten() + 0.5*(X.max()+X.min())
 	Yb = 0.5*max_range*np.mgrid[-1:2:2,-1:2:2,-1:2:2][1].flatten() + 0.5*(Y.max()+Y.min())
@@ -140,6 +125,12 @@ def plot_best_protein(protein, run_info):
 	# comment or uncomment following both lines to test the fake bounding box:
 	for xb, yb, zb in zip(Xb, Yb, Zb):
 	   ax.plot([xb], [yb], [zb], 'w')
+
+	# set title and labels
+	ax.set_title('Best score for: ' + run_info.protein_name)
+	ax.set_xlabel('X axis')
+	ax.set_ylabel('Y axis')
+	ax.set_zlabel('Z axis')
 
 	# set legend
 	polar = mlines.Line2D([], [], color='red', marker='o', markersize=15, label='Polar')
@@ -153,6 +144,7 @@ def plot_best_protein(protein, run_info):
 	
 	plt.legend(handles=legend)
 
+	# set caption
 	fig.text(.1,.1, "Stability: " + str(protein.winning_score))
 
 	plt.show()
