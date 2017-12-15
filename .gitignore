@@ -2,14 +2,6 @@
 __pycache__/
 *.pyc
 
-# IGNORE files that are made to run some proteins very often
-run_c1.py
-run_c2.py
-run_c3.py
-run_c4.py
-simulated_annelealing_without.py
-hillclimber_without.py
-
 # IGNORE generated csv files
 *.csv
 
