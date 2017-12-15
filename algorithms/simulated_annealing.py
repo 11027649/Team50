@@ -190,6 +190,8 @@ def simulated_annealing_control(run_info, protein):
             # write score and iteration to a csv file
             datawriter.writerow([i] + [current_score])
 
+            # this variable checks if a better score is found in 14 folds
+            found_better = False
             # do .. random folds and check each fold for a better score
             for j in range(14):
                 # initial random value
@@ -207,9 +209,10 @@ def simulated_annealing_control(run_info, protein):
                     protein.winning_grid = copy.deepcopy(protein.grid)
                     protein.winning_coordinates = copy.deepcopy(protein.coordinates)
                     protein.winning_score = current_score
+                    found_better = True
 
-            
-            if current_score >= protein.winning_score:
+
+            if found_better == False:
                 # calculate acceptance chance
                 difference = protein.winning_score - current_score
                 acceptance_chance = math.exp(difference / Ti)
@@ -231,7 +234,7 @@ def simulated_annealing_control(run_info, protein):
                     protein.winning_grid = copy.deepcopy(protein.grid)
                     protein.winning_coordinates = copy.deepcopy(protein.coordinates)
 
-        
+
         # cool system linear
         Ti = T0 - (i * (T0 - Tn) / N)
 
