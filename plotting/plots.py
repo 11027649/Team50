@@ -38,24 +38,6 @@ def plot_best_protein(protein, run_info):
 	global X, Y, Z
 	X, Y, Z = [], [], []
 
-	# add coordinates to X and Y array
-	for i in range(protein.length):
-		X.append(coor[i][0])
-		Y.append(coor[i][1])
-		Z.append(coor[i][2])
-
-	# scatter points, plot the aminos in the right colors
-	for i in range(protein.length):
-		if protein.protein_string[i] == 'H':
-			ax.scatter(X[i],Y[i], Z[i], marker = 'o', s = 200, color="blue")
-		elif protein.protein_string[i] == 'C':
-			ax.scatter(X[i], Y[i], Z[i], marker = 'o', s = 200, color = "yellow")
-		else:
-			ax.scatter(X[i],Y[i], Z[i], marker='o', s = 200, color="red")
-
-	# plot solid lines for bonds
-	ax.plot(X,Y,Z, linestyle='solid', color="black")
-
 	# plot dashed lines for interactions
 	grid = protein.winning_grid
 	cystein_appearance = False
@@ -63,24 +45,36 @@ def plot_best_protein(protein, run_info):
     # create global cur_id
 	global cur_id
 
+	# add coordinates to X and Y array
+	for i in range(protein.length):
+		X.append(coor[i][0])
+		Y.append(coor[i][1])
+		Z.append(coor[i][2])
+
+		# scatter points, plot the aminos in the right colors
+		if protein.protein_string[i] == 'H':
+			ax.scatter(X[i],Y[i], Z[i], marker = 'o', s = 200, color="blue")
+		elif protein.protein_string[i] == 'C':
+			cystein_appearance = True
+			ax.scatter(X[i], Y[i], Z[i], marker = 'o', s = 200, color = "yellow")
+		else:
+			ax.scatter(X[i],Y[i], Z[i], marker='o', s = 200, color="red")
+
 	# for all aminos in the protein
 	for i in range(protein.length):
-		x = coor[i][0]
-		y = coor[i][1]
-		z = coor[i][2]
-
 		# save the current id of the amino acid
-		cur_id = grid[x][y][z].num_id
-
-		if (grid[x][y][z].letter == "C"):
-			cystein_appearance = True
+		cur_id = grid[X[i]][Y[i]][Z[i]].num_id
 
 		# if the the letter is no P, add bonds
-		if not grid[x][y][z].letter == "P":
+		if not grid[X[i]][Y[i]][Z[i]].letter == "P":
 
-			set_line(grid[x + 1][y][z])
-			set_line(grid[x][y + 1][z])
-			set_line(grid[x][y][z + 1])
+			# draw lines
+			set_line(grid[X[i] + 1][Y[i]][Z[i]])
+			set_line(grid[X[i]][Y[i] + 1][Z[i]])
+			set_line(grid[X[i]][Y[i]][Z[i] + 1])
+
+	# plot solid lines for bonds
+	ax.plot(X,Y,Z, linestyle='solid', color="black")
 
 	X = np.array(X)
 	Y = np.array(Y)
@@ -88,10 +82,10 @@ def plot_best_protein(protein, run_info):
 
 	# create cubic bounding box to simulate equal aspect ratio
 	# source:https://stackoverflow.com/questions/13685386/matplotlib-equal-unit-length-with-equal-aspect-ratio-z-axis-is-not-equal-to
-	max_range = np.array([X.max()-X.min(), Y.max()-Y.min(), Z.max()-Z.min()]).max()
-	Xb = 0.5*max_range*np.mgrid[-1:2:2,-1:2:2,-1:2:2][0].flatten() + 0.5*(X.max()+X.min())
-	Yb = 0.5*max_range*np.mgrid[-1:2:2,-1:2:2,-1:2:2][1].flatten() + 0.5*(Y.max()+Y.min())
-	Zb = 0.5*max_range*np.mgrid[-1:2:2,-1:2:2,-1:2:2][2].flatten() + 0.5*(Z.max()+Z.min())
+	max_range = np.array([X.max() - X.min(), Y.max() - Y.min(), Z.max() - Z.min()]).max()
+	Xb = 0.5 * max_range * np.mgrid[-1:2:2, -1:2:2, -1:2:2][0].flatten() + 0.5 * (X.max() + X.min())
+	Yb = 0.5 * max_range * np.mgrid[-1:2:2, -1:2:2, -1:2:2][1].flatten() + 0.5 * (Y.max() + Y.min())
+	Zb = 0.5 * max_range * np.mgrid[-1:2:2, -1:2:2, -1:2:2][2].flatten() + 0.5 * (Z.max() + Z.min())
 
 	# comment or uncomment following both lines to test the fake bounding box:
 	for xb, yb, zb in zip(Xb, Yb, Zb):
@@ -110,14 +104,13 @@ def plot_best_protein(protein, run_info):
 	if cystein_appearance == True:
 		cystein = mlines.Line2D([], [], color='yellow', marker='o', markersize=15, label='Cystein')
 		legend = [cystein, polar, apolar]
-	elif cystein_appearance == False:
+	else:
 		legend = [polar, apolar]
 
 	plt.legend(handles=legend)
 
-	# set caption
+	# set caption and show
 	fig.text(.1,.1, "Stability: " + str(protein.winning_score))
-
 	plt.show()
 
 def set_line (toCheck):
