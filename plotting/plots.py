@@ -15,16 +15,13 @@ def plot_data(run_info):
 		dimension = '2D'
 	else:
 		dimension = '3D'
-	
-	ax.set_title(run_info.algorithm + ' for: ' + run_info.protein_name + ' in: ' + dimension)
 
+	ax.set_title(run_info.algorithm + ' for: ' + run_info.protein_name + ' in: ' + dimension)
 	ax.set_xlabel('Iteration')
 	ax.set_ylabel('Stability')
-
 	ax.plot(data['x'], data['y'], color = 'r', label = 'stability')
 
 	plt.show()
-
 
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.lines as mlines
@@ -32,11 +29,13 @@ import matplotlib.lines as mlines
 def plot_best_protein(protein, run_info):
 
 	fig = plt.figure()
+	global ax
 	ax = fig.add_subplot(111, projection='3d')
 	plt.rcParams["font.size"] = 10
 
 	coor = protein.winning_coordinates
 
+	global X, Y, Z
 	X, Y, Z = [], [], []
 
 	# add coordinates to X and Y array
@@ -61,6 +60,9 @@ def plot_best_protein(protein, run_info):
 	grid = protein.winning_grid
 	cystein_appearance = False
 
+    # create global cur_id
+	global cur_id
+
 	# for all aminos in the protein
 	for i in range(protein.length):
 		x = coor[i][0]
@@ -76,40 +78,9 @@ def plot_best_protein(protein, run_info):
 		# if the the letter is no P, add bonds
 		if not grid[x][y][z].letter == "P":
 
-			if type(grid[x + 1][y][z]) == Amino \
-				and not grid[x + 1][y][z].letter == "P" \
-				and abs(cur_id - grid[x + 1][y][z].num_id) > 1:
-
-				to_id = grid[x + 1][y][z].num_id
-
-				X_line = [X[cur_id], X[to_id]]
-				Y_line = [Y[cur_id], Y[to_id]]
-				Z_line = [Z[cur_id], Z[to_id]]
-				ax.plot(X_line, Y_line, Z_line, linestyle='dotted', color="black")
-
-			# same for under
-			if type(grid[x][y + 1][z]) == Amino \
-			and not grid[x][y + 1][z].letter == "P" \
-			and abs(cur_id - grid[x][y + 1][z].num_id) > 1:
-
-				to_id = grid[x][y + 1][z].num_id
-
-				X_line = [X[cur_id], X[to_id]]
-				Y_line = [Y[cur_id], Y[to_id]]
-				Z_line = [Z[cur_id], Z[to_id]]
-				ax.plot(X_line, Y_line, Z_line, linestyle='dotted', color="black")
-
-			# same for "beneath" (at z axis)
-			if type(grid[x][y][z + 1]) == Amino \
-			and not grid[x][y][z + 1].letter == "P" \
-			and abs(cur_id - grid[x][y][z + 1].num_id) > 1:
-
-				to_id = grid[x][y][z + 1].num_id
-
-				X_line = [X[cur_id], X[to_id]]
-				Y_line = [Y[cur_id], Y[to_id]]
-				Z_line = [Z[cur_id], Z[to_id]]
-				ax.plot(X_line, Y_line, Z_line, linestyle='dotted', color="black")
+			set_line(grid[x + 1][y][z])
+			set_line(grid[x][y + 1][z])
+			set_line(grid[x][y][z + 1])
 
 	X = np.array(X)
 	Y = np.array(Y)
@@ -141,10 +112,22 @@ def plot_best_protein(protein, run_info):
 		legend = [cystein, polar, apolar]
 	elif cystein_appearance == False:
 		legend = [polar, apolar]
-	
+
 	plt.legend(handles=legend)
 
 	# set caption
 	fig.text(.1,.1, "Stability: " + str(protein.winning_score))
 
 	plt.show()
+
+def set_line (toCheck):
+	if type(toCheck) == Amino \
+	and not toCheck.letter == "P" \
+	and abs(cur_id - toCheck.num_id) > 1:
+
+		to_id = toCheck.num_id
+
+		X_line = [X[cur_id], X[to_id]]
+		Y_line = [Y[cur_id], Y[to_id]]
+		Z_line = [Z[cur_id], Z[to_id]]
+		ax.plot(X_line, Y_line, Z_line, linestyle='dotted', color="black")
