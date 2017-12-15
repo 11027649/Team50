@@ -208,29 +208,31 @@ def simulated_annealing_control(run_info, protein):
                     protein.winning_coordinates = copy.deepcopy(protein.coordinates)
                     protein.winning_score = current_score
 
+            
+            if current_score >= protein.winning_score:
+                # calculate acceptance chance
+                difference = protein.winning_score - current_score
+                acceptance_chance = math.exp(difference / Ti)
+
+                # generate random compare value
+                value = randint(1,10000)/10000
+
+                # if acceptance_chance <= value, the deterioration is not accepted
+                if acceptance_chance < value:
+
+                    # if not accepted, restore the old grid
+                    protein.grid = copy.deepcopy(protein.winning_grid)
+                    protein.coordinates = copy.deepcopy(protein.winning_coordinates)
+                    current_score = old_score
+
+                # if accepted
                 else:
-                    # calculate acceptance chance
-                    difference = protein.winning_score - current_score
-                    acceptance_chance = math.exp(difference / Ti)
+                    # update changes anyway in the grid
+                    protein.winning_grid = copy.deepcopy(protein.grid)
+                    protein.winning_coordinates = copy.deepcopy(protein.coordinates)
 
-                    # generate random compare value
-                    value = randint(1,10000)/10000
-
-                    # if acceptance_chance <= value, the deterioration is not accepted
-                    if acceptance_chance < value:
-
-                        # if not accepted, restore the old grid
-                        protein.grid = copy.deepcopy(protein.winning_grid)
-                        protein.coordinates = copy.deepcopy(protein.winning_coordinates)
-                        current_score = old_score
-
-                    # if accepted
-                    else:
-                        # update changes anyway in the grid
-                        protein.winning_grid = copy.deepcopy(protein.grid)
-                        protein.winning_coordinates = copy.deepcopy(protein.coordinates)
-
+        
         # cool system linear
-        Ti = T0 - ((i - minus) * (T0 - Tn) / N)
+        Ti = T0 - (i * (T0 - Tn) / N)
 
     return [run_info, protein]
