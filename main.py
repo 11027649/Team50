@@ -5,7 +5,7 @@ from utility.input_string import input_string
 # import algorithms
 from algorithms.hillclimber import hillclimber, fold_control_hillclimber, extend_fold_hillclimber
 from algorithms.simulated_annealing import simulated_annealing, simulated_annealing_control, simulated_annealing_weird_reheat
-from algorithms.algo_brute_force import brute_force, brute_force2
+from algorithms.algo_brute_force import brute_force
 
 # import plot tools
 from plotting.plots import plot_data, plot_best_protein
@@ -32,7 +32,7 @@ def main():
     run_info.dimension = dimension
     protein.init_grid()
 
-    algo_functions = {"Brute Force": brute_force, "brute_force 2d": brute_force2, "Hill Climber": hillclimber, "Fold Control Hillclimber": fold_control_hillclimber, "Extend Fold Hillclimber": extend_fold_hillclimber, "Simulated Annealing": simulated_annealing, "Simulated Annealing Control": simulated_annealing_control, "Simulated Annealing Weird Reheat": simulated_annealing_weird_reheat}
+    algo_functions = {"Brute Force": brute_force, "Hill Climber": hillclimber, "Fold Control Hillclimber": fold_control_hillclimber, "Extend Fold Hillclimber": extend_fold_hillclimber, "Simulated Annealing": simulated_annealing, "Simulated Annealing Control": simulated_annealing_control, "Simulated Annealing Weird Reheat": simulated_annealing_weird_reheat}
 
     algorithms = []
     for key, value in algo_functions.items():
