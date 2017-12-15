@@ -91,9 +91,10 @@ def simulated_annealing_weird_reheat(run_info, protein):
 
     # initialize iterations, begin and end temperature
     N = 10000
-    T0 = Ti = 0.5
+    T0 = Ti = 1
     Tn = 0
     current_score = 0
+    minus = 0
 
     # store algorithm in file, write a header
     run_info.algorithm = "Simulated Annealing Weird One"
@@ -106,8 +107,11 @@ def simulated_annealing_weird_reheat(run_info, protein):
 
         # do N times 10 random folds and keep track of the best value
         for i in range(N):
+
             if i == 5000:
-                Ti = 2 * T0
+                minus = 5000
+
+            print(Ti)
 
             printProgressBar(i, N)
             datawriter.writerow([i] + [current_score])
@@ -154,7 +158,7 @@ def simulated_annealing_weird_reheat(run_info, protein):
                     protein.winning_coordinates = copy.deepcopy(protein.coordinates)
 
             # cool system linear
-            Ti = T0 - (i * (T0 - Tn) / N)
+            Ti = T0 - 2 * (i * (T0 - Tn) / N)
 
     return [run_info, protein]
 
@@ -227,6 +231,6 @@ def simulated_annealing_control(run_info, protein):
                         protein.winning_coordinates = copy.deepcopy(protein.coordinates)
 
         # cool system linear
-        Ti = T0 - (i * (T0 - Tn) / N)
+        Ti = T0 - ((i - minus) * (T0 - Tn) / N)
 
     return [run_info, protein]
