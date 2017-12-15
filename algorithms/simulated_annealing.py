@@ -4,8 +4,6 @@ from utility.fold import fold
 from algorithms.hillclimber import get_random_value
 from algorithms.progress_bar import printProgressBar
 
-import datetime
-
 from random import randint
 import copy
 import csv
@@ -14,7 +12,7 @@ import math
 
 def simulated_annealing(run_info, protein):
 
-    length = protein.protein_length
+    length = protein.length
     protein.winning_grid = copy.deepcopy(protein.grid)
     protein.winning_coordinates = copy.deepcopy(protein.coordinates)
 
@@ -26,28 +24,22 @@ def simulated_annealing(run_info, protein):
 
     # store algorithm in file, write a header
     run_info.algorithm = "Simulated Annealing"
-
-    # generate a filepath
-    date = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
-    run_info.filepath = "data\hillclimber\sa_" + str(date) + ".csv"
+    run_info.generate_filepath("sa_")
+    run_info.generate_header(protein.protein_string)
 
     # store data in .csv
     with open(run_info.filepath, 'w', newline='') as datafile:
         datawriter = csv.writer(datafile)
-        datawriter.writerow(["# This is a datafile generated for protein: " + str(protein.protein_string)])
-        datawriter.writerow(["# It is generated with a" +  run_info.algorithm + "algorithm."])
 
         # do N times 10 random folds and keep track of the best value
         for i in range(N):
 
             printProgressBar(i, N)
-
-            # write score and iteration to a csv file
             datawriter.writerow([i] + [current_score])
 
             # do random folds
-            for j in range(10):
-                random_value = get_random_value(run_info.dimension, protein.protein_length - 2)
+            for j in range(14):
+                random_value = get_random_value(run_info.dimension, protein.length - 2)
                 returncode_and_protein = fold(random_value[0], random_value[1], protein)
                 protein = returncode_and_protein[1]
 
@@ -95,7 +87,7 @@ def simulated_annealing(run_info, protein):
 def simulated_annealing_control(run_info, protein):
     protein.winning_score = current_score = 0
 
-    length = protein.protein_length
+    length = protein.length
     protein.winning_grid = copy.deepcopy(protein.grid)
     protein.winning_coordinates = copy.deepcopy(protein.coordinates)
 
@@ -104,16 +96,13 @@ def simulated_annealing_control(run_info, protein):
     T0 = Ti = 1
     Tn = 0
 
-    date = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
-    filepath = "data\simulated_annealing\sa_fc" + str(date) + ".csv"
-    run_info.filepath = filepath
     run_info.algorithm = "Simulated Annealing (with fold control)"
+    run_info.generate_filepath("sa_fc_")
+    run_info.generate_header(protein.protein_string)
 
     # store data in .csv
     with open(filepath, 'w', newline='') as datafile:
         datawriter = csv.writer(datafile)
-        datawriter.writerow(["# This is a datafile generated for protein: " + str(protein.protein_string)])
-        datawriter.writerow(["# It is generated with a Simulated Annealing with fold control algorithm."])
 
         # do N times 3 random folds and keep track of the best value
         for i in range(N):
@@ -124,16 +113,11 @@ def simulated_annealing_control(run_info, protein):
             datawriter.writerow([i] + [current_score])
 
             # do .. random folds and check each fold for a better score
-            for j in range(10):
+            for j in range(14):
                 # initial random value
-                random_value = get_random_value(run_info.dimension, protein.protein_length - 2)
+                random_value = get_random_value(run_info.dimension, protein.length - 2)
 
                 returncode_and_protein = fold(random_value[0], random_value[1], protein)
-
-                # while  returncode_and_protein[0] == "collision":
-                #     random_value = get_random_value(run_info.dimension, protein.protein_length - 2)
-                #     returncode_and_protein = fold(random_value[0], random_value[1], protein)
-
                 protein = returncode_and_protein[1]
 
                 old_score = current_score

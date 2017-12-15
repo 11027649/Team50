@@ -40,7 +40,7 @@ def update_grid(protein):
             zmin = coor[i][2]
 
     # correct all the coordinates of the AA's with xmin, ymin and zmin
-    for i in range(protein.protein_length):
+    for i in range(protein.length):
         coor[i][0] -= xmin
         coor[i][1] -= ymin
         coor[i][2] -= zmin
@@ -53,7 +53,7 @@ def update_grid(protein):
     protein.grid = [[[0 for i in range(grid_z + 1)] for j in range(grid_y + 1)] for k in range(grid_x + 1)]
 
     # put the right AA's at the grid points
-    for i in range(protein.protein_length):
+    for i in range(protein.length):
         protein.grid[coor[i][0]][coor[i][1]][coor[i][2]] = Amino(i, protein.protein_string[i])
 
     # put the new coordinates in the global coordinates

@@ -40,13 +40,13 @@ def plot_best_protein(protein, run_info):
 	X, Y, Z = [], [], []
 
 	# add coordinates to X and Y array
-	for i in range(protein.protein_length):
+	for i in range(protein.length):
 		X.append(coor[i][0])
 		Y.append(coor[i][1])
 		Z.append(coor[i][2])
 
 	# scatter points, plot the aminos in the right colors
-	for i in range(protein.protein_length):
+	for i in range(protein.length):
 		if protein.protein_string[i] == 'H':
 			ax.scatter(X[i],Y[i], Z[i], marker = 'o', s = 200, color="blue")
 		elif protein.protein_string[i] == 'C':
@@ -62,7 +62,7 @@ def plot_best_protein(protein, run_info):
 	cystein_appearance = False
 
 	# for all aminos in the protein
-	for i in range(protein.protein_length):
+	for i in range(protein.length):
 		x = coor[i][0]
 		y = coor[i][1]
 		z = coor[i][2]

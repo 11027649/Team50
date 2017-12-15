@@ -4,10 +4,7 @@
 # A function that allows the user to choose a protein.
 # Takes: nothing, instead asks for input
 # Updates: protein_string
-# Calls: init_grid()
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
-from utility.init_grid import init_grid
 
 from info_class import Info
 from protein_class import Protein
@@ -73,6 +70,6 @@ def input_string():
 
         # print the users input and store in protein (in uppercase letters)
         protein = Protein(protein_string.upper(), len(protein_string), [], [], [], [], 0, [])
+        protein.init_aminos()
 
-    protein = init_grid(protein)
     return [run_info, protein]

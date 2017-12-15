@@ -29,6 +29,7 @@ def main():
         dimension = int(input("Chosen dimension: "))
 
     run_info.dimension = dimension
+    protein.init_grid()
 
     algo_functions = {"Hill Climber": hillclimber, "Fold Control Hillclimber": fold_control_hillclimber, "Extend Fold Hillclimber": extend_fold_hillclimber, "Simulated Annealing": simulated_annealing, "Simulated Annealing Control": simulated_annealing_control}
 

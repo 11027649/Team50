@@ -24,7 +24,7 @@ def fold(num_id, direction, protein):
     backup_coordinates = coordinates[:]
     grid = protein.grid
 
-    protein_length = protein.protein_length
+    protein_length = protein.length
     grid_x = len(grid)
     grid_y = len(grid[0])
     grid_z = len(grid[0][0])
