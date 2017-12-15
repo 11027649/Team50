@@ -27,6 +27,8 @@ class Protein():
         """ Initializes the grid with an x of protein length, y,z of 2. 
             Lays the protein horizontally in this grid. """
 
+        self.init_aminos()
+        
         # initialize the grid
         self.grid = [[[0 for i in range(2)] for j in range(2)] for k in range(self.length + 1)]
         

@@ -7,8 +7,6 @@
 # Updates: global var coordinates and grid.
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from protein_class import Amino
-
 def update_grid(protein):
     """ Gets the global coordinates and uses them to get the grid and heigth for
         the grid. Corrects these coordinates to make them as low as possible.
@@ -54,7 +52,7 @@ def update_grid(protein):
 
     # put the right AA's at the grid points
     for i in range(protein.length):
-        protein.grid[coor[i][0]][coor[i][1]][coor[i][2]] = Amino(i, protein.protein_string[i])
+        protein.grid[coor[i][0]][coor[i][1]][coor[i][2]] = protein.aminos[i]
 
     # put the new coordinates in the global coordinates
     protein.coordinates = coor[:]

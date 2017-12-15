@@ -70,6 +70,5 @@ def input_string():
 
         # print the users input and store in protein (in uppercase letters)
         protein = Protein(protein_string.upper(), len(protein_string), [], [], [], [], 0, [])
-        protein.init_aminos()
 
     return [run_info, protein]
