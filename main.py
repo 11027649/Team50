@@ -5,7 +5,7 @@ from utility.input_string import input_string
 # import algorithms
 from algorithms.hillclimber import hillclimber, fold_control_hillclimber, extend_fold_hillclimber
 from algorithms.simulated_annealing import simulated_annealing, simulated_annealing_control
-from algorithms.algo_brute_forece import brute_force
+from algorithms.algo_brute_force import brute_force
 
 # import plot tools
 from plotting.plots import plot_data, plot_best_protein
