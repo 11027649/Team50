@@ -179,7 +179,7 @@ def simulated_annealing_control(run_info, protein):
     run_info.generate_header(protein.protein_string)
 
     # store data in .csv
-    with open(filepath, 'w', newline='') as datafile:
+    with open(run_info.filepath, 'w', newline='') as datafile:
         datawriter = csv.writer(datafile)
 
         # do N times 3 random folds and keep track of the best value
