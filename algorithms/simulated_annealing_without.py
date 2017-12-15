@@ -29,7 +29,7 @@ def simulated_annealing(protein):
 
         # do random folds
         for j in range(14):
-            random_value = get_random_value(0, protein.plength - 2)
+            random_value = get_random_value(0, protein.length - 2)
             returncode_and_protein = fold(random_value[0], random_value[1], protein)
             protein = returncode_and_protein[1]
 
