@@ -4,7 +4,7 @@ from utility.input_string import input_string
 
 # import algorithms
 from algorithms.hillclimber import hillclimber, fold_control_hillclimber, extend_fold_hillclimber
-from algorithms.simulated_annealing import simulated_annealing, simulated_annealing_control
+from algorithms.simulated_annealing import simulated_annealing, simulated_annealing_control, simulated_annealing_weird_reheat
 from algorithms.algo_brute_force import brute_force
 
 # import plot tools
@@ -32,7 +32,7 @@ def main():
     run_info.dimension = dimension
     protein.init_grid()
 
-    algo_functions = {"Hill Climber": hillclimber, "Brute Force": brute_force, "Fold Control Hillclimber": fold_control_hillclimber, "Extend Fold Hillclimber": extend_fold_hillclimber, "Simulated Annealing": simulated_annealing, "Simulated Annealing Control": simulated_annealing_control}
+    algo_functions = {"Brute Force": brute_force, "Hill Climber": hillclimber, "Fold Control Hillclimber": fold_control_hillclimber, "Extend Fold Hillclimber": extend_fold_hillclimber, "Simulated Annealing": simulated_annealing, "Simulated Annealing Control": simulated_annealing_control, "Simulated Annealing Weird Reheat": simulated_annealing_weird_reheat}
 
     algorithms = []
     for key, value in algo_functions.items():
@@ -66,7 +66,7 @@ def main():
 
     plot_best_protein(protein, run_info)
 
-    if algorithms[algorithm_choice] == "Hill Climber" or algorithms[algorithm_choice] == "Simulated Annealing":
+    if algorithms[algorithm_choice] == "Hill Climber" or algorithms[algorithm_choice] == "Simulated Annealing" or algorithms[algorithm_choice] == "Simulated Annealing Weird Reheat":
         plot_data(run_info)
 
     message("End of program, thank you for using our application. \n     Find your generated data in the data folder. \n")

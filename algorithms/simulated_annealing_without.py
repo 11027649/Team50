@@ -70,7 +70,7 @@ def simulated_annealing(protein):
 
         # cool system linear
         Ti = T0 - (i * (T0 - Tn) / N)
-    
+
     return protein
 
 
