@@ -5,6 +5,7 @@ from utility.input_string import input_string
 # import algorithms
 from algorithms.hillclimber import hillclimber, fold_control_hillclimber, extend_fold_hillclimber
 from algorithms.simulated_annealing import simulated_annealing, simulated_annealing_control
+from algorithms.algo_brute_force import brute_force
 
 # import plot tools
 from plotting.plots import plot_data, plot_best_protein
@@ -31,7 +32,7 @@ def main():
     run_info.dimension = dimension
     protein.init_grid()
 
-    algo_functions = {"Hill Climber": hillclimber, "Fold Control Hillclimber": fold_control_hillclimber, "Extend Fold Hillclimber": extend_fold_hillclimber, "Simulated Annealing": simulated_annealing, "Simulated Annealing Control": simulated_annealing_control}
+    algo_functions = {"Hill Climber": hillclimber, "Brute Force": brute_force, "Fold Control Hillclimber": fold_control_hillclimber, "Extend Fold Hillclimber": extend_fold_hillclimber, "Simulated Annealing": simulated_annealing, "Simulated Annealing Control": simulated_annealing_control}
 
     algorithms = []
     for key, value in algo_functions.items():
@@ -62,7 +63,7 @@ def main():
     mixer.music.play()
 
     message("Best score: " + str(protein.winning_score))
-    
+
     plot_best_protein(protein, run_info)
 
     if algorithms[algorithm_choice] == "Hill Climber" or algorithms[algorithm_choice] == "Simulated Annealing":
