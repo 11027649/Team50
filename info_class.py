@@ -11,8 +11,13 @@ class Info():
 
     def generate_filepath(self, algorithm_short):
         date = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
+        route = ""
+
+        if algorithm_short.startswith('sa'):
+            route = "data\simulated_annealing\\" + algorithm_short + str(date) + ".csv"
+        else:
+            route = "data\hillclimber\\" + algorithm_short + str(date) + ".csv"
         
-        route = "data\hillclimber\\" + algorithm_short + str(date) + ".csv"
         self.filepath = route
 
     def generate_header(self, protein_string):

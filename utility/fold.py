@@ -103,8 +103,7 @@ def fold(num_id, asked_direction, protein):
             coordinates[i] = [to_coords[0], to_coords[1], to_coords[2]]
 
         # if fold isn't possible
-        elif (str(type(grid[to_coords[0]][to_coords[1]][to_coords[2]])) == "<class 'protein_class.Amino'>"):
-            # print("Collision detected while folding amino " + str(num_id) + "\n -> Stopped this fold, cause amino " + str(i) + " was colliding")
+        elif (type(grid[to_coords[0]][to_coords[1]][to_coords[2]]) == Amino):
             coordinates = backup_coordinates[:]
             returncode = True
             break

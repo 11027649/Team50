@@ -8,6 +8,8 @@ import copy
 
 def brute_force(run_info, protein):
     length = protein.length
+    protein.winning_grid = copy.deepcopy(protein.grid)
+    protein.winning_coordinates = copy.deepcopy(protein.coordinates)
 
     iterations = pow(6, length - 2)
 
@@ -15,10 +17,12 @@ def brute_force(run_info, protein):
         iterations = (int) (iterations - (2 / 3) * pow(6, i + 1))
     numberArray = []
     check = 6
+    
     if run_info.dimension == 0:
         check = 4
     elif run_info == 1:
         check = 6
+    
     def recursieveFunctie(value, protein):
         if value == 1:
             for i in range(check):
@@ -29,6 +33,7 @@ def brute_force(run_info, protein):
             for i in range(check):
                 numberArray[value - 1] = i
                 recursieveFunctie(value - 1, protein)
+    
     iteration = 0
 
     for i in range(1, length - 2):
@@ -40,7 +45,6 @@ def brute_force(run_info, protein):
         recursieveFunctie(i, protein)
         printProgressBar(i + 1, length - 2)
 
-
     return [run_info, protein]
 
 def calc_coords(numberArray, protein):
@@ -48,7 +52,6 @@ def calc_coords(numberArray, protein):
     # get the length
     length = protein.length
     coordinates = protein.coordinates[:]
-
 
     possible = True
     grid_width = length * 2 + 1
@@ -117,6 +120,5 @@ def calc_coords(numberArray, protein):
         protein.winning_coordinates = copy.deepcopy(coordinates)
         best_score = stability
         protein.winning_score = best_score
-
-
+    
     return protein

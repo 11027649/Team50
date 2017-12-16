@@ -66,7 +66,7 @@ def main():
 
     plot_best_protein(protein, run_info)
 
-    if algorithms[algorithm_choice] == "Hill Climber" or algorithms[algorithm_choice] == "Simulated Annealing" or algorithms[algorithm_choice] == "Simulated Annealing Weird Reheat":
+    if not algorithms[algorithm_choice] == "Brute Force":
         plot_data(run_info)
 
     message("End of program, thank you for using our application. \n     Find your generated data in the data folder. \n")
