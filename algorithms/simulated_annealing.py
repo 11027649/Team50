@@ -22,6 +22,8 @@ def simulated_annealing(run_info, protein):
     Tn = 0
     current_score = 0
 
+    folds = 14
+
     # store algorithm in file, write a header
     run_info.algorithm = "Simulated Annealing"
     run_info.generate_filepath("sa_")
@@ -38,7 +40,7 @@ def simulated_annealing(run_info, protein):
             datawriter.writerow([i] + [current_score])
 
             # do random folds
-            for j in range(14):
+            for j in range(folds):
                 random_value = get_random_value(run_info.dimension, protein.length - 2)
                 returncode_and_protein = fold(random_value[0], random_value[1], protein)
                 protein = returncode_and_protein[1]
@@ -95,6 +97,7 @@ def simulated_annealing_control(run_info, protein):
     N = 10000
     T0 = Ti = 1
     Tn = 0
+    folds = 14
 
     run_info.algorithm = "Simulated Annealing (with fold control)"
     run_info.generate_filepath("sa_fc_")
@@ -113,7 +116,7 @@ def simulated_annealing_control(run_info, protein):
             # this variable checks if a better score is found in 14 folds
             found_better = False
             # do .. random folds and check each fold for a better score
-            for j in range(14):
+            for j in range(folds):
                 # initial random value
                 random_value = get_random_value(run_info.dimension, protein.length - 2)
 
@@ -174,6 +177,7 @@ def simulated_annealing_weird_reheat(run_info, protein):
     current_score = 0
     minus = 0
 
+    folds = 14
     # store algorithm in file, write a header
     run_info.algorithm = "Simulated Annealing Weird One"
     run_info.generate_filepath("sa_wo_")
@@ -193,7 +197,7 @@ def simulated_annealing_weird_reheat(run_info, protein):
             datawriter.writerow([i] + [current_score])
 
             # do random folds
-            for j in range(14):
+            for j in range(folds):
                 random_value = get_random_value(run_info.dimension, protein.length - 2)
                 returncode_and_protein = fold(random_value[0], random_value[1], protein)
                 protein = returncode_and_protein[1]

@@ -16,11 +16,16 @@ def hillclimber(run_info, protein):
     # will keep track of the score
     best_score = 0
 
+    # determines how many iterations are needed
+    iterations = 5000
+
+    # determines the amount of folds this hillclimber will do
+    folds = 6
+
     length = protein.length
     protein.winning_grid = copy.deepcopy(protein.grid)
     protein.winning_coordinates = copy.deepcopy(protein.coordinates)
 
-    iterations = 5000
 
     run_info.algorithm = "Hill Climber"
     run_info.generate_filepath("hc_")
@@ -36,7 +41,7 @@ def hillclimber(run_info, protein):
             printProgressBar(i, iterations)
             datawriter.writerow([i] + [best_score])
 
-            for j in range(6):
+            for j in range(folds):
                 random_value = get_random_value(run_info.dimension, protein.length - 2)
                 if accept == True:
                     returncode_and_protein = fold(random_value[0], random_value[1], protein)
@@ -76,6 +81,8 @@ def fold_control_hillclimber(run_info, protein):
     protein.winning_coordinates = copy.deepcopy(protein.coordinates)
 
     iterations = 5000
+    # determines how much folds it will do
+    folds = 6
 
     run_info.algorithm = "Hill Climber (with fold control)"
     run_info.generate_filepath("hc_fc_")
@@ -91,7 +98,7 @@ def fold_control_hillclimber(run_info, protein):
             printProgressBar(i, iterations)
             datawriter.writerow([i] + [best_score])
 
-            for j in range(14):
+            for j in range(folds):
                 random_value = get_random_value(run_info.dimension, protein.length - 2)
 
                 returncode_and_protein = fold(random_value[0], random_value[1], protein)
@@ -141,12 +148,15 @@ def extend_fold_hillclimber(run_info, protein):
             counter = 0
             found = False
 
+            # determines the end of the progressbar
+            end_extend = 101
+
             while found == False:
 
                 for j in range(extend):
                     print(j, extend)
 
-                    printProgressBar(extend, 101)
+                    printProgressBar(extend, end_extend)
                     datawriter.writerow([i] + [best_score])
 
                     random_value = get_random_value(run_info.dimension, protein.length - 2)
@@ -192,6 +202,7 @@ def get_random_value(dimension, length):
     # if 3D is chosen
     if (dimension == 1):
         value = randint(0,3)
+
     if value == 0:
         direction = "L"
     elif value == 1:

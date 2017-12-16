@@ -8,8 +8,8 @@ def plot_data(run_info):
 	filepath = run_info.filepath
 	data = np.genfromtxt(filepath, delimiter=',', names=['x', 'y'])
 	fig = plt.figure()
-
-	ax = fig.add_subplot(111)
+	subplot_value = 111
+	ax = fig.add_subplot(subplot_value)
 
 	if (run_info.dimension == 0):
 		dimension = '2D'

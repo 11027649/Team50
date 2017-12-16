@@ -16,13 +16,15 @@ def brute_force(run_info, protein):
     for i in range (length - 2):
         iterations = (int) (iterations - (2 / 3) * pow(6, i + 1))
     numberArray = []
+
+    # determines how many directions need to be checked
     check = 6
-    
+
     if run_info.dimension == 0:
         check = 4
     elif run_info == 1:
         check = 6
-    
+
     def recursieveFunctie(value, protein):
         if value == 1:
             for i in range(check):
@@ -33,8 +35,7 @@ def brute_force(run_info, protein):
             for i in range(check):
                 numberArray[value - 1] = i
                 recursieveFunctie(value - 1, protein)
-    
-    iteration = 0
+
 
     for i in range(1, length - 2):
         numberArray = []
@@ -120,5 +121,5 @@ def calc_coords(numberArray, protein):
         protein.winning_coordinates = copy.deepcopy(coordinates)
         best_score = stability
         protein.winning_score = best_score
-    
+
     return protein
