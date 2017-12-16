@@ -34,58 +34,54 @@ def simulated_annealing(run_info, protein):
         # do N times 10 random folds and keep track of the best value
         for i in range(N):
 
-            iteration(i, N, Ti, datawriter, current_score, run_info, protein)
+            printProgressBar(i, N)
+            datawriter.writerow([i] + [current_score])
+
+            # do random folds
+            for j in range(14):
+                random_value = get_random_value(run_info.dimension, protein.length - 2)
+                returncode_and_protein = fold(random_value[0], random_value[1], protein)
+                protein = returncode_and_protein[1]
+
+            old_score = current_score
+            # calculate stability of the protein
+            current_score = score(protein)
+
+            # if the score is lower save that particular grid in winning grid
+            if current_score <= protein.winning_score:
+                protein.winning_grid = copy.deepcopy(protein.grid)
+                protein.winning_coordinates = copy.deepcopy(protein.coordinates)
+
+                # update winning_score
+                protein.winning_score = current_score
+
+            # if the score is higher, calculate acceptance chance
+            else:
+                # calculate acceptance chance
+                difference = protein.winning_score - current_score
+                acceptance_chance = math.exp(difference / Ti)
+
+                # generate random compare value
+                value = randint(1,10000)/10000
+
+                # if acceptance_chance <= value, the deterioration is not accepted
+                if acceptance_chance < value:
+
+                    # if not accepted, restore the old grid
+                    protein.grid = copy.deepcopy(protein.winning_grid)
+                    protein.coordinates = copy.deepcopy(protein.winning_coordinates)
+                    current_score = old_score
+
+                # if accepted
+                else:
+                    # update changes anyway in the grid
+                    protein.winning_grid = copy.deepcopy(protein.grid)
+                    protein.winning_coordinates = copy.deepcopy(protein.coordinates)
 
             # cool system linear
             Ti = T0 - (i * (T0 - Tn) / N)
 
     return [run_info, protein]
-
-def iteration(i, N, Ti, datawriter, current_score, run_info, protein):
-
-                printProgressBar(i, N)
-                datawriter.writerow([i] + [current_score])
-
-                # do random folds
-                for j in range(14):
-                    random_value = get_random_value(run_info.dimension, protein.length - 2)
-                    returncode_and_protein = fold(random_value[0], random_value[1], protein)
-                    protein = returncode_and_protein[1]
-
-                old_score = current_score
-                # calculate stability of the protein
-                current_score = score(protein)
-
-                # if the score is lower save that particular grid in winning grid
-                if current_score <= protein.winning_score:
-                    protein.winning_grid = copy.deepcopy(protein.grid)
-                    protein.winning_coordinates = copy.deepcopy(protein.coordinates)
-
-                    # update winning_score
-                    protein.winning_score = current_score
-
-                # if the score is higher, calculate acceptance chance
-                else:
-                    # calculate acceptance chance
-                    difference = protein.winning_score - current_score
-                    acceptance_chance = math.exp(difference / Ti)
-
-                    # generate random compare value
-                    value = randint(1,10000)/10000
-
-                    # if acceptance_chance <= value, the deterioration is not accepted
-                    if acceptance_chance < value:
-
-                        # if not accepted, restore the old grid
-                        protein.grid = copy.deepcopy(protein.winning_grid)
-                        protein.coordinates = copy.deepcopy(protein.winning_coordinates)
-                        current_score = old_score
-
-                    # if accepted
-                    else:
-                        # update changes anyway in the grid
-                        protein.winning_grid = copy.deepcopy(protein.grid)
-                        protein.winning_coordinates = copy.deepcopy(protein.coordinates)
 
 
 def simulated_annealing_control(run_info, protein):
@@ -120,6 +116,7 @@ def simulated_annealing_control(run_info, protein):
             for j in range(14):
                 # initial random value
                 random_value = get_random_value(run_info.dimension, protein.length - 2)
+
                 returncode_and_protein = fold(random_value[0], random_value[1], protein)
                 protein = returncode_and_protein[1]
 
@@ -192,11 +189,51 @@ def simulated_annealing_weird_reheat(run_info, protein):
             if i == 5000:
                 minus = 5000
 
-            print(Ti)
+            printProgressBar(i, N)
+            datawriter.writerow([i] + [current_score])
 
-            iteration(i, N, Ti, datawriter, current_score, run_info, protein)
+            # do random folds
+            for j in range(14):
+                random_value = get_random_value(run_info.dimension, protein.length - 2)
+                returncode_and_protein = fold(random_value[0], random_value[1], protein)
+                protein = returncode_and_protein[1]
+
+            old_score = current_score
+            # calculate stability of the protein
+            current_score = score(protein)
+
+            # if the score is lower save that particular grid in winning grid
+            if current_score <= protein.winning_score:
+                protein.winning_grid = copy.deepcopy(protein.grid)
+                protein.winning_coordinates = copy.deepcopy(protein.coordinates)
+
+                # update winning_score
+                protein.winning_score = current_score
+
+            # if the score is higher, calculate acceptance chance
+            else:
+                # calculate acceptance chance
+                difference = protein.winning_score - current_score
+                acceptance_chance = math.exp(difference / Ti)
+
+                # generate random compare value
+                value = randint(1,10000)/10000
+
+                # if acceptance_chance <= value, the deterioration is not accepted
+                if acceptance_chance < value:
+
+                    # if not accepted, restore the old grid
+                    protein.grid = copy.deepcopy(protein.winning_grid)
+                    protein.coordinates = copy.deepcopy(protein.winning_coordinates)
+                    current_score = old_score
+
+                # if accepted
+                else:
+                    # update changes anyway in the grid
+                    protein.winning_grid = copy.deepcopy(protein.grid)
+                    protein.winning_coordinates = copy.deepcopy(protein.coordinates)
 
             # cool system linear
-            Ti = T0 - 2 * ((i - minus) * (T0 - Tn) / N)
+            Ti = T0 - 2 * ((i - minus) * (T0 - Tn) / N) + 0.001
 
     return [run_info, protein]
