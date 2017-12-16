@@ -68,7 +68,6 @@ def fold(num_id, asked_direction, protein):
 
     if (next_coords[0] != rot_origin[0]):
         rotation_matrix = directions(rotation_matrix_down_z, rotation_matrix_up_y)
-
     elif (next_coords[1] != rot_origin[1]):
         rotation_matrix = directions(rotation_matrix_down_z, rotation_matrix_up_x)
 
