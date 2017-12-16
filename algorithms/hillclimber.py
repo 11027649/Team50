@@ -133,7 +133,7 @@ def extend_fold_hillclimber(run_info, protein):
     # store data in .csv
     with open(run_info.filepath, 'a', newline='') as datafile:
         datawriter = csv.writer(datafile)
-        
+
         # do "iterations" random folds and keep track of the highest value
         for i in range(iterations):
 
@@ -177,7 +177,7 @@ def extend_fold_hillclimber(run_info, protein):
 
                     if extend > 100:
                         return [run_info, protein]
-    
+
 
 def get_random_value(dimension, length):
     """ This is a function that returns an array with a random direction and
@@ -186,15 +186,12 @@ def get_random_value(dimension, length):
     aminonumber = randint(1, length)
     direction = ""
     value = 6
-
     # if 2D is chosen
     if (dimension == 0):
-            value = randint(0,1)
-
+        value = randint(0,1)
     # if 3D is chosen
     if (dimension == 1):
         value = randint(0,3)
-
     if value == 0:
         direction = "L"
     elif value == 1:

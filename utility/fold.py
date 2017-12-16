@@ -26,7 +26,6 @@ def fold(num_id, asked_direction, protein):
     coordinates = protein.coordinates
     backup_coordinates = coordinates[:]
     grid = protein.grid
-
     protein_length = protein.length
     grid_x = len(grid)
     grid_y = len(grid[0])
@@ -95,7 +94,6 @@ def fold(num_id, asked_direction, protein):
         # foldings that aren't possible
         if (to_coords[0] < 0 or to_coords[0] >= grid_x):
             coordinates[i] = [to_coords[0], to_coords[1], to_coords[2]]
-
         elif (to_coords[1] < 0 or to_coords[1] >= grid_y):
             coordinates[i] = [to_coords[0], to_coords[1], to_coords[2]]
 
@@ -106,19 +104,21 @@ def fold(num_id, asked_direction, protein):
         elif (type(grid[to_coords[0]][to_coords[1]][to_coords[2]]) == Amino):
             coordinates = backup_coordinates[:]
             returncode = True
+
             break
 
         else:
             coordinates[i] = [to_coords[0], to_coords[1], to_coords[2]]
-
     # update global coordinates and update the grid
     protein.coordinates = coordinates[:]
     update_grid(protein)
 
     if returncode == True:
         return ["collision", protein]
+        print("hoi")
     else:
         return [0, protein]
+        print("HOOOOOOOI")
 
 def directions(first_matrix, second_matrix):
 
