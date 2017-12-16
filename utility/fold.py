@@ -115,10 +115,8 @@ def fold(num_id, asked_direction, protein):
 
     if returncode == True:
         return ["collision", protein]
-        print("hoi")
     else:
         return [0, protein]
-        print("HOOOOOOOI")
 
 def directions(first_matrix, second_matrix):
 
