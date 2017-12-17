@@ -52,11 +52,7 @@ def brute_force(run_info, protein):
         progres = pow(5, i + 1)
         recursieveFunctie(i, protein)
 
-
-
     return [run_info, protein]
-
-
 
 def calc_coords(numberArray, protein):
     directions = numberArray

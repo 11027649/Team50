@@ -8,8 +8,7 @@ def plot_data(run_info):
 	filepath = run_info.filepath
 	data = np.genfromtxt(filepath, delimiter=',', names=['x', 'y'])
 	fig = plt.figure()
-	subplot_value = 111
-	ax = fig.add_subplot(subplot_value)
+	ax = fig.add_subplot(111)
 
 	if (run_info.dimension == 0):
 		dimension = '2D'
@@ -53,12 +52,12 @@ def plot_best_protein(protein, run_info):
 
 		# scatter points, plot the aminos in the right colors
 		if protein.protein_string[i] == 'H':
-			ax.scatter(X[i],Y[i], Z[i], marker = 'o', s = 200, color="blue")
+			ax.scatter(X[i],Y[i], Z[i], marker = 'p', s = 200, color="blue")
 		elif protein.protein_string[i] == 'C':
 			cystein_appearance = True
-			ax.scatter(X[i], Y[i], Z[i], marker = 'o', s = 200, color = "yellow")
+			ax.scatter(X[i], Y[i], Z[i], marker = 'p', s = 200, color = "yellow")
 		else:
-			ax.scatter(X[i],Y[i], Z[i], marker='o', s = 200, color="red")
+			ax.scatter(X[i],Y[i], Z[i], marker='p', s = 200, color="red")
 
 	# for all aminos in the protein
 	for i in range(protein.length):
