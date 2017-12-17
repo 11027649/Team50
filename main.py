@@ -26,7 +26,7 @@ def main():
 
     dimension = 2
     while not (dimension == 0) and not (dimension == 1):
-        print("In what dimension do you want to fold? \n ( 0 ) 2D \n ( 1 ) 3D\n")
+        print("In what dimension do you want to fold? \n\n ( 0 ) 2D \n ( 1 ) 3D\n")
         dimension = int(input("Chosen dimension: "))
 
     run_info.dimension = dimension
@@ -38,7 +38,7 @@ def main():
     for key, value in algo_functions.items():
         algorithms.append(key)
 
-    print("Please choose which algorithm you want to apply.")
+    print("\nPlease choose which algorithm you want to apply.\n")
 
     for alg in algorithms:
         print(" ( " + str(algorithms.index(alg)) + " )   " + str(alg))

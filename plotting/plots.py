@@ -62,7 +62,7 @@ def plot_best_protein(protein, run_info):
 
 	# for all aminos in the protein
 	for i in range(protein.length - 1):
-		print(protein.aminos[i].letter, protein.aminos[i].num_id)
+
 		# save the current id of the amino acid
 		cur_id = grid[X[i]][Y[i]][Z[i]].num_id
 
@@ -97,6 +97,9 @@ def plot_best_protein(protein, run_info):
 	ax.set_xlabel('X axis')
 	ax.set_ylabel('Y axis')
 	ax.set_zlabel('Z axis')
+	ax.set_yticklabels([])
+	ax.set_xticklabels([])
+	ax.set_zticklabels([])
 
 	# set legend
 	polar = mlines.Line2D([], [], color='red', marker='o', markersize=15, label='Polar')
@@ -112,6 +115,7 @@ def plot_best_protein(protein, run_info):
 
 	# set caption and show
 	fig.text(.1,.1, "Stability: " + str(protein.winning_score))
+
 	plt.show()
 
 def set_line (toCheck):

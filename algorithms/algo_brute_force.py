@@ -5,27 +5,19 @@ from algorithms.progress_bar import printProgressBar
 
 import copy
 
+counter = 0
 
 def brute_force(run_info, protein):
+    
     length = protein.length
     protein.winning_grid = copy.deepcopy(protein.grid)
     protein.winning_coordinates = copy.deepcopy(protein.coordinates)
 
-    iterations = pow(6, length - 2)
-
-    for i in range (length - 2):
-        iterations = (int) (iterations - (2 / 3) * pow(6, i + 1))
-    numberArray = []
-
-    # determines how many directions need to be checked
-    check = 6
-
-    if run_info.dimension == 0:
-        check = 4
-    elif run_info == 1:
-        check = 6
-
     def recursieveFunctie(value, protein):
+        global counter
+        counter += 1
+        print(counter, iterations)
+        printProgressBar(counter, iterations)
         if value == 1:
             for i in range(check):
                 numberArray[value - 1] = i
@@ -36,6 +28,20 @@ def brute_force(run_info, protein):
                 numberArray[value - 1] = i
                 recursieveFunctie(value - 1, protein)
 
+    # calculate amount of iterations needed to complete the depth first
+    iterations = pow(6, length - 2)
+    for i in range (length - 2):
+        iterations = (int) (iterations - (2 / 3) * pow(6, i + 1))
+
+    numberArray = []
+
+    # determines how many directions need to be checked
+    check = 6
+
+    if run_info.dimension == 0:
+        check = 4
+    elif run_info == 1:
+        check = 6
 
     for i in range(1, length - 2):
         numberArray = []
@@ -44,9 +50,12 @@ def brute_force(run_info, protein):
         numberArray[i] = 1
         progres = pow(5, i + 1)
         recursieveFunctie(i, protein)
-        printProgressBar(i + 1, length - 2)
+
+
 
     return [run_info, protein]
+
+
 
 def calc_coords(numberArray, protein):
     directions = numberArray

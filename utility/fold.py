@@ -70,7 +70,6 @@ def fold(num_id, asked_direction, protein):
         rotation_matrix = directions(rotation_matrix_down_z, rotation_matrix_up_y)
     elif (next_coords[1] != rot_origin[1]):
         rotation_matrix = directions(rotation_matrix_down_z, rotation_matrix_up_x)
-
     elif (next_coords[2] != rot_origin[2]):
         rotation_matrix = directions(rotation_matrix_down_y, rotation_matrix_up_x)
 
@@ -85,7 +84,6 @@ def fold(num_id, asked_direction, protein):
     for i in range(num_id + 1, protein_length):
 
         from_coords = coordinates[i]
-
         subtracted = np.subtract(from_coords, rot_origin)
         to_coords = np.dot(rotation_matrix, subtracted) + rot_origin
 
