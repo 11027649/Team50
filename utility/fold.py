@@ -14,18 +14,16 @@ from protein_class import Amino
 import numpy as np
 import copy
 
-def fold(num_id, asked_direction, protein):
+def fold(num_id, direction, protein):
     """ Finds an origin to fold around and multiplies the coordinates of the aminos
         that will get a different place with a rotation matrix to get the new
         coordinates. If the fold is not possible, returns and old grid and at which
         amino acid this fold was colliding. """
 
-    global direction
-    direction = asked_direction
-
     coordinates = protein.coordinates
     backup_coordinates = coordinates[:]
     grid = protein.grid
+
     protein_length = protein.length
     grid_x = len(grid)
     grid_y = len(grid[0])
@@ -52,8 +50,8 @@ def fold(num_id, asked_direction, protein):
     rotation_matrix_up_z = [[0, 1, 0], [-1, 0, 0],[0, 0, 1]]
 
     # rotations around y axis
-    rotation_matrix_down_y = [[0, 0, -1], [0, 1, 0],[1, 0, 0]]
-    rotation_matrix_up_y = [[0, 0, 1], [0, 1, 0], [-1, 0, 0]]
+    rotation_matrix_up_y = [[0, 0, -1], [0, 1, 0],[1, 0, 0]]
+    rotation_matrix_down_y = [[0, 0, 1], [0, 1, 0], [-1, 0, 0]]
 
     # rotations around x axis
     rotation_matrix_down_x = [[1, 0, 0], [0, 0, -1], [0, 1, 0]]
@@ -67,11 +65,34 @@ def fold(num_id, asked_direction, protein):
     axis = ""
 
     if (next_coords[0] != rot_origin[0]):
-        rotation_matrix = directions(rotation_matrix_down_z, rotation_matrix_up_y)
+        if (direction == "R"):
+            rotation_matrix = rotation_matrix_up_z
+        elif (direction == "L"):
+            rotation_matrix = rotation_matrix_down_z
+        elif (direction == "U"):
+            rotation_matrix = rotation_matrix_up_y
+        elif (direction == "D"):
+            rotation_matrix = rotation_matrix_down_y
+
     elif (next_coords[1] != rot_origin[1]):
-        rotation_matrix = directions(rotation_matrix_down_z, rotation_matrix_up_x)
+        if (direction == "R"):
+            rotation_matrix = rotation_matrix_up_z
+        elif (direction == "L"):
+            rotation_matrix = rotation_matrix_down_z
+        elif (direction == "U"):
+            rotation_matrix = rotation_matrix_up_x
+        elif (direction == "D"):
+            rotation_matrix = rotation_matrix_down_x
+
     elif (next_coords[2] != rot_origin[2]):
-        rotation_matrix = directions(rotation_matrix_down_y, rotation_matrix_up_x)
+        if (direction == "R"):
+            rotation_matrix = rotation_matrix_up_y
+        elif (direction == "L"):
+            rotation_matrix = rotation_matrix_down_y
+        elif (direction == "U"):
+            rotation_matrix = rotation_matrix_up_x
+        elif (direction == "D"):
+            rotation_matrix = rotation_matrix_down_x
 
     # iterates over the aminos, beginning at the one after the amino acid where
     # we'll fold
@@ -84,6 +105,7 @@ def fold(num_id, asked_direction, protein):
     for i in range(num_id + 1, protein_length):
 
         from_coords = coordinates[i]
+
         subtracted = np.subtract(from_coords, rot_origin)
         to_coords = np.dot(rotation_matrix, subtracted) + rot_origin
 
@@ -91,6 +113,7 @@ def fold(num_id, asked_direction, protein):
         # foldings that aren't possible
         if (to_coords[0] < 0 or to_coords[0] >= grid_x):
             coordinates[i] = [to_coords[0], to_coords[1], to_coords[2]]
+
         elif (to_coords[1] < 0 or to_coords[1] >= grid_y):
             coordinates[i] = [to_coords[0], to_coords[1], to_coords[2]]
 
@@ -98,14 +121,15 @@ def fold(num_id, asked_direction, protein):
             coordinates[i] = [to_coords[0], to_coords[1], to_coords[2]]
 
         # if fold isn't possible
-        elif (type(grid[to_coords[0]][to_coords[1]][to_coords[2]]) == Amino):
+        elif (str(type(grid[to_coords[0]][to_coords[1]][to_coords[2]])) == "<class 'protein_class.Amino'>"):
+            # print("Collision detected while folding amino " + str(num_id) + "\n -> Stopped this fold, cause amino " + str(i) + " was colliding")
             coordinates = backup_coordinates[:]
             returncode = True
-
             break
 
         else:
             coordinates[i] = [to_coords[0], to_coords[1], to_coords[2]]
+
     # update global coordinates and update the grid
     protein.coordinates = coordinates[:]
     update_grid(protein)
@@ -114,16 +138,3 @@ def fold(num_id, asked_direction, protein):
         return ["collision", protein]
     else:
         return [0, protein]
-
-def directions(first_matrix, second_matrix):
-
-    if (direction == "R"):
-        rotation_matrix = first_matrix
-    elif (direction == "L"):
-        rotation_matrix = first_matrix
-    elif (direction == "U"):
-        rotation_matrix = second_matrix
-    elif (direction == "D"):
-        rotation_matrix = second_matrix
-
-    return rotation_matrix

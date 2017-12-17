@@ -7,10 +7,26 @@ from random import randint
 import copy
 import csv
 
-
-
-
 def hillclimber(run_info, protein):
+
+    returncode_and_protein = fold(1, "L", protein)
+    returncode_and_protein = fold(2, "R", protein)
+    returncode_and_protein = fold(3, "R", protein)
+    returncode_and_protein = fold(4, "D", protein)
+    returncode_and_protein = fold(5, "R", protein)
+    returncode_and_protein = fold(6, "R", protein)
+
+
+    print(returncode_and_protein)
+
+    protein.winning_grid = copy.deepcopy(protein.grid)
+    protein.winning_coordinates = copy.deepcopy(protein.coordinates)
+
+    run_info.algorithm = "Hill Climber"
+    run_info.generate_filepath("hc_")
+    run_info.generate_header(protein.protein_string)
+    return [run_info, protein]
+def hillclimber2(run_info, protein):
     # if accept is True, folds that collide will count
     # if False only folds that pass will happen
     accept = True

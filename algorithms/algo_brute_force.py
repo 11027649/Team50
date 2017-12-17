@@ -8,7 +8,7 @@ import copy
 counter = 0
 
 def brute_force(run_info, protein):
-    
+
     length = protein.length
     protein.winning_grid = copy.deepcopy(protein.grid)
     protein.winning_coordinates = copy.deepcopy(protein.coordinates)
@@ -19,6 +19,7 @@ def brute_force(run_info, protein):
         print(counter, iterations)
         printProgressBar(counter, iterations)
         if value == 1:
+
             for i in range(check):
                 numberArray[value - 1] = i
                 numberArray.reverse

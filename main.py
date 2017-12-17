@@ -51,8 +51,8 @@ def main():
 
     message("Protein initiated, algorithm chosen, please be patient.")
 
-    mixer.music.load("doc\elevator.mp3")
-    mixer.music.play()
+    # mixer.music.load("doc\elevator.mp3")
+    # mixer.music.play()
 
     info_and_protein = algo_functions[algorithms[algorithm_choice]](run_info, protein)
     run_info = info_and_protein[0]
