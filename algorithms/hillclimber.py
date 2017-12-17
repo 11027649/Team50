@@ -7,7 +7,7 @@ from random import randint
 import copy
 import csv
 
-def hillclimber(run_info, protein):
+def hillclimbert(run_info, protein):
 
     returncode_and_protein = fold(1, "L", protein)
     returncode_and_protein = fold(2, "L", protein)
@@ -26,7 +26,7 @@ def hillclimber(run_info, protein):
     run_info.generate_filepath("hc_")
     run_info.generate_header(protein.protein_string)
     return [run_info, protein]
-def hillclimbert(run_info, protein):
+def hillclimber(run_info, protein):
     # if accept is True, folds that collide will count
     # if False only folds that pass will happen
     accept = True

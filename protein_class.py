@@ -1,6 +1,7 @@
 class Protein():
+
     def __init__(   self, protein_string, protein_length,
-                    grid, coordinates, 
+                    grid, coordinates,
                     winning_grid, winning_coordinates,
                     winning_score, aminos):
 
@@ -9,10 +10,10 @@ class Protein():
 
         self.grid = grid
         self.coordinates = coordinates
-        
-        self.winning_grid = winning_grid
+
         self.winning_coordinates = winning_coordinates
-        
+        self.winning_grid = winning_grid
+
         self.winning_score = winning_score
         self.aminos = aminos
 
@@ -24,14 +25,14 @@ class Protein():
 
 
     def init_grid(self):
-        """ Initializes the grid with an x of protein length, y,z of 2. 
+        """ Initializes the grid with an x of protein length, y,z of 2.
             Lays the protein horizontally in this grid. """
 
         self.init_aminos()
-        
+
         # initialize the grid
         self.grid = [[[0 for i in range(2)] for j in range(2)] for k in range(self.length + 1)]
-        
+
         # put aminos in grid
         for i in range(self.length - 1):
             self.grid[i][0][0] = self.aminos[i]
