@@ -61,7 +61,7 @@ def plot_best_protein(protein, run_info):
 			ax.scatter(X[i],Y[i], Z[i], marker='o', s = 200, color="red")
 
 	# for all aminos in the protein
-	for i in range(protein.length - 1):
+	for i in range(protein.length):
 
 		# save the current id of the amino acid
 		cur_id = grid[X[i]][Y[i]][Z[i]].num_id
