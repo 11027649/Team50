@@ -21,6 +21,11 @@ Some things are known about the mechanism of folding: hydrophobic/polar amino ac
 
 The goal is of this project is to fold the given proteins so that they are maximally stable. To reach this goal we have written a program that folds a protein into it's most stable configuration. The program takes a protein string as user input. If two H's are next to each other, the protein becomes more stable with a score of -1. If two C's are next to each other, the stability is decreased even more, with a change of -5. **A lower score is better!**
 
+## Results
+The best stabilities for all the proteins are represented in the table below. The scores for A1 and B1 are certain, because these are calculated by a brute force algorithm. The other stabilities are approached by other algorithms (see below) and are uncertain.
+
+![Stability Graph](https://github.com/Segouta/Team50/blob/master/doc/stabilities.png)
+
 ## Algorithms ##
 
 There are 7 algorithms ready to be used. In this sections, a brief elaboration is provided on each of them. An important note: 2d and 3d are working for all of these algorithms, and if 2d is selected, the 3d options are not considered optional. So it's not doing the 3d options but neglecting them, its just not doing the 3d options, because the extra folds would be a waste of runtime.
