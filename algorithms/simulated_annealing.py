@@ -11,7 +11,7 @@ from utility.score import score
 from utility.fold import fold
 
 from algorithms.hillclimber import get_random_value
-from algorithms.progress_bar import printProgressBar
+from visualization.progress_bar import printProgressBar
 
 from random import randint
 import copy
@@ -20,11 +20,11 @@ import math
 
 
 def simulated_annealing(run_info, protein):
-    """ This is an algorithm that cools from 1 degree Celsius to 0 degrees, at a
-        linear rate. The hotter it is, the easier detoriations are accepted.
-        When the detoriation is bigger, it is also less likely to be accepted.
-        There's an extra so-called adapt grid to make sure the winning grid contains
-        the most stable protein. """
+    """ This is an algorithm that does 14 random folds per iteration. The system 
+        cools from 1 degree Celsius to 0 degrees, at a linear rate. The hotter it 
+        is, the easier detoriations are accepted. When the detoriation is bigger, 
+        it is also less likely to be accepted. There's an extra so-called adapt 
+        grid to make sure the winning grid contains the most stable protein. """
 
     length = protein.length
     protein.winning_grid = adapt_grid = copy.deepcopy(protein.grid)

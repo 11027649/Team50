@@ -1,7 +1,6 @@
 
 from utility.score import score
 from protein_class import Amino
-from algorithms.progress_bar import printProgressBar
 
 import copy
 
