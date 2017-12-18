@@ -7,9 +7,26 @@ from random import randint
 import copy
 import csv
 
-
-
 def hillclimber(run_info, protein):
+
+    fold(1, "R", protein)
+    fold(1, "L", protein)
+
+
+    length = protein.length
+    protein.winning_grid = copy.deepcopy(protein.grid)
+    protein.winning_coordinates = copy.deepcopy(protein.coordinates)
+
+    run_info.algorithm = "Hill Climber"
+    run_info.generate_filepath("hc_")
+    run_info.generate_header(protein.protein_string)
+
+
+
+    return [run_info, protein]
+
+
+def hillclimber2(run_info, protein):
 
     # will keep track of the score
     best_score = 0
