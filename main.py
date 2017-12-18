@@ -17,27 +17,36 @@ def main():
 
     message("This is a protein-fold-optimizer by Team50")
 
-    # Get the user's choice of protein.
+    # get the user's choice of protein
     info_and_protein = input_string()
     run_info = info_and_protein[0]
     protein = info_and_protein[1]
 
     message("Protein received")
 
+    # ask the user in which dimension they want to fold
     dimension = 2
     while not (dimension == 0) and not (dimension == 1):
         print("In what dimension do you want to fold? \n\n ( 0 ) 2D \n ( 1 ) 3D\n")
         dimension = int(input("Chosen dimension: "))
 
+    # initialize the grid and save the dimension
     run_info.dimension = dimension
     protein.init_grid()
 
-    algo_functions = {"Brute Force": brute_force, "Hill Climber": hillclimber, "Fold Control Hillclimber": fold_control_hillclimber, "Extend Fold Hillclimber": extend_fold_hillclimber, "Simulated Annealing": simulated_annealing, "Simulated Annealing Control": simulated_annealing_control, "Simulated Annealing Weird Reheat": simulated_annealing_weird_reheat}
+    # make a list with all the algorithms
+    algo_functions = {"Brute Force": brute_force, "Hill Climber": hillclimber, \
+        "Fold Control Hillclimber": fold_control_hillclimber, \
+        "Extend Fold Hillclimber": extend_fold_hillclimber, \
+        "Simulated Annealing": simulated_annealing, \
+        "Simulated Annealing Control": simulated_annealing_control, \
+        "Simulated Annealing Reheat": simulated_annealing_reheat}
 
     algorithms = []
     for key, value in algo_functions.items():
         algorithms.append(key)
 
+    # ask the user which algorithm they want to run
     print("\nPlease choose which algorithm you want to apply.\n")
 
     for alg in algorithms:
@@ -51,9 +60,11 @@ def main():
 
     message("Protein initiated, algorithm chosen, please be patient.")
 
-    # mixer.music.load("doc\elevator.mp3")
-    # mixer.music.play()
+    # play some music while waiting
+    mixer.music.load("doc\elevator.mp3")
+    mixer.music.play()
 
+    # run the right algorithm
     info_and_protein = algo_functions[algorithms[algorithm_choice]](run_info, protein)
     run_info = info_and_protein[0]
     protein = info_and_protein[1]
@@ -64,13 +75,14 @@ def main():
 
     message("Best score: " + str(protein.winning_score))
 
+    # show the user the best found protein
     plot_best_protein(protein, run_info)
 
+    # for all algorithms except brute force, plot the graphs
     if not algorithms[algorithm_choice] == "Brute Force":
         plot_data(run_info)
 
     message("End of program, thank you for using our application. \n     Find your generated data in the data folder. \n")
-
 
 
 if __name__ == '__main__':

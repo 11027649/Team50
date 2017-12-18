@@ -178,7 +178,7 @@ def simulated_annealing_control(run_info, protein):
     return [run_info, protein]
 
 
-def simulated_annealing_weird_reheat(run_info, protein):
+def simulated_annealing_reheat(run_info, protein):
 
     length = protein.length
     protein.winning_grid = adapt_grid = copy.deepcopy(protein.grid)
@@ -192,11 +192,11 @@ def simulated_annealing_weird_reheat(run_info, protein):
     current_score = 0
 
     minus = 0
-
     folds = 14
+
     # store algorithm in file, write a header
-    run_info.algorithm = "Simulated Annealing Weird One"
-    run_info.generate_filepath("sa_wo_")
+    run_info.algorithm = "Simulated Annealing With Reheat"
+    run_info.generate_filepath("sa_wr_")
     run_info.generate_header(protein.protein_string)
 
     # store data in .csv
