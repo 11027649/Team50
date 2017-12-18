@@ -209,7 +209,7 @@ class Protein():
 
             # if fold isn't possible
             elif (type(grid[to_coords[0]][to_coords[1]][to_coords[2]]) == Amino):
-                
+
                 coordinates = backup_coordinates[:]
                 returncode = True
                 break

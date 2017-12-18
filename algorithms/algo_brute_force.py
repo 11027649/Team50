@@ -1,3 +1,12 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# This file is part of the protein folding program made by Team50.
+#
+# It contains a dept firce algoritm called brute force.
+#
+#
+#
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
 
 from protein_class import Amino
 
@@ -7,19 +16,22 @@ import copy
 
 def brute_force(run_info, protein):
 
+    # initialize the length
     length = protein.length
 
+    # make the grid with 2 times as high + 1 to prevent out of range problems
     grid_width = length * 2 + 1
 
+    # initialize an empty winning grid with the grid_width
     protein.winning_grid =  [[[0 for i in range(grid_width)] for j in range(grid_width)] for k in range(grid_width)]
 
-    protein.winning_coordinates = copy.deepcopy(protein.coordinates)
-    protein.winning_score = 0
-
-
+    # set the aminos in the grid starting from the middle of the grid
     for i in range (length):
-        protein.coordinates[i] = [protein.coordinates[i][0] + length, protein.coordinates[i][1] + length, protein.coordinates[i][2] + length]
+        new_coordinate = [protein.coordinates[i][0] + length, protein.coordinates[i][1] + length, protein.coordinates[i][2] + length]
+        protein.coordinates[i] = new_coordinate
 
+
+    protein.winning_coordinates = copy.deepcopy(protein.coordinates)
     for i in range (length):
         coordinates = protein.winning_coordinates
         x_coor = coordinates[i][0]
