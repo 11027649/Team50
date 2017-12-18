@@ -184,7 +184,6 @@ def simulated_annealing_reheat(run_info, protein):
     protein.winning_grid = adapt_grid = copy.deepcopy(protein.grid)
     protein.winning_coordinates = adapt_coordinates = copy.deepcopy(protein.coordinates)
 
-
     # initialize iterations, begin and end temperature
     N = 10000
     T0 = Ti = 1
