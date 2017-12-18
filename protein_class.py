@@ -1,3 +1,10 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# This file is part of the protein folding program made by Team50.
+#
+# It contains the protein class. Here, everything about the protein, and the
+# grid wherein the protein is, are saved to use later on.
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
 from utility.update_grid import update_grid
 
 import numpy as np
@@ -87,6 +94,8 @@ class Protein():
 
 
     def calc_score(self, coor1, coor2):
+        """ Calculates the score for the given axis. """
+
         if type(coor2) == Amino \
             and not coor2.letter == "P" \
             and abs(coor1.num_id - coor2.num_id) > 1:

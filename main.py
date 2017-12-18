@@ -1,3 +1,10 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# This file is part of the protein folding program made by Team50.
+#
+# It contains the main program. This is where the user is asked for input,
+# their choices are saved, and the best protein and data are plotted.
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
 from visualization.message import message
 
 from utility.input_string import input_string

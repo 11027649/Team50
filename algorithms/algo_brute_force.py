@@ -3,8 +3,7 @@
 #
 # It contains a dept firce algoritm called brute force.
 # By using a list with directions some mirror variations of folds are prevented.
-# The direction list is dependent of the user input.
-#
+# The direction list is dependent of the users input for dimension.
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 from protein_class import Amino
@@ -51,11 +50,10 @@ def brute_force(run_info, protein):
         check = 6
 
 
-    # this function calculates the right folding sequence
-    # value keeps track of how much deeper this function can go
     def recursieveFunctie(value, protein):
         """ This function goes recursive and calculates all the options by saving
-            them in a direction list. This list is passed to calc_coords."""
+            them in a direction list. This list is passed to calc_coords. Value
+            keeps track of how much deeper this function can go. """
 
         # if the value is 1 the last check is needed
         if value == 1:
