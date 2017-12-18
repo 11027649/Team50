@@ -5,6 +5,7 @@ In this project we've written algorithms that fold proteins to their most stable
 
 ## Getting Started
 Get this program on your computer by downloading the Team50 github repository. 
+Install the requirements by running: pip install -r requirements.txt.
 The program will ask you 2 things: the protein that you want to fold and the algorithm you want to use to do so. The protein can be A1, B1-B4 or C1-C4 for the proteins specified for our problemset. You can find these proteins in assignements.txt in the inputFolder. You can also type your own protein, consisting of H, P and C amino acids.
 
 ## More about the problem this case is based on
@@ -47,8 +48,3 @@ Christian Bijvoets, David van Grinsven and Natasja Wezel
 
 This program was made in the context of the Minor Programming we followed at the UvA, for the heuristics project november/december 2017.
 Case: Protein Powder
-
-_So far so good (ofcourse we're still busy improving this):_
-
-[![BCH compliance](https://bettercodehub.com/edge/badge/Segouta/Team50?branch=master)](https://bettercodehub.com/)
-
