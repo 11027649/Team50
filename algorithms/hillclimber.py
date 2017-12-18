@@ -2,7 +2,7 @@
 # This file is part of the protein folding program made by Team50.
 #
 # It contains three variations of a Hill Climber algorithm.
-# For the "normal" version, you can change the boolean accept to force the 
+# For the "normal" version, you can change the boolean accept to force the
 # the algorithm to do 14 folds that are accepted.
 # Here, you can change the amount of iterations by changing iterations.
 # You can change the amount of folds per iterations by changing folds.
@@ -18,8 +18,8 @@ import csv
 def hillclimber(run_info, protein):
     """ This is an algorithm that does 14 random folds per iteration. You can
         force the algorithm to do 14 folds that are accepted by changing the accept
-        boolean to False. After the 14 folds it checks whether the protein is more 
-        stable then before. If so, the changes are kept, else the old protein is 
+        boolean to False. After the 14 folds it checks whether the protein is more
+        stable then before. If so, the changes are kept, else the old protein is
         restored. This continues for n iterations. """
 
     # will keep track of the score
@@ -53,17 +53,17 @@ def hillclimber(run_info, protein):
 
             for j in range(folds):
                 random_value = get_random_value(run_info.dimension, protein.length - 2)
-                
+
                 if accept == True:
                     returncode_and_protein = protein.fold(random_value[0], random_value[1])
                     protein = returncode_and_protein[1]
-                
+
                 # if you set accept to false, you'll force n folds that are possible
-                # this is not better, but we left it in here because you should be able 
+                # this is not better, but we left it in here because you should be able
                 # to generate the same results
                 else:
                     returncode_and_protein = protein.fold(random_value[0], random_value[1])
- 
+
                     while returncode_and_protein[0] == "collision":
                         random_value = get_random_value(run_info.dimension, protein.length - 2)
                         returncode_and_protein = protein.fold(random_value[0], random_value[1])
@@ -87,7 +87,7 @@ def hillclimber(run_info, protein):
 
 def fold_control_hillclimber(run_info, protein):
     """ This is an algorithm that is a variation at the normal hillclimber.
-        It does 14 random folds per iteration. The folds must be possible here, 
+        It does 14 random folds per iteration. The folds must be possible here,
         because after every fold the score is checked. If it's higher we keep that
         protein. Else the old protein is restored. This continues for n iterations. """
 
@@ -145,7 +145,7 @@ def fold_control_hillclimber(run_info, protein):
 
 def extend_fold_hillclimber(run_info, protein):
     """ This is an algorithm that is a variation at the normal hillclimber.
-        The amount of folds can get higher or lower bla bla bla 
+        The amount of folds can get higher or lower bla bla bla
 
         CHRISTIAN PLS DO THIS """
         ############################################################################33
@@ -224,11 +224,11 @@ def get_random_value(dimension, length):
     aminonumber = randint(1, length)
     direction = ""
     value = 6
-    
+
     # if 2D is chosen
     if (dimension == 0):
         value = randint(0,1)
-    
+
     # if 3D is chosen
     if (dimension == 1):
         value = randint(0,3)
