@@ -223,9 +223,8 @@ def get_random_value(dimension, length):
     """ This is a function that returns an array with a random aminonumber and
         direction, to make random folds. Also used in Simulated Annealing. """
 
+    # get a random integer between one and length
     aminonumber = randint(1, length)
-    direction = ""
-    value = 6
 
     # if 2D is chosen
     if (dimension == 0):
