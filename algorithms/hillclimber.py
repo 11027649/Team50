@@ -6,10 +6,7 @@
 # the algorithm to do 14 folds that are accepted.
 # Here, you can change the amount of iterations by changing iterations.
 # You can change the amount of folds per iterations by changing folds.
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
-from utility.score import score
-from utility.fold import fold
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #2
 
 from visualization.progress_bar import printProgressBar
 
@@ -58,21 +55,21 @@ def hillclimber(run_info, protein):
                 random_value = get_random_value(run_info.dimension, protein.length - 2)
                 
                 if accept == True:
-                    returncode_and_protein = fold(random_value[0], random_value[1], protein)
+                    returncode_and_protein = protein.fold(random_value[0], random_value[1])
                     protein = returncode_and_protein[1]
                 
                 # if you set accept to false, you'll force n folds that are possible
                 # this is not better, but we left it in here because you should be able 
                 # to generate the same results
                 else:
-                    returncode_and_protein = fold(random_value[0], random_value[1], protein)
+                    returncode_and_protein = protein.fold(random_value[0], random_value[1])
  
                     while returncode_and_protein[0] == "collision":
                         random_value = get_random_value(run_info.dimension, protein.length - 2)
-                        returncode_and_protein = fold(random_value[0], random_value[1], protein)
+                        returncode_and_protein = protein.fold(random_value[0], random_value[1])
                     protein = returncode_and_protein[1]
 
-            stability = score(protein)
+            stability = protein.score()
 
             # if the score is lower save that particular grid in winning grid
             if stability < best_score:
@@ -121,14 +118,14 @@ def fold_control_hillclimber(run_info, protein):
 
             for j in range(folds):
                 random_value = get_random_value(run_info.dimension, protein.length - 2)
-                returncode_and_protein = fold(random_value[0], random_value[1], protein)
+                returncode_and_protein = protein.fold(random_value[0], random_value[1])
 
                 # force a fold that is possible, and control if this is a better fold
                 while returncode_and_protein[0] == "collision":
                     random_value = get_random_value(run_info.dimension, protein.length - 2)
-                    returncode_and_protein = fold(random_value[0], random_value[1], protein)
+                    returncode_and_protein = protein.fold(random_value[0], random_value[1])
 
-                stability = score(protein)
+                stability = protein.score()
 
                 # if the score is lower save that particular grid in winning grid
                 if stability < best_score:
@@ -193,12 +190,12 @@ def extend_fold_hillclimber(run_info, protein):
                     random_value = get_random_value(run_info.dimension, protein.length - 2)
 
                     # do a valid fold
-                    returncode_and_protein = fold(random_value[0], random_value[1], protein)
+                    returncode_and_protein = protein.fold(random_value[0], random_value[1])
                     protein = returncode_and_protein[1]
 
                     # if the score is lower save that particular grid in winning grid
 
-                    stability = score(protein)
+                    stability = protein.score()
 
                     if stability < best_score:
                         protein.winning_grid = copy.deepcopy(protein.grid)

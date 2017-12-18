@@ -7,9 +7,6 @@
 # temperature you want.
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from utility.score import score
-from utility.fold import fold
-
 from algorithms.hillclimber import get_random_value
 from visualization.progress_bar import printProgressBar
 
@@ -57,12 +54,12 @@ def simulated_annealing(run_info, protein):
             # do random folds
             for j in range(folds):
                 random_value = get_random_value(run_info.dimension, protein.length - 2)
-                returncode_and_protein = fold(random_value[0], random_value[1], protein)
+                returncode_and_protein = protein.fold(random_value[0], random_value[1])
                 protein = returncode_and_protein[1]
 
             old_score = current_score
             # calculate stability of the protein
-            current_score = score(protein)
+            current_score = protein.score()
 
             # if the score is lower save that particular grid in winning grid
             if current_score < protein.winning_score:
@@ -145,15 +142,15 @@ def simulated_annealing_control(run_info, protein):
             for j in range(folds):
                 # initial random value
                 random_value = get_random_value(run_info.dimension, protein.length - 2)
-                returncode_and_protein = fold(random_value[0], random_value[1], protein)
+                returncode_and_protein = protein.fold(random_value[0], random_value[1])
 
                 while returncode_and_protein[0] == "collision":
                     random_value = get_random_value(run_info.dimension, protein.length - 2)
-                    returncode_and_protein = fold(random_value[0], random_value[1], protein)
+                    returncode_and_protein = protein.fold(random_value[0], random_value[1])
                 protein = returncode_and_protein[1]
 
                 # calculate stability of the protein
-                current_score = score(protein)
+                current_score = protein.score()
 
                 # if the score is lower save that particular grid in winning grid
                 if current_score < protein.winning_score:
@@ -235,13 +232,13 @@ def simulated_annealing_reheat(run_info, protein):
             # do random folds
             for j in range(folds):
                 random_value = get_random_value(run_info.dimension, protein.length - 2)
-                returncode_and_protein = fold(random_value[0], random_value[1], protein)
+                returncode_and_protein = protein.fold(random_value[0], random_value[1])
                 protein = returncode_and_protein[1]
 
             old_score = current_score
 
             # calculate stability of the protein
-            current_score = score(protein)
+            current_score = protein.score()
 
             # if the score is lower save that particular grid in winning grid
             if current_score <= protein.winning_score:
