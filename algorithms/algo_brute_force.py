@@ -7,14 +7,11 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-
 from protein_class import Amino
-
 import copy
 
-
-
 def brute_force(run_info, protein):
+""" This is an algoritm that goes dept first. It will calculate every option """
 
     # initialize the length
     length = protein.length
@@ -56,6 +53,8 @@ def brute_force(run_info, protein):
     # this function calculates the right folding sequence
     # value keeps track of how much deeper this function can go
     def recursieveFunctie(value, protein):
+    """ This function goes recursive and calculates all the options by saving
+        them in a direction list. This list is passed to calc_coords."""
 
         # if the value is 1 the last check is needed
         if value == 1:
@@ -91,6 +90,10 @@ def brute_force(run_info, protein):
     return [run_info, protein]
 
 def calc_coords(direction_list, protein):
+    """ This calculates new coordinates for aminos by use of the given
+        direction_list. It puts the amonis in a large grid and checks if this
+        gives a better score."""
+
     # get the length
     length = protein.length
     coordinates = protein.coordinates[:]
