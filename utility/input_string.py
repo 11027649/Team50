@@ -51,7 +51,7 @@ def input_string():
                 exit(1)
 
             protein_lines = open("inputFiles/assignments.txt").read().splitlines()
-            
+
             # save protein input here in the file
             run_info.protein_name = protein_input
 

@@ -1,3 +1,11 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# This file is part of the protein folding program made by Team50.
+#
+# This program plots the graph of the score per iteration.
+# Besides plotting the graph it also gives a 3d image of the winning protein.
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
 import matplotlib.pyplot as plt
 import numpy as np
 import csv
