@@ -145,12 +145,11 @@ def fold_control_hillclimber(run_info, protein):
 
 def extend_fold_hillclimber(run_info, protein):
     """ This is an algorithm that is a variation at the normal hillclimber.
-        The amount of folds can get higher or lower bla bla bla
-
-        CHRISTIAN PLS DO THIS """
-        ############################################################################33
-        ###################################L############################################33
-        ############################################################################
+        It does 2 random folds per iteration. The folds do not have to be possible.
+        If for 1000 iterations no better score is found, the fold amount is increased
+        by 1, and thus will become 3. It tries again finding a better score, and this
+        progress goes on and on, untill no better solution can be found for up to 100 folds
+        per iteration."""
 
     run_info.algorithm = "Extend Fold Hill Climber"
     run_info.generate_filepath("hc_ef_")
@@ -163,6 +162,7 @@ def extend_fold_hillclimber(run_info, protein):
     protein.winning_grid = copy.deepcopy(protein.grid)
     protein.winning_coordinates = copy.deepcopy(protein.coordinates)
 
+    # max amount of iterations of we will try for each fold amount
     iterations = 30
 
     # store data in .csv
@@ -172,6 +172,7 @@ def extend_fold_hillclimber(run_info, protein):
         # do "iterations" random folds and keep track of the highest value
         for i in range(iterations):
 
+            # extend starts with 2, becomes bigger every time, set counter
             extend = 2
             counter = 0
             found = False
@@ -179,11 +180,11 @@ def extend_fold_hillclimber(run_info, protein):
             # determines the end of the progressbar
             end_extend = 101
 
+            # while no better score is found
             while found == False:
 
+                # fold "extend" times
                 for j in range(extend):
-                    print(j, extend)
-
                     printProgressBar(extend, end_extend)
                     datawriter.writerow([i] + [best_score])
 
@@ -194,9 +195,9 @@ def extend_fold_hillclimber(run_info, protein):
                     protein = returncode_and_protein[1]
 
                     # if the score is lower save that particular grid in winning grid
-
                     stability = protein.score()
 
+                    # if stability is lower, save this last grid anc break
                     if stability < best_score:
                         protein.winning_grid = copy.deepcopy(protein.grid)
                         protein.winning_coordinates = copy.deepcopy(protein.coordinates)
@@ -204,15 +205,16 @@ def extend_fold_hillclimber(run_info, protein):
                         protein.winning_score = best_score
 
                         found = True
-
                         break
 
                     counter += 1
 
+                    # if 1000 non-improving counts were counted, extend the fold amount
                     if counter > 1000:
                         extend += 1
                         counter = 0
 
+                    # if extend is larger then 100 though, stop the algorithm
                     if extend > 100:
                         return [run_info, protein]
 
