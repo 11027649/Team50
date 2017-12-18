@@ -161,6 +161,8 @@ def simulated_annealing_control(run_info, protein):
                     protein.winning_score = adapt_score = current_score
                     found_better = True
 
+                    break
+
 
             if found_better == False:
                 # calculate acceptance chance
