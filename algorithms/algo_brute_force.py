@@ -11,12 +11,28 @@ counter = 0
 def brute_force(run_info, protein):
 
     length = protein.length
-    protein.winning_grid = copy.deepcopy(protein.grid)
+
+    grid_width = length * 2 + 1
+
+    protein.winning_grid =  [[[0 for i in range(grid_width)] for j in range(grid_width)] for k in range(grid_width)]
+
     protein.winning_coordinates = copy.deepcopy(protein.coordinates)
     protein.winning_score = 0
 
+
     for i in range (length):
         protein.coordinates[i] = [protein.coordinates[i][0] + length, protein.coordinates[i][1] + length, protein.coordinates[i][2] + length]
+
+    for i in range (length):
+        coordinates = protein.winning_coordinates
+        x_coor = coordinates[i][0]
+        y_coor = coordinates[i][1]
+        z_coor = coordinates[i][2]
+
+        protein.winning_grid[x_coor][y_coor][z_coor] = protein.aminos[i]
+
+
+
 
     def recursieveFunctie(value, protein):
         global counter
@@ -28,6 +44,7 @@ def brute_force(run_info, protein):
             for i in range(check):
                 numberArray[value - 1] = i
                 numberArray.reverse
+                print(numberArray)
                 calc_coords(list(reversed(numberArray)), protein)
         else:
             for i in range(check):
@@ -49,9 +66,9 @@ def brute_force(run_info, protein):
     elif run_info == 1:
         check = 6
 
-    for i in range(1, length - 2):
+    for i in range(1, length - 1):
         numberArray = []
-        for j in range (length - 2):
+        for j in range (length - 1):
             numberArray.append(0)
         numberArray[i] = 1
         progres = pow(5, i + 1)
@@ -87,6 +104,7 @@ def calc_coords(numberArray, protein):
 
     # iterate from the starting position till the end and put new coordinates
     for i in range(start_pos + 1 , length ):
+
         # get the previous coordinates
         previous_x = coordinates[i - 1][0]
         previous_y = coordinates[i - 1][1]
