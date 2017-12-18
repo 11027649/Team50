@@ -67,10 +67,10 @@ def hillclimber(run_info, protein):
                 else:
                     returncode_and_protein = fold(random_value[0], random_value[1], protein)
  
-                     while returncode_and_protein[0] == "collision":
-                         random_value = get_random_value(run_info.dimension, protein.length - 2)
-                         returncode_and_protein = fold(random_value[0], random_value[1], protein)
-                     protein = returncode_and_protein[1]
+                    while returncode_and_protein[0] == "collision":
+                        random_value = get_random_value(run_info.dimension, protein.length - 2)
+                        returncode_and_protein = fold(random_value[0], random_value[1], protein)
+                    protein = returncode_and_protein[1]
 
             stability = score(protein)
 
