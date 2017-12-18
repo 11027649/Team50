@@ -15,10 +15,13 @@ def brute_force(run_info, protein):
     protein.winning_coordinates = copy.deepcopy(protein.coordinates)
     protein.winning_score = 0
 
+    for i in range (length):
+        protein.coordinates[i] = [protein.coordinates[i][0] + length, protein.coordinates[i][1] + length, protein.coordinates[i][2] + length]
+
     def recursieveFunctie(value, protein):
         global counter
         counter += 1
-        print(counter, iterations)
+        # print(counter, iterations)
         printProgressBar(counter, iterations)
         if value == 1:
 
@@ -74,12 +77,11 @@ def calc_coords(numberArray, protein):
         start_pos += 1
 
     for i in range(start_pos):
-        print(length, end = "AAAAAAAAAAARGH")
-        print()
+
         # set the coordinatesin the midle of the grid
-        x_coor = coordinates[i][0] + length
-        y_coor = coordinates[i][1] + length
-        z_coor = coordinates[i][2] + length
+        x_coor = coordinates[i][0]
+        y_coor = coordinates[i][1]
+        z_coor = coordinates[i][2]
         grid[x_coor][y_coor][z_coor] = protein.aminos[i]
 
 
@@ -108,7 +110,6 @@ def calc_coords(numberArray, protein):
             coordinates[i][2] = previous_z - 1
 
     for i in range(start_pos, length):
-        print(coordinates)
         # set the coordinatesin the midle of the grid
         x_coor = coordinates[i][0]
         y_coor = coordinates[i][1]
