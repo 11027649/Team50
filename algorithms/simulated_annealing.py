@@ -23,26 +23,26 @@ def simulated_annealing(run_info, protein):
         it is also less likely to be accepted. There's an extra so-called adapt
         grid to make sure the winning grid contains the most stable protein. """
 
-    length = protein.length
 
-    # make sure the winning coordinates and grid are never empty
-    protein.winning_grid = adapt_grid = copy.deepcopy(protein.grid)
-    protein.winning_coordinates = adapt_coordinates = copy.deepcopy(protein.coordinates)
+    # store algorithm in file, write a header
+    run_info.algorithm = "Simulated Annealing"
+    run_info.generate_filepath("sa_")
+    run_info.generate_header(protein.protein_string)
+
+    # initialze the score at 0
+    current_score = adapt_score =  0
 
     # initialize iterations, begin and end temperature
     N = 5000
     T0 = Ti = 1
     Tn = 0
 
-    # initialze the score at 0
-    current_score = adapt_score =  0
-
     folds = 14
+    length = protein.length
 
-    # store algorithm in file, write a header
-    run_info.algorithm = "Simulated Annealing"
-    run_info.generate_filepath("sa_")
-    run_info.generate_header(protein.protein_string)
+    # make sure the winning coordinates and grid are never empty
+    protein.winning_grid = adapt_grid = copy.deepcopy(protein.grid)
+    protein.winning_coordinates = adapt_coordinates = copy.deepcopy(protein.coordinates)
 
     # store data in .csv
     with open(run_info.filepath, 'w', newline='') as datafile:
@@ -111,26 +111,25 @@ def simulated_annealing_control(run_info, protein):
         acceptance chance part for that iteration. There's an extra so-called adapt
         grid to make sure the winning grid contains the most stable protein."""
 
-    length = protein.length
+    # store algorithm in file, write a header
+    run_info.algorithm = "Simulated Annealing (with fold control)"
+    run_info.generate_filepath("sa_fc_")
+    run_info.generate_header(protein.protein_string)
 
-    # make sure the winning coordinates and grid are never empty
-    protein.winning_grid = adapt_grid = copy.deepcopy(protein.grid)
-    protein.winning_coordinates = adapt_coordinates = copy.deepcopy(protein.coordinates)
+    # initialze scores at 0
+    current_score = adapt_score 0
 
     # initialize iterations, begin and end temperature
     N = 5000
     T0 = Ti = 1
     Tn = 0
 
-    # initialze scores at 0
-    current_score = adapt_score 0
-
     folds = 14
+    length = protein.length
 
-    # store algorithm in file, write a header
-    run_info.algorithm = "Simulated Annealing (with fold control)"
-    run_info.generate_filepath("sa_fc_")
-    run_info.generate_header(protein.protein_string)
+    # make sure the winning coordinates and grid are never empty
+    protein.winning_grid = adapt_grid = copy.deepcopy(protein.grid)
+    protein.winning_coordinates = adapt_coordinates = copy.deepcopy(protein.coordinates)
 
     # store data in .csv
     with open(run_info.filepath, 'w', newline='') as datafile:
@@ -212,24 +211,26 @@ def simulated_annealing_reheat(run_info, protein):
         cases, not in all...). There's an extra so-called adapt grid to make sure
         the winning grid contains the most stable protein."""
 
-    length = protein.length
-    protein.winning_grid = adapt_grid = copy.deepcopy(protein.grid)
-    protein.winning_coordinates = adapt_coordinates = copy.deepcopy(protein.coordinates)
+
+    # store algorithm in file, write a header
+    run_info.algorithm = "Simulated Annealing (with reheat)"
+    run_info.generate_filepath("sa_wr_")
+    run_info.generate_header(protein.protein_string)
+
+    # initialze minus and current_score at 0
+    current_score = minus = 0
 
     # initialize iterations, begin and end temperature
     N = 10000
     T0 = Ti = 1
     Tn = 0
 
-    # initialze minus and current_score at 0
-    current_score = minus = 0
-
     folds = 14
+    length = protein.length
 
-    # store algorithm in file, write a header
-    run_info.algorithm = "Simulated Annealing (with reheat)"
-    run_info.generate_filepath("sa_wr_")
-    run_info.generate_header(protein.protein_string)
+    # make sure the winning coordinates and grid are never empty
+    protein.winning_grid = adapt_grid = copy.deepcopy(protein.grid)
+    protein.winning_coordinates = adapt_coordinates = copy.deepcopy(protein.coordinates)
 
     # store data in .csv
     with open(run_info.filepath, 'w', newline='') as datafile:
