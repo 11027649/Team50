@@ -14,13 +14,17 @@ from random import randint
 import copy
 import csv
 
-
 def hillclimber(run_info, protein):
     """ This is an algorithm that does 14 random folds per iteration. You can
         force the algorithm to do 14 folds that are accepted by changing the accept
         boolean to False. After the 14 folds it checks whether the protein is more
         stable then before. If so, the changes are kept, else the old protein is
         restored. This continues for n iterations. """
+
+    # store algorithm in file, write a header
+    run_info.algorithm = "Hill Climber"
+    run_info.generate_filepath("hc_")
+    run_info.generate_header(protein.protein_string)
 
     # will keep track of the score
     best_score = 0
@@ -32,14 +36,11 @@ def hillclimber(run_info, protein):
     folds = 14
 
     accept = True
-
     length = protein.length
+
+    # make sure winning_grid and winning_coordinates are not empty
     protein.winning_grid = copy.deepcopy(protein.grid)
     protein.winning_coordinates = copy.deepcopy(protein.coordinates)
-
-    run_info.algorithm = "Hill Climber"
-    run_info.generate_filepath("hc_")
-    run_info.generate_header(protein.protein_string)
 
     # store data in .csv
     with open(run_info.filepath, 'a', newline='') as datafile:
@@ -48,9 +49,11 @@ def hillclimber(run_info, protein):
         # do "iterations" random folds and keep track of the highest value
         for i in range(iterations):
 
+            # print progressbar
             printProgressBar(i, iterations)
             datawriter.writerow([i] + [best_score])
 
+            # do random folds
             for j in range(folds):
                 random_value = get_random_value(run_info.dimension, protein.length - 2)
 
@@ -69,14 +72,14 @@ def hillclimber(run_info, protein):
                         returncode_and_protein = protein.fold(random_value[0], random_value[1])
                     protein = returncode_and_protein[1]
 
+            # calculate the score
             stability = protein.score()
 
             # if the score is lower save that particular grid in winning grid
             if stability < best_score:
                 protein.winning_grid = copy.deepcopy(protein.grid)
                 protein.winning_coordinates = copy.deepcopy(protein.coordinates)
-                best_score = stability
-                protein.winning_score = best_score
+                protein.winning_score = best_score = stability
 
             else:
                 protein.grid = copy.deepcopy(protein.winning_grid)
@@ -91,20 +94,25 @@ def fold_control_hillclimber(run_info, protein):
         because after every fold the score is checked. If it's higher we keep that
         protein. Else the old protein is restored. This continues for n iterations. """
 
-    # will keep track of the score
-    best_score = 0
-
-    length = protein.length
-    protein.winning_grid = copy.deepcopy(protein.grid)
-    protein.winning_coordinates = copy.deepcopy(protein.coordinates)
-
-    iterations = 5000
-    # determines how much folds it will do
-    folds = 14
-
+    # store algorithm in file, write a header
     run_info.algorithm = "Hill Climber (with fold control)"
     run_info.generate_filepath("hc_fc_")
     run_info.generate_header(protein.protein_string)
+
+    # will keep track of the score
+    best_score = 0
+
+    # determines how many iterations are needed
+    iterations = 5000
+
+    # determines the amount of folds this hillclimber will do
+    folds = 14
+
+    length = protein.length
+
+    # prevent winning_grid and winning_coordinates from being empty
+    protein.winning_grid = copy.deepcopy(protein.grid)
+    protein.winning_coordinates = copy.deepcopy(protein.coordinates)
 
     # store data in .csv
     with open(run_info.filepath, 'a', newline='') as datafile:
@@ -113,10 +121,14 @@ def fold_control_hillclimber(run_info, protein):
         # do "iterations" random folds and keep track of the highest value
         for i in range(iterations):
 
+            # print the progressbar
             printProgressBar(i, iterations)
             datawriter.writerow([i] + [best_score])
 
+            # do random folds
             for j in range(folds):
+
+                # initial fold
                 random_value = get_random_value(run_info.dimension, protein.length - 2)
                 returncode_and_protein = protein.fold(random_value[0], random_value[1])
 
@@ -128,12 +140,11 @@ def fold_control_hillclimber(run_info, protein):
                 stability = protein.score()
 
                 # if the score is lower save that particular grid in winning grid
+                # and stop with folding this iteration
                 if stability < best_score:
                     protein.winning_grid = copy.deepcopy(protein.grid)
                     protein.winning_coordinates = copy.deepcopy(protein.coordinates)
-                    best_score = stability
-                    protein.winning_score = best_score
-
+                    protein.winning_score = best_score = stability
                     break
 
             # set the winning grid back as current grid
@@ -151,6 +162,7 @@ def extend_fold_hillclimber(run_info, protein):
         progress goes on and on, untill no better solution can be found for up to 100 folds
         per iteration."""
 
+    # store algorithm in file, write a header
     run_info.algorithm = "Extend Fold Hill Climber"
     run_info.generate_filepath("hc_ef_")
     run_info.generate_header(protein.protein_string)
@@ -158,12 +170,12 @@ def extend_fold_hillclimber(run_info, protein):
     # will keep track of the score
     best_score = 0
 
+    # max amount of iterations of we will try for each fold amount
+    iterations = 30
+
     length = protein.length
     protein.winning_grid = copy.deepcopy(protein.grid)
     protein.winning_coordinates = copy.deepcopy(protein.coordinates)
-
-    # max amount of iterations of we will try for each fold amount
-    iterations = 30
 
     # store data in .csv
     with open(run_info.filepath, 'a', newline='') as datafile:
@@ -201,9 +213,7 @@ def extend_fold_hillclimber(run_info, protein):
                     if stability < best_score:
                         protein.winning_grid = copy.deepcopy(protein.grid)
                         protein.winning_coordinates = copy.deepcopy(protein.coordinates)
-                        best_score = stability
-                        protein.winning_score = best_score
-
+                        best_score = protein.winning_score = stability
                         found = True
                         break
 
