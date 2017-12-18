@@ -1,3 +1,11 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# This file is part of the protein folding program made by Team50.
+#
+# It contains three variations of a Hill Climber algorithm.
+# Here, you can change the amount of iterations by changing iterations.
+# You can change the amount of folds per iterations by changing folds.
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
 from utility.score import score
 from utility.fold import fold
 
@@ -35,7 +43,7 @@ def hillclimber2(run_info, protein):
     iterations = 5000
 
     # determines the amount of folds this hillclimber will do
-    folds = 6
+    folds = 14
 
     length = protein.length
     protein.winning_grid = copy.deepcopy(protein.grid)
@@ -89,7 +97,7 @@ def fold_control_hillclimber(run_info, protein):
 
     iterations = 5000
     # determines how much folds it will do
-    folds = 6
+    folds = 14
 
     run_info.algorithm = "Hill Climber (with fold control)"
     run_info.generate_filepath("hc_fc_")
