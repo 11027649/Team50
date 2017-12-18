@@ -99,6 +99,7 @@ def calc_coords(direction_list, protein):
     length = protein.length
     coordinates = protein.coordinates[:]
 
+    # determines if the fold was possible
     possible = True
     grid_width = length * 2 + 1
 
@@ -152,6 +153,8 @@ def calc_coords(direction_list, protein):
         x_coor = coordinates[i][0]
         y_coor = coordinates[i][1]
         z_coor = coordinates[i][2]
+
+        # if there is already an amino stop calculating new coordinates
         if type(grid[x_coor][y_coor][z_coor]) == Amino:
             possible = False
             break
