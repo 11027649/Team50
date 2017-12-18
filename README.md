@@ -24,7 +24,7 @@ The goal is of this project is to fold the given proteins so that they are maxim
 ## Results
 The best stabilities for all the proteins are represented in the table below. The scores for A1 and B1 are certain, because these are calculated by a brute force algorithm. The other stabilities are approached by other algorithms (see below) and are uncertain.
 
-
+![Stability Graph](https://github.com/Segouta/Team50/blob/master/doc/stability.png)
 
 ## Algorithms ##
 
