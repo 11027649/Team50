@@ -225,12 +225,12 @@ def simulated_annealing_reheat(run_info, protein):
     T0 = Ti = 1
     Tn = 0
 
-    folds = 14
     length = protein.length
-
-    # make sure the winning coordinates and grid are never empty
     protein.winning_grid = adapt_grid = copy.deepcopy(protein.grid)
     protein.winning_coordinates = adapt_coordinates = copy.deepcopy(protein.coordinates)
+
+
+    folds = 14
 
     # store data in .csv
     with open(run_info.filepath, 'w', newline='') as datafile:
