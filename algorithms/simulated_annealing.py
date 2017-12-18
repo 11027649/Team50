@@ -1,8 +1,14 @@
-from utility.score import score
-from utility.fold import fold
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# This file is part of the protein folding program made by Team50.
+#
+# It contains three variations of a Simulated Annealing algorithm.
+# You can change the amount of iterations by changing N. 
+# You can change the begin temperature by changing T0 = Ti = x, where x is the
+# temperature you want.
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 from algorithms.hillclimber import get_random_value
-from algorithms.progress_bar import printProgressBar
+from visualization.progress_bar import printProgressBar
 
 from random import randint
 import copy
@@ -11,6 +17,11 @@ import math
 
 
 def simulated_annealing(run_info, protein):
+    """ This is an algorithm that does 14 random folds per iteration. The system 
+        cools from 1 degree Celsius to 0 degrees, at a linear rate. The hotter it 
+        is, the easier detoriations are accepted. When the detoriation is bigger, 
+        it is also less likely to be accepted. There's an extra so-called adapt 
+        grid to make sure the winning grid contains the most stable protein. """
 
     length = protein.length
     protein.winning_grid = adapt_grid = copy.deepcopy(protein.grid)
@@ -23,9 +34,7 @@ def simulated_annealing(run_info, protein):
     current_score = 0
 
     folds = 14
-
     adapt_score = 0
-
 
     # store algorithm in file, write a header
     run_info.algorithm = "Simulated Annealing"
@@ -45,15 +54,15 @@ def simulated_annealing(run_info, protein):
             # do random folds
             for j in range(folds):
                 random_value = get_random_value(run_info.dimension, protein.length - 2)
-                returncode_and_protein = fold(random_value[0], random_value[1], protein)
+                returncode_and_protein = protein.fold(random_value[0], random_value[1])
                 protein = returncode_and_protein[1]
 
             old_score = current_score
             # calculate stability of the protein
-            current_score = score(protein)
+            current_score = protein.score()
 
             # if the score is lower save that particular grid in winning grid
-            if current_score <= protein.winning_score:
+            if current_score < protein.winning_score:
                 protein.winning_grid = adapt_grid = copy.deepcopy(protein.grid)
                 protein.winning_coordinates = adapt_coordinates =  copy.deepcopy(protein.coordinates)
 
@@ -69,7 +78,7 @@ def simulated_annealing(run_info, protein):
                 # generate random compare value
                 value = randint(1,10000)/10000
 
-                # if acceptance_chance <= value, the deterioration is not accepted
+                # if acceptance_chance < value, the deterioration is not accepted
                 if acceptance_chance < value:
 
                     # if not accepted, restore the old grid
@@ -90,6 +99,11 @@ def simulated_annealing(run_info, protein):
 
 
 def simulated_annealing_control(run_info, protein):
+    """ This is an algorithm that is almost the same as the "normal" simulated
+        annealing. The difference is that, here, every fold out of the 14 we do
+        is checked and accepted if it's a better score. If a better score is found,
+        the boolean found_better becomes True, so we can skip the calculate
+        acceptance chance part for that iteration. """
 
     length = protein.length
     protein.winning_grid = adapt_grid = copy.deepcopy(protein.grid)
@@ -128,15 +142,15 @@ def simulated_annealing_control(run_info, protein):
             for j in range(folds):
                 # initial random value
                 random_value = get_random_value(run_info.dimension, protein.length - 2)
-                returncode_and_protein = fold(random_value[0], random_value[1], protein)
+                returncode_and_protein = protein.fold(random_value[0], random_value[1])
 
                 while returncode_and_protein[0] == "collision":
                     random_value = get_random_value(run_info.dimension, protein.length - 2)
-                    returncode_and_protein = fold(random_value[0], random_value[1], protein)
+                    returncode_and_protein = protein.fold(random_value[0], random_value[1])
                 protein = returncode_and_protein[1]
 
                 # calculate stability of the protein
-                current_score = score(protein)
+                current_score = protein.score()
 
                 # if the score is lower save that particular grid in winning grid
                 if current_score < protein.winning_score:
@@ -179,6 +193,10 @@ def simulated_annealing_control(run_info, protein):
 
 
 def simulated_annealing_reheat(run_info, protein):
+    """ This is an algorithm that is also a variation at the normal algorithm.
+        In this algorithm the environment is reheated to 1 degree at half of the
+        iterations. This way, the algorithm can escape from a local minimum (in some
+        cases, not in all...) """
 
     length = protein.length
     protein.winning_grid = adapt_grid = copy.deepcopy(protein.grid)
@@ -194,7 +212,7 @@ def simulated_annealing_reheat(run_info, protein):
     folds = 14
 
     # store algorithm in file, write a header
-    run_info.algorithm = "Simulated Annealing With Reheat"
+    run_info.algorithm = "Simulated Annealing (with reheat)"
     run_info.generate_filepath("sa_wr_")
     run_info.generate_header(protein.protein_string)
 
@@ -205,8 +223,8 @@ def simulated_annealing_reheat(run_info, protein):
         # do N times 10 random folds and keep track of the best value
         for i in range(N):
 
-            if i == 5000:
-                minus = 5000
+            if i == (N / 2):
+                minus = N / 2
 
             printProgressBar(i, N)
             datawriter.writerow([i] + [current_score])
@@ -214,12 +232,13 @@ def simulated_annealing_reheat(run_info, protein):
             # do random folds
             for j in range(folds):
                 random_value = get_random_value(run_info.dimension, protein.length - 2)
-                returncode_and_protein = fold(random_value[0], random_value[1], protein)
+                returncode_and_protein = protein.fold(random_value[0], random_value[1])
                 protein = returncode_and_protein[1]
 
             old_score = current_score
+
             # calculate stability of the protein
-            current_score = score(protein)
+            current_score = protein.score()
 
             # if the score is lower save that particular grid in winning grid
             if current_score <= protein.winning_score:
