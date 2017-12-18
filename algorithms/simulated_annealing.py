@@ -117,7 +117,7 @@ def simulated_annealing_control(run_info, protein):
     run_info.generate_header(protein.protein_string)
 
     # initialze scores at 0
-    current_score = adapt_score 0
+    current_score = adapt_score = 0
 
     # initialize iterations, begin and end temperature
     N = 5000
